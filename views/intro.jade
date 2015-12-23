@@ -1,0 +1,220 @@
+extends layoutGray
+
+block content
+  #introHead
+  .container.containerIntro
+    .row
+      .col-sm-3
+        if thisProfile.picture
+          img.propic(src="#{thisProfile.picture}", alt='')
+        else
+          img.propic(src='/img/default_profile.png')
+        //- photo end
+      .col-sm-8
+        .cv-title
+          .row
+            .col-sm-6
+              h1 #{thisProfile.cname}
+              h1 #{thisProfile.name} #{thisProfile.lname}
+            |                         
+            .col-sm-6.text-right.dl-share
+              //- AddToAny BEGIN
+                                        
+              //- script(type='text/javascript').
+              //-   var a2a_config = a2a_config || {};
+              //-   a2a_config.linkname = "Minimal CV by EvenFly";
+              //-   a2a_config.num_services = 6;
+              //-   a2a_config.prioritize = ["facebook", "twitter", "google_plus", "linkedin", "pinterest", "email"];
+              //- |                             
+              //- script(type='text/javascript', src='//static.addtoany.com/menu/page.js')
+              //- AddToAny END
+              if thisProfile.facebook
+                a.btn.btn-primary(href='https://www.facebook.com/#{thisProfile.facebook}', target='_blank')
+                  span.fa.fa-comment
+                  |  FB Message
+              else
+                a.btn.btn-primary.disabled(href='', alt='Facebook Account Not Available.')
+                  span.fa.fa-comment
+                  |  FB Message
+          |                   
+          h2 #{thisProfile.job}
+          .row
+            .col-sm-4
+              ul.list-unstyled
+                li
+                    span.social.fa.fa-calendar
+                    | #{thisProfile.birth} 
+                li
+                  if thisProfile.email
+                    a(href='mailto:#{thisProfile.email}')
+                      span.social.fa.fa-envelope-o
+                      | My E-mail
+                  else
+                    span.social.fa.fa-envelope-o
+                      |   My E-mail
+            .col-sm-4
+              ul.list-unstyled
+                li
+                  if thisProfile.facebook
+                    a(href='https://www.facebook.com/#{thisProfile.facebook}', target='_blank')
+                      span.social.fa.fa-facebook-square
+                      | Facebook
+                  else
+                    span.social.fa.fa-facebook-square
+                      |   Facebook
+                li
+                  if thisProfile.website
+                    a(href='#{thisProfile.website}', target='_blank')
+                      span.social.fa.fa-home
+                      | My Website
+                  else
+                    span.social.fa.fa-home
+                      |   My Website
+                
+            .col-sm-4
+              ul.list-unstyled
+                li
+                  if thisProfile.twitter
+                    a(href='https://twitter.com/intent/user?user_id=#{thisProfile.twitter}', target='_blank')
+                      span.social.fa.fa-twitter
+                      | Twitter
+                  else
+                    span.social.fa.fa-twitter
+                      |  Twitter
+                li
+                  if thisProfile.linkedin
+                    a(href='http://www.linkedin.com/profile/view?id=#{thisProfile.linkedin}', target='_blank')
+                      span.social.fa.fa-linkedin
+                      | Linkedin   
+                  else
+                    span.social.fa.fa-linkedin
+                      |   Linkedin 
+
+                //- li
+                //-   if thisProfile.instagram
+                //-     a(href='')
+                //-       span.social.fa.fa-instagram
+                //-       | Instagram
+                //-   else
+                //-     span.social.fa.fa-instagram
+                //-       |   Instagram
+    p
+    hr
+    p       
+
+    .col-md-12.mainleft
+      if thisProfile.selfThreeWords1 
+        .row.mobmid
+          .col-sm-1
+            span.secicon.fa.fa-list-ol(style='color:#f7a61b')
+          //- icon end
+          .col-sm-9
+            h3 I am:
+            |                    
+            p #{thisProfile.selfThreeWords1}
+            p #{thisProfile.selfThreeWords2}
+            p #{thisProfile.selfThreeWords3}
+        //- info end
+      //- personal statement end
+      if thisProfile.threeInterests1  
+        hr  
+        .row.mobmid
+          .col-sm-1
+            span.secicon.fa.fa-plane(style='color:#7cbf42')
+          //- icon end
+          .col-sm-9
+            h3 I am intrested in:
+            |                 
+            p #{thisProfile.threeInterests1}
+            p #{thisProfile.threeInterests2}
+            p #{thisProfile.threeInterests3} 
+      if thisProfile.threeKeySkill1
+        hr  
+        .row.mobmid
+          .col-sm-1
+            span.secicon.fa.fa-rocket(style='color:#34a8c8')
+          //- icon end
+          .col-sm-9
+            h3 My three key skill sets are:
+            |                    
+            p #{thisProfile.threeKeySkill1}
+            p #{thisProfile.threeKeySkill2}
+            p #{thisProfile.threeKeySkill3}    
+      if thisProfile.sixThings1
+        hr  
+        .row.mobmid
+          .col-sm-1
+            span.secicon.fa.fa-check-square(style='color:#eb4a24')
+          //- icon end
+          .col-sm-9
+            h3 The Six things I can never do without: 
+            |                                
+            p #{thisProfile.sixThings1}
+            p #{thisProfile.sixThings2}
+            p #{thisProfile.sixThings3}  
+            p #{thisProfile.sixThings4}
+            p #{thisProfile.sixThings5}
+            p #{thisProfile.sixThings6}      
+      if thisProfile.bestAdvice
+        hr  
+        .row.mobmid
+          .col-sm-1
+            span.secicon.fa.fa-thumbs-up(style='color:#30a443')
+          //- icon end
+          .col-sm-9
+            h3 Best piece of advice I ever received:
+            |                                 
+            p !{thisProfile.bestAdvice}
+            p    
+      if thisProfile.oneBook
+        hr  
+        .row.mobmid
+          .col-sm-1
+            span.secicon.fa.fa-book(style='color:#948077')
+          //- icon end
+          .col-sm-9
+            h3 One book I would recommend to others:
+            |             
+            p !{thisProfile.oneBook}
+            p   
+      if thisProfile.oneUrl
+        hr  
+        .row.mobmid
+          .col-sm-1
+            span.secicon.fa.fa-link(style='color:#A569BD')
+          //- icon end
+          .col-sm-9
+            h3 One URL I would recommend to others:
+            |             
+            p !{thisProfile.oneUrl}
+            p 
+      if thisProfile.favoritePlace
+        hr  
+        .row.mobmid
+          .col-sm-1
+            span.secicon.fa.fa-map-marker(style='color:#f6cd4c')
+          //- icon end
+          .col-sm-9
+            h3 My favorite place to hang out in Taiwan: 
+            |  
+            p !{thisProfile.favoritePlace}
+            p      
+      if thisProfile.statement
+        hr  
+        .row.mobmid
+          .col-sm-1
+            span.secicon.fa.fa-user(style='color:#40b0f9')
+          //- icon end
+          .col-sm-9
+            h3 My self-summary: 
+            |      
+            p !{thisProfile.statement}
+            p   
+    .col-md-2.introBackBtn
+        a.a2a_dd.btn.btn-default(href='#introHead')
+          span.fa.fa-arrow-up
+          |  Top
+    .col-md-2.introBackBtn
+      a.a2a_dd.btn.btn-default(href='../people/#{thisProfile.status}')
+        span.fa.fa-share
+        |  See others   

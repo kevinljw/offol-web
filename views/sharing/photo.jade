@@ -1,0 +1,81 @@
+extends ../layoutGray
+
+block content
+		.row.jumbotron
+			.container
+				h2 Sharing - Photo
+				p 
+				p 
+				p 
+		script.
+			userUploadID="#{user.id}"
+		.container
+			.row
+				.col-md-10
+					each val in shareList
+						.post.post-img(id='#{val.timestamp}')
+									.post-head
+										h3 #{val.title}
+										.post-meta
+											div
+												i.fa.fa-user  BY:
+												a(href='../intro/#{val.upload_userId}') #{val.upload_user}
+											div
+												i.fa.fa-clock-o	#{val.timestamp}
+										.clearfix
+									.post-wrap
+										//- .post-img.post-img-8
+											//- .bx-wrapper(style='max-width: 1170px;')
+											//- 	.bx-viewport(style='width: 100%; overflow: hidden; position: relative; height: 296px;')
+											//- 		ul(style='width: 515%; position: relative; transition-timing-function: linear; transition-duration: 0s; transform: translate3d(-1578px, 0px, 0px);')
+											//- 			each eachFileVal,indexOfEachFile in val.filespath
+											//- 				li.bx-clone(style='float: left; list-style: none; position: relative; width: 526px;')
+											//- 					img(src='/uploadAnnPImg/#{val.filesname[indexOfEachFile]}')
+											//- 	.bx-controls.bx-has-pager.bx-has-controls-direction
+											//- 		.bx-pager.bx-default-pager
+											//- 			each eachFileVal,indexOfEachFile in val.filespath
+											//- 				.bx-pager-item
+											//- 					a.bx-pager-link(href, data-slide-index="0") 1
+											//- 		.bx-controls-direction
+											//- 			a.bx-prev(href)
+											//- 			a.bx-next(href)
+										.post-img
+											img(height='420', src='/uploadFiles/#{val.filesname[0]}')
+										.post-inner
+											p #{val.description}
+											ul
+											each eachFileVal,indexOfEachFile in val.filespath
+												li
+													a(href='files/#{val.filesname[indexOfEachFile]}') #{eachFileVal}
+											.clearfix
+			//- .row
+			//- 	.col-sm-12
+			//- 		each val in shareList
+			//- 			.panel(class='panel-default')
+			//- 				.panel-heading #{val.title}
+			//- 				.eachShareItem
+			//- 					li=val.timestamp
+			//- 					li=val.description
+			//- 					ul Files:
+			//- 						each eachFileVal,indexOfEachFile in val.filespath
+			//- 							li
+			//- 								a(href='files/#{val.filesname[indexOfEachFile]}') #{eachFileVal}
+			.row
+				.col-sm-12
+					.uploadFilesForm
+						form.form-horizontal(action='uploadfiles/'+user.id, method='POST', enctype='multipart/form-data')
+							input(type='hidden', name='_csrf', value=_csrf)
+							.form-group
+								label.col-sm-4.control-label(for='title') Title
+								.col-sm-5
+									input.form-control(type='text', name='title', id='title')
+							.form-group
+								label.col-sm-4.control-label(for='description') Description
+								.col-sm-5
+									input.form-control(type='description', name='description', id='description')
+							.form-group
+								label.col-sm-4.control-label(for='userFiles') Uploader
+								.col-sm-5
+									input.file-uploading(id='input-2', type='file', data-preview-file-type='text', accept='image/*', multiple, name='userFiles')
+
+				

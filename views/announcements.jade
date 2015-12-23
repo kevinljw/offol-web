@@ -1,0 +1,66 @@
+extends layoutGray
+
+block content
+	.row.jumbotron
+		.container
+			h2 Announcements
+			p
+			p
+			p
+	.container
+		.row
+			.col-md-10
+				each val in allArticles
+					if val.link
+						.post.post-youtube(id='#{val.timestamp}')
+							.post-head
+								h3 #{val.title}
+								.post-meta
+									div
+										i.fa.fa-user 	BY:
+										a(href='intro/#{val.authorId}')	#{val.author}
+									div
+										i.fa.fa-clock-o	#{val.timestamp}
+								.clearfix
+							.post-wrap
+								.post-img
+									iframe(height='420', src='#{val.link}')
+								.post-inner
+									p #{val.content}
+									.clearfix
+										//- on September 18, 2014
+					else if val.picture
+						.post.image_post(id='#{val.timestamp}')
+							.post-head
+								h3 #{val.title}
+								.post-meta
+									div
+										i.fa.fa-user 	BY:
+										a(href='intro/#{val.authorId}')	#{val.author}
+									div
+										i.fa.fa-clock-o	#{val.timestamp}
+								.clearfix
+							.post-wrap
+								.post-img
+									img(height='420', src='#{val.picture}')
+								.post-inner
+									p #{val.content}
+									.clearfix
+
+					else
+						.post.post-quote(id='#{val.timestamp}')
+							.post-head
+								h3 #{val.title}
+								.post-meta
+									div
+										i.fa.fa-user 	BY:
+										a(href='intro/#{val.authorId}') #{val.author}
+									div
+										i.fa.fa-clock-o	#{val.timestamp}
+								.clearfix
+							.post-wrap
+								.post-inner
+									p #{val.content}
+									.clearfix
+										//- on September 18, 2014
+				

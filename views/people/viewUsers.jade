@@ -1,0 +1,32 @@
+.row
+	
+	each val in userData
+
+		.col-sm-3(style='text-align: center;min-height: 250px;')
+			a.eachPeoplePic(href='/intro/'+val.id)
+				.flip-container
+					.card
+						.front.propic
+							.cubeContain
+								p #{val.profile.selfThreeWords1}
+								p #{val.profile.selfThreeWords2}
+								p #{val.profile.selfThreeWords3} 
+								p #{val.profile.threeInterests1}
+								p #{val.profile.threeInterests2}
+								p #{val.profile.threeInterests3}
+						.back.propic
+							if val.profile.picture
+								.propic.profileGrid(style='background: url(\'#{val.profile.picture}\') no-repeat;background-size: auto 110%; background-position: 50% 20%; border-radius: 5px;')
+								//- img(src="#{val.profile.picture}", width='180')
+							else
+								img.propic(src="/img/default_profile.png", class='profile', width='180', height='180')
+			.eachPeopleText
+				li= val.profile.name+" "+val.profile.lname
+
+			//- .flip-container
+			//- 	.card
+			//-         .front
+			//-           // front side content
+			//-         |             
+			//-         .back
+			//-           // back side content

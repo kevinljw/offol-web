@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  .row.jumbotron.jumbotronPeople
+    .container
+      h2 Fellow
+      p
+      p Meet the people behind NTU LIVE
+      p
+  .container
+    //- .row
+    //-   ul(style='list-style-type: none;',class='nav nav-tabs')
+    //-     li(role="presentation",class="active"): a(href='/people/student') Students
+    //-     li(role="presentation"): a(href='/people/mentor',role="presentation") Mentors        
+    //-     li(role="presentation"): a(href='/people/ta',role="presentation") TA
+    //-     li(role="presentation"): a(href='/people/faculty',role="presentation") Faculty
+    //- p
+    .margin_top20
+      include ./people/viewUsers.jade
+  

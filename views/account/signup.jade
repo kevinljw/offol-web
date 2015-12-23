@@ -1,0 +1,33 @@
+extends ../layoutHidden
+
+block content
+  .page-header.container
+    h3 Sign up
+  .container
+    form.form-horizontal(id='signup-form', method='POST')
+      input(type='hidden', name='_csrf', value=_csrf)
+      .form-group
+        label.col-sm-offset-1.col-sm-3.control-label(for='email') Email
+        .col-sm-4
+          input.form-control(type='email', name='email', id='email', placeholder='Email', autofocus)
+      .form-group
+        label.col-sm-offset-1.col-sm-3.control-label(for='uname') First Name
+        .col-sm-4
+          input.form-control(type='text', name='uname', id='uname', placeholder='First name')
+      .form-group
+        label.col-sm-offset-1.col-sm-3.control-label(for='lname') Last Name
+        .col-sm-4
+          input.form-control(type='text', name='lname', id='lname', placeholder='Last name')
+      .form-group
+        label.col-sm-offset-1.col-sm-3.control-label(for='password') Password
+        .col-sm-4
+          input.form-control(type='password', name='password', id='password', placeholder='Password')
+      .form-group
+        label.col-sm-offset-1.col-sm-3.control-label(for='confirmPassword') Confirm Password
+        .col-sm-4
+          input.form-control(type='password', name='confirmPassword', id='confirmPassword', placeholder='Confirm Password')
+      .form-group
+        .col-sm-offset-4.col-sm-7
+          button.btn.btn-success(type='submit')
+            i.fa.fa-user-plus
+            | Signup

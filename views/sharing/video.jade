@@ -1,0 +1,64 @@
+extends ../layoutGray
+
+block content
+		.row.jumbotron
+			.container
+				h2 Sharing - Video
+				p 
+				p 
+				p 
+		script.
+			userUploadID="#{user.id}"
+		.container
+			.row
+				.col-md-10
+					each val in shareList
+						.post.post-quote(id='#{val.timestamp}')
+									.post-head
+										h3 #{val.title}
+										.post-meta
+											div
+												i.fa.fa-user  BY:
+												a(href='../intro/#{val.upload_userId}') #{val.upload_user}
+											div
+												i.fa.fa-clock-o	#{val.timestamp}
+										.clearfix
+									.post-wrap
+										.post-inner
+											p #{val.description}
+											ul
+											each eachFileVal,indexOfEachFile in val.filespath
+												li
+													a(href='files/#{val.filesname[indexOfEachFile]}') #{eachFileVal}
+											.clearfix
+			//- .row
+			//- 	.col-sm-12
+			//- 		each val in shareList
+			//- 			.panel(class='panel-default')
+			//- 				.panel-heading #{val.title}
+			//- 				.eachShareItem
+			//- 					li=val.timestamp
+			//- 					li=val.description
+			//- 					ul Files:
+			//- 						each eachFileVal,indexOfEachFile in val.filespath
+			//- 							li
+			//- 								a(href='files/#{val.filesname[indexOfEachFile]}') #{eachFileVal}
+			.row
+				.col-sm-12
+					.uploadFilesForm
+						form.form-horizontal(action='uploadfiles/'+user.id, method='POST', enctype='multipart/form-data')
+							input(type='hidden', name='_csrf', value=_csrf)
+							.form-group
+								label.col-sm-4.control-label(for='title') Title
+								.col-sm-5
+									input.form-control(type='text', name='title', id='title')
+							.form-group
+								label.col-sm-4.control-label(for='description') Description
+								.col-sm-5
+									input.form-control(type='description', name='description', id='description')
+							.form-group
+								label.col-sm-4.control-label(for='userFiles') Uploader
+								.col-sm-5
+									input.file(id='input-3', type='file', data-preview-file-type='text', accept='video/*', multiple, name='userFiles')
+
+				

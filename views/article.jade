@@ -1,0 +1,88 @@
+extends layout
+
+block content
+		//- script.
+		//- 	$(document).on('ready', function() {
+				
+		//- 	});
+		.row.jumbotron
+			.container
+				h2 Article Management
+				p 
+				p 
+				p 
+
+		.container
+			
+			.page-header
+				h3 Delete Announcement
+			ul.list-group
+				.row
+					.col-sm-offset-3.col-sm-6
+						each val,index in allArticles
+							form.form-horizontal(action='deleteArticle/#{val.id}', method='POST')
+								li.list-group-item #{index} | #{val.title}
+									span.alignRight
+										button.btn.btn-default(type='submit')
+											i.fa.fa-minus-circle
+											| Delete
+			.page-header
+				h3 New Announcement
+
+			//- form.form-horizontal(action='account/uploadAnnPImg/', method='POST', enctype='multipart/form-data')
+			//- 	input(type='hidden', name='_csrf', value=_csrf)
+			//- 	.form-group
+			//- 		label.col-sm-5.control-label(for='AnnPImg') Upload Photo
+			//- 		.col-sm-4
+			//- 			input#input-10(type='file', data-preview-file-type='text',accept='image/*', class='file-loading', name='AnnPImg')
+			form.form-horizontal(action='/article/new/'+user.id, method='POST',enctype='multipart/form-data')
+				input(type='hidden', name='_csrf', value=_csrf)
+				.form-group
+					label.col-sm-5.control-label(for='title') Title
+					.col-sm-4
+						input.form-control(type='text', name='title', id='title')
+				.form-group
+					label.col-sm-5.control-label(for='content') Content
+					.col-sm-4
+						textarea.form-control(type='text', name='content', id='content', rows='6')
+				.form-group
+					label.col-sm-5.control-label(for='AnnPImg') Upload Photo
+					.col-sm-4
+						input#input-10(type='file', data-preview-file-type='text',accept='image/*', class='file-loading', name='AnnPImg')
+				.form-group
+					label.col-sm-5.control-label(for='link') Video Link (Only Youtube and Vimeo)
+					.col-sm-4
+						input.form-control(type='text', name='link', id='link', placeholder='(Optional)')
+				.form-group
+					label.col-sm-5.control-label(for='IsSendEmail') Send Email
+					.col-sm-4
+						input.form-control(type='checkbox', name='IsSendEmail', id='IsSendEmail', checked)
+				.form-group
+					.col-sm-offset-5.col-sm-4
+						button.btn.btn-primary(type='submit')
+							i.fa.fa-pencil
+							| Post this article
+			.page-header
+				h3 Delete Sharing
+			ul.list-group
+				.row
+					.col-sm-offset-3.col-sm-6
+						each val,index in allShares
+							form.form-horizontal(action='deleteShare/#{val.id}', method='POST')
+								li.list-group-item #{val.type} | #{val.title}
+									span.alignRight
+										button.btn.btn-default(type='submit')
+											i.fa.fa-minus-circle
+											| Delete
+			.page-header
+				h3 Delete Idea
+			ul.list-group
+				.row
+					.col-sm-offset-3.col-sm-6
+						each val,index in allIdeas
+							form.form-horizontal(action='deleteIdea/#{val.id}', method='POST')
+								li.list-group-item #{index} | #{val.title}
+									span.alignRight
+										button.btn.btn-default(type='submit')
+											i.fa.fa-minus-circle
+											| Delete
