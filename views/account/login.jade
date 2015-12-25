@@ -1,8 +1,8 @@
-extends ../layoutHidden
+extends ../layout
 
 block content
   .page-header.container
-    h3 Sign in
+    h3 登入
   .container
     form.form-horizontal(method='POST')
       input(type='hidden', name='_csrf', value=_csrf)
@@ -11,24 +11,24 @@ block content
         .col-sm-4
           input.form-control(type='email', name='email', id='email', placeholder='Email', autofocus=true)
       .form-group
-        label.col-sm-offset-1.col-sm-3.control-label(for='password') Password
+        label.col-sm-offset-1.col-sm-3.control-label(for='password') 密碼
         .col-sm-4
           input.form-control(type='password', name='password', id='password', placeholder='Password')
       .form-group
-        .col-sm-offset-4.col-sm-7
+        .col-sm-offset-4.col-sm-4
           button.col-sm-3.btn.btn-primary(type='submit')
             i.fa.fa-user
-            | Login
-        .col-sm-offset-4.col-sm-7
-          a.col-sm-4.forgotPass(href='/forgot') Forgot your password?
+            | 登入
+        .col-sm-offset-4.col-sm-4
+          a.col-sm-4.forgotPass(href='/forgot') 忘記密碼?
       .form-group
-        .col-sm-offset-3.col-sm-7
+        .col-sm-offset-3.col-sm-6
           hr
-      //- .form-group
-      //-   .col-sm-offset-3.col-sm-7
-      //-     a.btn.btn-block.btn-facebook.btn-social(href='/auth/facebook')
-      //-       i.fa.fa-facebook
-      //-       | Sign in with Facebook
+      .form-group
+        .col-sm-offset-4.col-sm-4
+          a.btn.btn-block.btn-facebook.btn-social(href='/auth/facebook')
+            i.fa.fa-facebook
+            | 以您的 Facebook 登入
       //-     a.btn.btn-block.btn-twitter.btn-social(href='/auth/twitter')
       //-       i.fa.fa-twitter
       //-       | Sign in with Twitter

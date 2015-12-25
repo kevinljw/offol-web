@@ -1,0 +1,31 @@
+extends ../layout
+
+block content
+  .banner.free_jumbo
+    .container.img-preview
+      img(src='/img/b_banner.jpg')
+  .container.fundingPage
+    form.form-horizontal(action='/fundings/'+user.id, method='POST')
+      input(type='hidden', name='_csrf', value=_csrf)
+      .form-group
+        label.col-sm-offset-1.col-sm-3.control-label(for='money') 金額
+        .col-sm-4
+          input.form-control(type='text', name='money', id='money', placeholder='請填入一元以上之金額')
+      .form-group
+        label.col-sm-offset-1.col-sm-3.control-label(for='money') 確認
+        .col-sm-4
+          input.form-control(type='checkbox', name='chkm', id='chkm')
+          | 確認付款
+      .form-group
+        .col-sm-offset-4.col-sm-7
+          button.btn.btn-success(type='submit')
+            i.fa.fa-shopping-cart
+            | 付款
+      .form-group
+        .col-sm-offset-3.col-sm-6
+          hr
+
+          
+
+
+  

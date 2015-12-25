@@ -7,33 +7,33 @@ var User = require('../models/User');
 var secrets = require('../config/secrets');
 var adminList = ['evin92@gmail.com'];
 var fs = require('fs');
-var whiteListArr;
-var whiteListArr_email=[];
+// var whiteListArr;
+// var whiteListArr_email=[];
 
-loadWhiteListArr(whiteListArr);
+// loadWhiteListArr(whiteListArr);
 
-function loadWhiteListArr(listArr){
-  fs.readFile('./database/white_list.json', 'utf8', function (err,data) {
-        if (err) throw err;
-        whiteListArr = JSON.parse(data);
-        whiteListArr.forEach(function(item){
-          whiteListArr_email.push(item.email);
+// function loadWhiteListArr(listArr){
+//   fs.readFile('./database/white_list.json', 'utf8', function (err,data) {
+//         if (err) throw err;
+//         whiteListArr = JSON.parse(data);
+//         whiteListArr.forEach(function(item){
+//           whiteListArr_email.push(item.email);
 
-        });
-        // console.log(data);
-        console.log("wList:"+whiteListArr.length);
-   });
+//         });
+//         // console.log(data);
+//         console.log("wList:"+whiteListArr.length);
+//    });
 
-}
-function saveWhiteListArr(){
-  fs.writeFile("./database/white_list.json", JSON.stringify(whiteListArr), function(err) {
-            if(err){
-                return console.log(err);
-            }
-            console.log("The file was saved!");
-  }); 
+// }
+// function saveWhiteListArr(){
+//   fs.writeFile("./database/white_list.json", JSON.stringify(whiteListArr), function(err) {
+//             if(err){
+//                 return console.log(err);
+//             }
+//             console.log("The file was saved!");
+//   }); 
 
-}
+// }
 exports.postDeleteLastWhitelist = function(req, res, next) {
   whiteListArr.pop();
   whiteListArr_email.pop();
@@ -147,7 +147,7 @@ exports.getSignup = function(req, res) {
 exports.postSignup = function(req, res, next) {
   req.assert('email', 'Email is not valid').isEmail();
   req.assert('uname', 'User first name must be at least 1 characters long').len(1);
-  req.assert('lname', 'User last name must be at least 1 characters long').len(1);
+  // req.assert('lname', 'User last name must be at least 1 characters long').len(1);
   req.assert('password', 'Password must be at least 4 characters long').len(4);
   req.assert('confirmPassword', 'Passwords do not match').equals(req.body.password);
 
@@ -159,35 +159,21 @@ exports.postSignup = function(req, res, next) {
   }
   
   // console.log('email:'+whiteListArr_email);
-  var findWlistIndex = whiteListArr_email.indexOf(req.body.email);
-  if(findWlistIndex>-1){
+  
     // console.log('--'+whiteListArr[findWlistIndex].status);
     // console.log(adminList.indexOf(req.body.email));
-    if(adminList.indexOf(req.body.email)>-1 || whiteListArr[findWlistIndex].status=="admin"){
-      console.log("admin!");
-      var user = new User({
-        email: req.body.email,
-        IsAdmin: true,
-        profile: {
-          name: req.body.uname,
-          lname: req.body.lname,
-          status: whiteListArr[findWlistIndex].status
-        },
-        password: req.body.password
-      });
-    }
-    else{
+    
       var user = new User({
         email: req.body.email,
         profile: {
           name: req.body.uname,
           lname: req.body.lname,
-          status: whiteListArr[findWlistIndex].status
+          status: 'fellow'
         },
         password: req.body.password
       });
 
-    }
+    
     User.findOne({ email: req.body.email }, function(err, existingUser) {
             if (existingUser) {
               req.flash('errors', { msg: 'Account with that email address already exists.' });
@@ -205,11 +191,6 @@ exports.postSignup = function(req, res, next) {
               });
             });
     });
-  }
-  else{
-          req.flash('errors', { msg: 'Account Forbbiden' });
-          return res.redirect('/signup');
-  }
 };
 
 /**
@@ -237,7 +218,7 @@ exports.getAccount = function(req, res) {
           res.render('account/profile', {
             title: 'Account Management',
             ulist: usersList,
-            wList: whiteListArr
+            // wList: whiteListArr
           });
       }
     });

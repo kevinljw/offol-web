@@ -1,56 +1,52 @@
 extends ../layout
 
 block content
-  .row.jumbotron
-    .container
-      h2 User Profile
-      p
-      p 
-      p 
+  //- .row.jumbotron
+  //-   .container
+  //-     h2 User Profile
+  //-     p
+  //-     p 
+  //-     p 
 
   .container
     .page-header
-      h3 Profile Information
+      h3 個人資訊
     script.
       userPic="#{user.profile.picture}"
       usersList="#{ulist}"
     form.form-horizontal(action='account/uploadPImg/'+user.id, method='POST', enctype='multipart/form-data')
       input(type='hidden', name='_csrf', value=_csrf)
       .form-group
-        label.col-sm-5.control-label(for='gravatar') Profile Image
+        label.col-sm-5.control-label(for='gravatar') 個人頭像
         .col-sm-4
           if user.profile.picture
             .profileGrid(style='background: url(\'#{user.profile.picture}\') no-repeat;background-size: auto 100%; background-position: 50% 0; border-radius: 5px;')
             //- img(src="#{user.profile.picture}", class='profile', width='180', height='180')
           else 
             img(src="img/default_profile.png", class='profile', width='180', height='180')
-      .form-group
-        label.col-sm-5.control-label(for='userPImg') Upload Photo
-        .col-sm-4
-          input.file(id='input-1', type='file', data-preview-file-type='text',accept='image/*', name='userPImg')
+      //- .form-group
+      //-   label.col-sm-5.control-label(for='userPImg') 上傳照片
+      //-   .col-sm-4
+      //-     input.file(id='input-1', type='file', data-preview-file-type='text',accept='image/*', name='userPImg')
     form.form-horizontal(action='/account/profile', method='POST')
       input(type='hidden', name='_csrf', value=_csrf)
+      
       .form-group
-        label.col-sm-5.control-label(for='cname') Chinese Name
+        label.col-sm-5.control-label(for='name') 姓名
         .col-sm-4
-          input.form-control(type='text', name='cname', id='cname', value='#{user.profile.cname}')
+          input.form-control(type='text', name='name', id='name', placeholder='your name', value='#{user.profile.name}')          
       .form-group
-        label.col-sm-5.control-label(for='name') English Name
-        .col-sm-4
-          input.form-control(type='text', name='name', id='name', placeholder='First Name', value='#{user.profile.name}')
-          input.form-control(type='text', name='lname', id='lname', placeholder='Last Name', value='#{user.profile.lname}')          
-      .form-group
-        label.col-sm-5.control-label(for='birth') Birth Date
+        label.col-sm-5.control-label(for='birth') 生日
         .col-sm-4
           input.form-control(type='date', name='birth', id='birth', min='1900-01-01' max='1999-12-31', value='#{user.profile.birth}')
       .form-group
         label.col-sm-5.control-label(for='email') Email
         .col-sm-4
           input.form-control(type='email', name='email', id='email', value='#{user.email}')
-      .form-group
-        label.col-sm-5.control-label(for='status') Status
-        .col-sm-4
-          input.form-control(type='status', name='status', id='status', disabled='disabled', value='#{user.profile.status}')  
+      //- .form-group
+      //-   label.col-sm-5.control-label(for='status') Status
+      //-   .col-sm-4
+      //-     input.form-control(type='status', name='status', id='status', disabled='disabled', value='#{user.profile.status}')  
       
 
       //- .form-group
@@ -67,83 +63,83 @@ block content
       //-   .col-sm-4
       //-     input.form-control(type='text', name='location', id='location', value='#{user.profile.location}')
       .form-group
-        label.col-sm-5.control-label(for='website') Personal Website
+        label.col-sm-5.control-label(for='website') 個人連結
         .col-sm-4
           input.form-control(type='text', name='website', id='website', value='#{user.profile.website}')
-      .form-group
-        label.col-sm-5.control-label(for='job') Describe your current role in one word:
-        .col-sm-4
-          input.form-control(type='text', name='job', id='job', value='#{user.profile.job}')
-      .form-group
-        label.col-sm-5.control-label(for='selfThreeWords1') How would you describe your self in three words?
-        .col-sm-4
-          .col-sm-4
-            input.form-control(type='text', name='selfThreeWords1', id='selfThreeWords1', placeholder='One', value='#{user.profile.selfThreeWords1}')
-          .col-sm-4
-            input.form-control(type='text', name='selfThreeWords2', id='selfThreeWords2', placeholder='Two', value='#{user.profile.selfThreeWords2}')
-          .col-sm-4
-            input.form-control(type='text', name='selfThreeWords3', id='selfThreeWords3', placeholder='Three', value='#{user.profile.selfThreeWords3}')
-      .form-group
-        label.col-sm-5.control-label(for='threeKeySkill1') What are your three key skill sets?
-        .col-sm-4
-          .col-sm-4
-            input.form-control(type='text', name='threeKeySkill1', id='threeKeySkill1', placeholder='One', value='#{user.profile.threeKeySkill1}')
-          .col-sm-4
-            input.form-control(type='text', name='threeKeySkill2', id='threeKeySkill2', placeholder='Two', value='#{user.profile.threeKeySkill2}')
-          .col-sm-4
-            input.form-control(type='text', name='threeKeySkill3', id='threeKeySkill3', placeholder='Three', value='#{user.profile.threeKeySkill3}')
-      .form-group
-        label.col-sm-5.control-label(for='threeInterests1') Name three interests outside of school and work
-        .col-sm-4
-          .col-sm-4
-            input.form-control(type='text', name='threeInterests1', id='threeInterests1', placeholder='One', value='#{user.profile.threeInterests1}')
-          .col-sm-4
-            input.form-control(type='text', name='threeInterests2', id='threeInterests2', placeholder='Two', value='#{user.profile.threeInterests2}')
-          .col-sm-4
-            input.form-control(type='text', name='threeInterests3', id='threeInterests3', placeholder='Three', value='#{user.profile.threeInterests3}')
-      .form-group
-        label.col-sm-5.control-label(for='sixThings') The Six things I can never do without
-        .col-sm-4
-          .col-sm-6
-            input.form-control(type='text', name='sixThings1', id='sixThings1', placeholder='One', value='#{user.profile.sixThings1}')
-          .col-sm-6
-            input.form-control(type='text', name='sixThings2', id='sixThings2', placeholder='Two', value='#{user.profile.sixThings2}')
-          .col-sm-6
-            input.form-control(type='text', name='sixThings3', id='sixThings3', placeholder='Three', value='#{user.profile.sixThings3}')
-          .col-sm-6
-            input.form-control(type='text', name='sixThings4', id='sixThings4', placeholder='Four', value='#{user.profile.sixThings4}')
-          .col-sm-6
-            input.form-control(type='text', name='sixThings5', id='sixThings5', placeholder='Five', value='#{user.profile.sixThings5}')
-          .col-sm-6
-            input.form-control(type='text', name='sixThings6', id='sixThings6', placeholder='Six', value='#{user.profile.sixThings6}')
-      .form-group
-        label.col-sm-5.control-label(for='bestAdvice') Best piece of advice ever received
-        .col-sm-4
-          textarea.form-control(type='text', name='bestAdvice', id='bestAdvice', rows='5') #{user.profile.bestAdvice}
-      .form-group
-        label.col-sm-5.control-label(for='oneBook') One book you would recommend to others
-        .col-sm-4
-          textarea.form-control(type='text', name='oneBook', id='oneBook', rows='4') #{user.profile.oneBook}
-      .form-group
-        label.col-sm-5.control-label(for='oneUrl') One URL you would recommend to others
-        .col-sm-4
-          textarea.form-control(type='text', name='oneUrl', id='oneUrl', rows='4') #{user.profile.oneUrl}
-      .form-group
-        label.col-sm-5.control-label(for='favoritePlace') Where is your favorite place to hang out in Taiwan?
-        .col-sm-4
-          textarea.form-control(type='text', name='favoritePlace', id='favoritePlace', rows='3') #{user.profile.favoritePlace}
-      .form-group
-        label.col-sm-5.control-label(for='statement') My self-summary:
-        .col-sm-4
-          textarea.form-control(type='text', name='statement', id='statement', rows='10') #{user.profile.statement}
+      //- .form-group
+      //-   label.col-sm-5.control-label(for='job') Describe your current role in one word:
+      //-   .col-sm-4
+      //-     input.form-control(type='text', name='job', id='job', value='#{user.profile.job}')
+      //- .form-group
+      //-   label.col-sm-5.control-label(for='selfThreeWords1') How would you describe your self in three words?
+      //-   .col-sm-4
+      //-     .col-sm-4
+      //-       input.form-control(type='text', name='selfThreeWords1', id='selfThreeWords1', placeholder='One', value='#{user.profile.selfThreeWords1}')
+      //-     .col-sm-4
+      //-       input.form-control(type='text', name='selfThreeWords2', id='selfThreeWords2', placeholder='Two', value='#{user.profile.selfThreeWords2}')
+      //-     .col-sm-4
+      //-       input.form-control(type='text', name='selfThreeWords3', id='selfThreeWords3', placeholder='Three', value='#{user.profile.selfThreeWords3}')
+      //- .form-group
+      //-   label.col-sm-5.control-label(for='threeKeySkill1') What are your three key skill sets?
+      //-   .col-sm-4
+      //-     .col-sm-4
+      //-       input.form-control(type='text', name='threeKeySkill1', id='threeKeySkill1', placeholder='One', value='#{user.profile.threeKeySkill1}')
+      //-     .col-sm-4
+      //-       input.form-control(type='text', name='threeKeySkill2', id='threeKeySkill2', placeholder='Two', value='#{user.profile.threeKeySkill2}')
+      //-     .col-sm-4
+      //-       input.form-control(type='text', name='threeKeySkill3', id='threeKeySkill3', placeholder='Three', value='#{user.profile.threeKeySkill3}')
+      //- .form-group
+      //-   label.col-sm-5.control-label(for='threeInterests1') Name three interests outside of school and work
+      //-   .col-sm-4
+      //-     .col-sm-4
+      //-       input.form-control(type='text', name='threeInterests1', id='threeInterests1', placeholder='One', value='#{user.profile.threeInterests1}')
+      //-     .col-sm-4
+      //-       input.form-control(type='text', name='threeInterests2', id='threeInterests2', placeholder='Two', value='#{user.profile.threeInterests2}')
+      //-     .col-sm-4
+      //-       input.form-control(type='text', name='threeInterests3', id='threeInterests3', placeholder='Three', value='#{user.profile.threeInterests3}')
+      //- .form-group
+      //-   label.col-sm-5.control-label(for='sixThings') The Six things I can never do without
+      //-   .col-sm-4
+      //-     .col-sm-6
+      //-       input.form-control(type='text', name='sixThings1', id='sixThings1', placeholder='One', value='#{user.profile.sixThings1}')
+      //-     .col-sm-6
+      //-       input.form-control(type='text', name='sixThings2', id='sixThings2', placeholder='Two', value='#{user.profile.sixThings2}')
+      //-     .col-sm-6
+      //-       input.form-control(type='text', name='sixThings3', id='sixThings3', placeholder='Three', value='#{user.profile.sixThings3}')
+      //-     .col-sm-6
+      //-       input.form-control(type='text', name='sixThings4', id='sixThings4', placeholder='Four', value='#{user.profile.sixThings4}')
+      //-     .col-sm-6
+      //-       input.form-control(type='text', name='sixThings5', id='sixThings5', placeholder='Five', value='#{user.profile.sixThings5}')
+      //-     .col-sm-6
+      //-       input.form-control(type='text', name='sixThings6', id='sixThings6', placeholder='Six', value='#{user.profile.sixThings6}')
+      //- .form-group
+      //-   label.col-sm-5.control-label(for='bestAdvice') Best piece of advice ever received
+      //-   .col-sm-4
+      //-     textarea.form-control(type='text', name='bestAdvice', id='bestAdvice', rows='5') #{user.profile.bestAdvice}
+      //- .form-group
+      //-   label.col-sm-5.control-label(for='oneBook') One book you would recommend to others
+      //-   .col-sm-4
+      //-     textarea.form-control(type='text', name='oneBook', id='oneBook', rows='4') #{user.profile.oneBook}
+      //- .form-group
+      //-   label.col-sm-5.control-label(for='oneUrl') One URL you would recommend to others
+      //-   .col-sm-4
+      //-     textarea.form-control(type='text', name='oneUrl', id='oneUrl', rows='4') #{user.profile.oneUrl}
+      //- .form-group
+      //-   label.col-sm-5.control-label(for='favoritePlace') Where is your favorite place to hang out in Taiwan?
+      //-   .col-sm-4
+      //-     textarea.form-control(type='text', name='favoritePlace', id='favoritePlace', rows='3') #{user.profile.favoritePlace}
+      //- .form-group
+      //-   label.col-sm-5.control-label(for='statement') My self-summary:
+      //-   .col-sm-4
+      //-     textarea.form-control(type='text', name='statement', id='statement', rows='10') #{user.profile.statement}
       .form-group
         .col-sm-offset-5.col-sm-4
           button.btn.btn.btn-primary(type='submit')
             i.fa.fa-pencilr
-            | Update Profile
+            | 更新資訊
     .page-header#linkAcnt
-      h3 Link Accounts
-      p.lead Please enter your personal link to the following social media:
+      h3 社群連結
+      //- p.lead Please enter your personal link to the following social media:
     .form-horizontal
       .form-group
         //- .col-sm-offset-3.col-sm-4
@@ -157,57 +153,57 @@ block content
         //-   else
         //-     p: a(href='/auth/google') Link your Google account
         .col-sm-offset-2.col-sm-8
-          .col-sm-4
+          .col-sm-6
             .linkAcnt
               if user.facebook
                 a.text-danger(href='/account/unlink/facebook')
                   span.fa.fa-facebook-square
-                  p Unlink your Facebook account
+                  p 取消連結你的 Facebook 帳戶
               else
                 a(href='/auth/facebook')
                   span.fa.fa-facebook-square
-                  p Link your Facebook account
-          .col-sm-4
+                  p 連結你的 Facebook 帳戶
+          .col-sm-6
             .linkAcnt
               if user.twitter
                 a.text-danger(href='/account/unlink/twitter')
                   span.fa.fa-twitter-square
-                  p Unlink your Twitter account
+                  p 取消連結你的 Twitter 帳戶
               else
                 a(href='/auth/twitter')
                   span.fa.fa-twitter-square
-                  p Link your Twitter account
-          .col-sm-4
-            .linkAcnt
-              if user.linkedin
-                a.text-danger(href='/account/unlink/linkedin')
-                  span.fa.fa-linkedin-square
-                  p Unlink your LinkedIn account
-              else
-                a(href='/auth/linkedin')
-                  span.fa.fa-linkedin-square
-                  p Link your LinkedIn account
+                  p 連結你的 Twitter 帳戶
+          //- .col-sm-4
+          //-   .linkAcnt
+          //-     if user.linkedin
+          //-       a.text-danger(href='/account/unlink/linkedin')
+          //-         span.fa.fa-linkedin-square
+          //-         p Unlink your LinkedIn account
+          //-     else
+          //-       a(href='/auth/linkedin')
+          //-         span.fa.fa-linkedin-square
+          //-         p Link your LinkedIn account
     .page-header
-      h3 Change Password
+      h3 密碼更變
 
     form.form-horizontal(action='/account/password', method='POST')
       input(type='hidden', name='_csrf', value=_csrf)
       .form-group
-        label.col-sm-5.control-label(for='password') New Password
+        label.col-sm-5.control-label(for='password') 新密碼
         .col-sm-4
           input.form-control(type='password', name='password', id='password')
       .form-group
-        label.col-sm-5.control-label(for='confirmPassword') Confirm Password
+        label.col-sm-5.control-label(for='confirmPassword') 確認密碼
         .col-sm-4
           input.form-control(type='password', name='confirmPassword', id='confirmPassword')
       .form-group
         .col-sm-offset-5.col-sm-4
           button.btn.btn-primary(type='submit')
             i.fa.fa-lock
-            | Change Password
+            | 更變
 
     .page-header
-      h3 Delete Account
+      h3 刪除帳號
 
     form.form-horizontal(action='/account/delete', method='POST')
       .form-group

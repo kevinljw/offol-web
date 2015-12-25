@@ -1,19 +1,16 @@
-var Article = require('../models/Article');
-var Share = require('../models/Share');
+// var Article = require('../models/Article');
+// var Share = require('../models/Share');
 /**
  * GET /
  * Home page.
  */
 exports.index = function(req, res) {
-	Share.find({}, null, {sort: {_id: -1}, limit: 6}, function(err, shares) {
-		Article.find({}, null, {sort: {_id: -1}, limit: 6}, function(err, articles) {
+	
 			res.render('home', {
 			    title: 'Home',
-			    nArticles: articles,
-			    nShares: shares
+			    
 			});
-		});
-	});
+		
 	// var Aarr=[];
 	// Share.find({}, function(err, shares) {
 	// 	Article.find({}, function(err, articles) {
@@ -39,9 +36,4 @@ exports.index = function(req, res) {
 	// 	});
 	// });
   
-};
-exports.indexHidden = function(req, res) {
-  res.render('homeHidden', {
-    title: 'Home'
-  });
 };

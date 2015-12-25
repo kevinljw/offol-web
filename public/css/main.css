@@ -11763,7 +11763,7 @@ footer p, footer ul {
 #hero-area h1 {
   font-size: 120px;
   font-weight: 600;
-  color: #931D34;
+  color: #062b46;
   text-shadow: 2px 2px 25px #d1c8c8;
 }
 
@@ -11846,7 +11846,7 @@ footer p, footer ul {
 }
 
 .navbar-default .navbar-brand {
-  color: #931D34;
+  color: #062b46;
   font-weight: 700;
   padding-right: 20px;
 }
@@ -11900,7 +11900,7 @@ footer p, footer ul {
   /* IE 9 */
   -webkit-transform: rotateY(180deg);
   transform: rotateY(180deg);
-  background-color: #931D34;
+  background-color: #062b46;
 }
 
 .back {
@@ -12285,7 +12285,7 @@ article.post .post-inner iframe {
 }
 
 .post-quote .post-wrap {
-  background-color: #ffsf;
+  background-color: #fff;
   color: #7c7c7c;
 }
 
@@ -12295,7 +12295,7 @@ article.post .post-inner iframe {
 }
 
 .dropdown-menu > li > a:hover {
-  color: #931D34;
+  color: #062b46;
 }
 
 .dropdown-menu > li > a {
@@ -12306,35 +12306,41 @@ article.post .post-inner iframe {
 }
 
 .navbar-default .navbar-nav > li > a {
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 900;
 }
 
 .navbar-default .navbar-nav > li > a:hover {
-  color: #931D34;
+  color: #062b46;
   background-color: #e7e7e7;
 }
 
 .navbar-default .navbar-nav > .active > a:hover {
   color: #e5dcde;
-  background-color: #931D34;
+  background-color: #062b46;
 }
 
 .navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > .active > a {
   color: #fff;
-  background-color: #931D34;
+  background-color: #062b46;
 }
 
 .jumbotronHome {
-  background: url("/img/23513388126_6b8fcaf3c5_k_b.jpg") no-repeat;
-  background-size: 100% auto;
+  margin-top: -10px;
+}
+
+.jumbotronDiscover {
+  background: url("/img/b2dc32b9c577473db597fc89c74e6f32.jpg") no-repeat;
+  background-size: auto 95%;
   background-attachment: fixed;
+  background-position: 0 -170px;
 }
 
 .jumbotronPeople {
-  background: url("/img/22911258384_13d3dd1bac_k_c.jpg") no-repeat;
+  background: url("/img/791735a745884b6db82203d849e406d6-2.jpg") no-repeat;
   background-size: 100% auto;
   background-attachment: fixed;
-  background-position: 0 40px;
+  background-position: 0 -100px;
   padding: 100px 0;
 }
 
@@ -12343,24 +12349,24 @@ article.post .post-inner iframe {
   background-size: 100% auto;
   background-attachment: fixed;
   background-position: 0 -200px;
-  padding: 120px 0;
+  padding: 50px 0;
 }
 
 .jumbotron h1 {
-  color: #931D34;
+  color: #062b46;
   text-shadow: 2px 2px 20px #f5f5f5;
 }
 
 .jumbotron p, .jumbotron h2 {
-  font-weight: 500;
-  color: #fff;
-  text-shadow: 2px 2px 5px #212121;
+  font-weight: 800;
+  color: #062b46;
 }
 
 .jumbotron {
-  background-color: #931D34;
+  background-color: #062b46;
   color: #fff;
   margin-top: -10px;
+  margin-bottom: 50px;
 }
 
 @media screen and (max-width: 767px) {
@@ -12368,8 +12374,8 @@ article.post .post-inner iframe {
     margin-left: 10px;
   }
   .jumbotronPeople {
-    background-size: auto 52%;
-    background-position: -160px 0px;
+    background-size: auto 90%;
+    background-position: -160px -120px;
   }
   .jumbotronHome {
     background-size: auto 70%;
@@ -12390,12 +12396,12 @@ article.post .post-inner iframe {
   }
   .jumbotronPeople {
     background-position: 0 0px;
-    padding: 140px 0;
+    padding: 40px 0;
   }
 }
 
 .navbar-default {
-  border-color: #931D34;
+  border-color: #062b46;
 }
 
 .homeSubTag {
@@ -12521,4 +12527,65 @@ article.post .post-inner iframe {
 
 .jumbotronIdea {
   margin-bottom: 0;
+}
+
+.body_lightGray {
+  background: #f9fbfb;
+}
+
+.leadDiscover {
+  padding: 20px 30px;
+}
+
+.py6 {
+  margin: 50px 0 100px;
+}
+
+.bold.h5 {
+  font-size: 20px;
+  width: 800;
+}
+
+.btn--large {
+  font-size: 18px;
+  font-weight: 800;
+  padding: 18px 30px;
+}
+
+.NS_projects__back_and_star {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.banner {
+  height: 400px;
+  background: #e4e4e4;
+  margin-top: -10px;
+  margin-bottom: 50px;
+}
+
+.free_jumbo {
+  position: relative;
+}
+
+.free_jumbo .img-preview {
+  width: 1000px;
+  height: 378px;
+}
+
+.free_jumbo img, .free_jumbo svg {
+  border: 1px solid #ddd;
+  -webkit-box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.4);
+  box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.4);
+}
+
+.free_jumbo img, .free_jumbo svg {
+  width: 1000px;
+  height: 378px;
+}
+
+.not-active {
+  pointer-events: none;
+  cursor: default;
 }

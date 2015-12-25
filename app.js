@@ -12,37 +12,7 @@ var bodyParser = require('body-parser');
 var logger = require('morgan');
 var errorHandler = require('errorhandler');
 
-var multer  = require('multer');
-var storagePImg = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, './public/uploadPImg/'); // Absolute path. Folder must exist, will not be created for you.
-  },
-  filename: function (req, file, cb) {
-    cb(null, req.params.id + file.originalname.substr(file.originalname.lastIndexOf('.')));
-  }
-});
-var storageAnnPImg = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, './public/uploadAnnPImg/'); // Absolute path. Folder must exist, will not be created for you.
-  },
-  filename: function (req, file, cb) {
-    cb(null, req.params.id + "-"+ Date.now() + file.originalname.substr(file.originalname.lastIndexOf('.')));
-  }
-});
-var uploadPImg = multer({ storage: storagePImg });
-var uploadAnnPImg = multer({ storage: storageAnnPImg });
 
-var storageFiles = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, './public/uploadFiles/'); // Absolute path. Folder must exist, will not be created for you.
-  },
-  filename: function (req, file, cb) {
-    // console.log('req.body:');
-    // console.log(file);
-    cb(null, req.params.id + "-"+ Date.now() + file.originalname.substr(file.originalname.lastIndexOf('.')));
-  }
-});
-var uploadFiles = multer({ storage: storageFiles });
 // var img = require('easyimage');
 // var imgs = ['png', 'jpg', 'jpeg', 'gif', 'bmp']; // only make thumbnail for these
 
@@ -69,10 +39,13 @@ var apiController = require('./controllers/api');
 var peopleController = require('./controllers/people');
 var contactController = require('./controllers/contact');
 var introController = require('./controllers/intro');
-var shareController = require('./controllers/sharing');
+// var shareController = require('./controllers/sharing');
 var announcementsController = require('./controllers/announcements');
-var adminController = require('./controllers/admin');
-var ideaController = require('./controllers/idea');
+// var discoverController = require('./controllers/discover');
+var hostController = require('./controllers/host');
+var projController = require('./controllers/projects');
+// var adminController = require('./controllers/admin');
+// var ideaController = require('./controllers/idea');
 /**
  * API keys and Passport configuration.
  */
@@ -124,7 +97,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 app.use(lusca({
-  csrf: false,
+  csrf: true,
   xframe: 'SAMEORIGIN',
   xssProtection: true
 }));
@@ -154,8 +127,8 @@ app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }))
 /**
  * Primary app routes.
  */
-app.get('/', passportConf.isAuthenticated, homeController.index);
-app.get('/home', homeController.indexHidden);
+app.get('/', homeController.index);
+// app.get('/home', homeController.indexHidden);
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);
 app.get('/logout', userController.logout);
@@ -165,42 +138,46 @@ app.get('/reset/:token', userController.getReset);
 app.post('/reset/:token', userController.postReset);
 app.get('/signup', userController.getSignup);
 app.post('/signup', userController.postSignup);
-app.get('/contact', passportConf.isAuthenticated, contactController.getContact);
+app.get('/contact',  contactController.getContact);
 app.get('/contact2', contactController.getContact2);
 app.post('/contact', contactController.postContact);
-// app.get('/people', passportConf.isAuthenticated, peopleController.getPeople);
-app.post('/people', passportConf.isAuthenticated, peopleController.postPeople);
-app.get('/people/:id', passportConf.isAuthenticated, peopleController.getPeopleId);
-// app.get('/people/mentors', passportConf.isAuthenticated, peopleController.getMentors);
-// app.get('/people/ta', passportConf.isAuthenticated, peopleController.getTA);
-// app.get('/people/faculty', passportConf.isAuthenticated, peopleController.getFaculty);
-app.get('/intro/:id', passportConf.isAuthenticated, introController.getIntro);
-app.get('/sharing/:id', passportConf.isAuthenticated, shareController.getSharing);
-app.post('/sharing/uploadfiles/:id', passportConf.isAuthenticated, uploadFiles.any(), shareController.postSharingFiles);
-app.get('/sharing/files/:id', passportConf.isAuthenticated, shareController.getFile);
+// app.get('/people',  peopleController.getPeople);
+app.post('/people', peopleController.postPeople);
+app.get('/people/:id', peopleController.getPeopleId);
+// app.get('/people/mentors',  peopleController.getMentors);
+// app.get('/people/ta',  peopleController.getTA);
+// app.get('/people/faculty',  peopleController.getFaculty);
+app.get('/intro/:id',  introController.getIntro);
 
-app.get('/announcements', passportConf.isAuthenticated, announcementsController.getAnnouncements);
+app.get('/announcements',  announcementsController.getAnnouncements);
+
+app.get('/discover',  projController.getDiscover);
+app.get('/host',  hostController.getHost);
+app.get('/projects/:id', projController.getProject);
+app.get('/fundings/:id', passportConf.isAuthenticated, projController.getFunding);
+app.post('/fundings/:id', passportConf.isAuthenticated, projController.postFunding);
+
 
 app.get('/account', passportConf.isAuthenticated, userController.getAccount);
 app.post('/account/profile', passportConf.isAuthenticated, userController.postUpdateProfile);
 app.post('/account/password', passportConf.isAuthenticated, userController.postUpdatePassword);
 app.post('/account/delete', passportConf.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConf.isAuthenticated, userController.getOauthUnlink);
-app.post('/account/uploadPImg/:id', passportConf.isAuthenticated, uploadPImg.single('userPImg'), userController.postPImg);
+// app.post('/account/uploadPImg/:id', passportConf.isAuthenticated, uploadPImg.single('userPImg'), userController.postPImg);
 
 app.post('/account/whitelist', passportConf.isAuthenticated, userController.postEmailToWhitelist);
 app.post('/account/delete_whitelist', passportConf.isAuthenticated, userController.postDeleteLastWhitelist);
 
-app.get('/article', passportConf.isAuthenticated, announcementsController.getArticle);
-app.post('/article/new/:id', passportConf.isAuthenticated, uploadAnnPImg.single('AnnPImg'), announcementsController.postNewArticle);
+// app.get('/article', passportConf.isAuthenticated, announcementsController.getArticle);
+// app.post('/article/new/:id', passportConf.isAuthenticated, uploadAnnPImg.single('AnnPImg'), announcementsController.postNewArticle);
 
 app.post('/deleteArticle/:id', passportConf.isAuthenticated, announcementsController.postDeleteArticle);
 app.post('/deleteShare/:id', passportConf.isAuthenticated, announcementsController.postDeleteShare);
 app.post('/deleteIdea/:id', passportConf.isAuthenticated, announcementsController.postDeleteIdea);
 
 
-app.get('/idea', passportConf.isAuthenticated, ideaController.getIdea);
-app.post('/idea/new/:id', passportConf.isAuthenticated, ideaController.postIdea);
+// app.get('/idea',  ideaController.getIdea);
+// app.post('/idea/new/:id',  ideaController.postIdea);
 /**
  * API examples routes.
  */

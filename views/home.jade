@@ -1,72 +1,42 @@
 extends layout
 
 block content
-
-  .row.jumbotron.jumbotronHome
-    .container.backColor
-      h1 NTU LIVE
-      p.lead Leadership, Innovation, ValuE
-      p 打造台灣未來醫療科技CEO人才計劃
+  header#myCarousel.carousel.slide.jumbotronHome
+    //- Indicators
+    ol.carousel-indicators
+      li.active(data-target='#myCarousel', data-slide-to='0')
+      li(data-target='#myCarousel', data-slide-to='1')
+      li(data-target='#myCarousel', data-slide-to='2')
+    //- Wrapper for Slides
+    .carousel-inner
+      .item.active
+        //- Set the first background image using inline CSS below.
+        .fill(style="background-image:url('img/b5a368be53ad4b20bb3441cb26f2fc44.jpg');")
+        .carousel-caption
+          h2 Loffo
+      .item
+        //- Set the second background image using inline CSS below.
+        .fill(style="background-image:url('img/a_banner-01.jpg');")
+        .carousel-caption
+          h2 Caption 2
+      .item
+        //- Set the third background image using inline CSS below.
+        .fill(style="background-image:url('img/b_banner.jpg');")
+        .carousel-caption
+          h2 Caption 3
+    //- Controls
+    a.left.carousel-control(href='#myCarousel', data-slide='prev')
+      span.icon-prev
+    a.right.carousel-control(href='#myCarousel', data-slide='next')
+      span.icon-next
+  //- .row.jumbotron.jumbotronHome
+  //-   .container.backColor
+  //-     h1 Loffo
+  //-     p.lead Lotto for funding
+  //-     p 
   .container
     .row.fourHeading
-      .col-sm-3
-        h2 What we do
-        //- p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-        p
-          //- a.btn.btn-default(href='#', role='button') View details »
-      .col-sm-3
-        h2 Who we are
-        //- p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-        p
-          //- a.btn.btn-default(href='#', role='button') View details »
-      .col-sm-3
-        h2 Why we do it
-        //- p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-        p
-          //- a.btn.btn-default(href='#', role='button') View details »
-      .col-sm-3
-        h2 How we do it
-        //- p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-        p
-          //- a.btn.btn-default(href='#', role='button') View details »
+      
     hr
     .row
-      .col-sm-8
-        .page-header
-          h3 Announcements
-        each val in nArticles
-          .homeAnn.col-sm-12
-            .col-sm-6
-              h3 #{val.title}
-              p.homeAnnContent #{val.content}
-              .homeSubTag 
-                i.fa.fa-user  #{val.author}
-              .homeSubTag
-                i.fa.fa-clock-o  #{val.timestamp}
-              p 
-                a.btn.btn-default(href='announcements/\##{val.timestamp}', role='button') View details » 
-              p  
-
-            .col-sm-offset-1.col-sm-5
-              if val.picture
-                a(href='announcements/\##{val.timestamp}').hollowPic(style='background: url(\'#{val.picture}\') no-repeat;background-size: auto 100%; background-position: 30% 0; border-radius: 5px;')
-                //- img(src='#{val.picture}', height='200px')
-              //- else
-                //- .hollowPic 
-          .col-sm-12
-            hr
-        
-      .col-sm-4
-        .page-header
-          h3 Sharing
-        each val in nShares
-          .homeSha
-            h4 #{val.title}
-            p #{val.description}
-            .homeSubTag 
-              i.fa.fa-user  #{val.upload_user}
-            .homeSubTag
-              i.fa.fa-clock-o  #{val.timestamp}
-            p 
-              a.btn.btn-default(href='sharing/#{val.type}/\##{val.timestamp}', role='button') View details »
-            hr
+    

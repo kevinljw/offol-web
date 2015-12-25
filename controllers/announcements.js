@@ -1,8 +1,8 @@
 var secrets = require('../config/secrets');
 var moment = require('moment');
-var Article = require('../models/Article');
-var Share = require('../models/Share');
-var Idea = require('../models/Idea');
+// var Article = require('../models/Article');
+// var Share = require('../models/Share');
+// var Idea = require('../models/Idea');
 var User = require('../models/User');
 var nodemailer = require("nodemailer");
 var transporter = nodemailer.createTransport({

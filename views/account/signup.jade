@@ -1,8 +1,8 @@
-extends ../layoutHidden
+extends ../layout
 
 block content
   .page-header.container
-    h3 Sign up
+    h3 註冊即可贊助
   .container
     form.form-horizontal(id='signup-form', method='POST')
       input(type='hidden', name='_csrf', value=_csrf)
@@ -11,23 +11,27 @@ block content
         .col-sm-4
           input.form-control(type='email', name='email', id='email', placeholder='Email', autofocus)
       .form-group
-        label.col-sm-offset-1.col-sm-3.control-label(for='uname') First Name
+        label.col-sm-offset-1.col-sm-3.control-label(for='uname') 姓名
         .col-sm-4
-          input.form-control(type='text', name='uname', id='uname', placeholder='First name')
+          input.form-control(type='text', name='uname', id='uname', placeholder='您的大名')
       .form-group
-        label.col-sm-offset-1.col-sm-3.control-label(for='lname') Last Name
-        .col-sm-4
-          input.form-control(type='text', name='lname', id='lname', placeholder='Last name')
-      .form-group
-        label.col-sm-offset-1.col-sm-3.control-label(for='password') Password
+        label.col-sm-offset-1.col-sm-3.control-label(for='password') 密碼
         .col-sm-4
           input.form-control(type='password', name='password', id='password', placeholder='Password')
       .form-group
-        label.col-sm-offset-1.col-sm-3.control-label(for='confirmPassword') Confirm Password
+        label.col-sm-offset-1.col-sm-3.control-label(for='confirmPassword') 確認密碼
         .col-sm-4
           input.form-control(type='password', name='confirmPassword', id='confirmPassword', placeholder='Confirm Password')
       .form-group
         .col-sm-offset-4.col-sm-7
           button.btn.btn-success(type='submit')
             i.fa.fa-user-plus
-            | Signup
+            | 註冊
+      .form-group
+        .col-sm-offset-3.col-sm-6
+          hr
+      //- .form-group
+      //-   .col-sm-offset-4.col-sm-4
+      //-     a.btn.btn-block.btn-facebook.btn-social(href='/auth/facebook')
+      //-       i.fa.fa-facebook
+      //-       | 以您的 Facebook 註冊

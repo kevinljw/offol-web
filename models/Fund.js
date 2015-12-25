@@ -2,16 +2,13 @@
 // var crypto = require('crypto');
 var mongoose = require('mongoose');
 
-var shareSchema = new mongoose.Schema({
+var fundSchema = new mongoose.Schema({
 
-  title: { type: String, default: 'File Sharing' },
-  description: { type: String, default: '' },
-  upload_user: { type: String, default: '' },
-  upload_userId: { type: String, default: '' },
-  type: { type: String, default: '' },
-  filespath: [],
-  filesname: [],
-  timestamp: { type: String, default: '' }
+  hoster: { type: String, default: '' },
+  investor: { type: String, default: '' },
+  money: { type: Number, default: 1 },
+  timestamp: { type: String, default: '' },
+  serials: { type: Array, default: [] },
 });
 
 /**
@@ -38,4 +35,4 @@ var shareSchema = new mongoose.Schema({
 
 
 
-module.exports = mongoose.model('Share', shareSchema);
+module.exports = mongoose.model('Fund', fundSchema);
