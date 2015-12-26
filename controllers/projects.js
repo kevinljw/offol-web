@@ -161,7 +161,7 @@ exports.postFunding = function(req, res) {
 		  hoster: hostId,
 		  investor: req.params.id,
 		  money: req.body.money,
-		  timestamp: moment().format('lll'),
+		  timestamp: moment().utcOffset(8).format('lll'),
 		  serials: allSeriels,
 
 	    });
