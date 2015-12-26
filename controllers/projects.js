@@ -3,25 +3,34 @@ var User = require('../models/User');
 var moment = require('moment');
 var Fund = require('../models/Fund');
 var async = require('async');
+var md5 = require('md5');
+
+var addNullNum = 10000000;
 
 var a_projectObj = {
 	id: '10000001',
 	goal: 2000,
 	nowMoney: 0,
 	investors: 0,
-	percent: 0 
+	percent: 0,
+	ticketBuyArr: new Array(2000)
 }
 var b_projectObj = {
 	id: '10000002',
 	goal: 1200,
 	nowMoney: 0,
 	investors: 0, 
-	percent: 0 
+	percent: 0,
+	ticketBuyArr: new Array(1200)
 }
 
 refreshFundingData();
 
 function refreshFundingData(){
+	for(var i=0; i< a_projectObj.ticketBuyArr.length; i++){
+		// console.log(a_projectObj.ticketBuyArr[i]);
+		a_projectObj.ticketBuyArr[i]=false;
+	}
 	
 	singleUserUpdate('10000001', a_projectObj);
 	singleUserUpdate('10000002', b_projectObj);
@@ -49,6 +58,10 @@ function singleUserUpdate(thisHost, projObj){
 				if(investorArr.indexOf(eachFund.investor)==-1){
 					investorArr.push(eachFund.investor);
 				}
+				eachFund.serials.forEach(function(eachSerial){
+					a_projectObj.ticketBuyArr[parseInt(eachSerial)-addNullNum]=true;
+				});
+				
 				thisFund_callback();
 				
 			},function(err){
@@ -93,10 +106,18 @@ exports.getProject = function(req, res) {
 	    });
 
   	}
-  
-    
-  
-  
+ 
+};
+exports.getPayEnd = function(req, res) {
+  // get all the users
+  // console.log("getPeople");
+  	
+  		res.render('payend', {
+	    	title: '付款未完',
+	    	buynum: req.params.num
+	    });
+  	
+ 
 };
 exports.getFunding = function(req, res) {
   // get all the users
@@ -110,9 +131,14 @@ exports.getFunding = function(req, res) {
 };
 exports.postFunding = function(req, res) {
 
-  	req.assert('money', '請填入至少一元以上之金額').notEmpty().isInt();
-  	// req.assert('money', '請填入至少一元以上之金額').gte(1);
+	var hostId = req.headers.referer.substr(req.headers.referer.indexOf("/fundings/")+10);
   	
+  	req.assert('money', '金額不得為空').notEmpty();
+  	req.assert('money', '金額錯誤').isInt();
+  	req.assert('money', '請填入至少一元以上之金額').gte(1);
+  	if(hostId=='10000001') req.assert('money', '填入金額不得多於:'+(a_projectObj.goal-a_projectObj.nowMoney)).lt((a_projectObj.goal-a_projectObj.nowMoney));
+  	else req.assert('money', '填入金額不得多於:'+(b_projectObj.goal-b_projectObj.nowMoney)).lt((b_projectObj.goal-b_projectObj.nowMoney));
+
   	// console.log(req)
   	var errors = req.validationErrors();
 
@@ -121,25 +147,72 @@ exports.postFunding = function(req, res) {
 	    return res.redirect(req.headers.referer);
 	  }
 
+	serialGenerate(hostId, req.params.id, req.body.money, (hostId=='10000001')?a_projectObj.goal:b_projectObj.goal ,function(allSeriels){
   	
+		console.log(allSeriels);
 
-	var thisFund = new Fund({
-	  hoster: req.headers.referer.substr(req.headers.referer.indexOf("/fundings/")+10),
-	  investor: req.params.id,
-	  money: req.body.money,
-	  timestamp: Date(),
-	  serials: [],
+		var thisFund = new Fund({
+		  hoster: hostId,
+		  investor: req.params.id,
+		  money: req.body.money,
+		  timestamp: Date(),
+		  serials: allSeriels,
 
-    });
-    // console.log(thisArticle);
-   	thisFund.save(function(err) {
-        if (err) {
-          return next(err);
-        }
-        refreshFundingData();
-        req.flash('success', { msg: '已登記:'+req.body.money+"元" });
-        res.redirect('/discover');
-    });
+	    });
+	    // console.log(thisArticle);
+	   	thisFund.save(function(err) {
+	        if (err) {
+	          return next(err);
+	        }
+	        refreshFundingData();
+	        req.flash('success', { msg: '已登記:'+req.body.money+"元" });
+	        res.redirect('/payend/'+req.body.money);
+	    });
+
+   });
 		
   
 };
+
+function serialGenerate(hostId, thisEmail, thisNum, needForPeople, callback){
+    
+    var allSerials = [];
+    // async.forEachOf(thisProjs, function (eachFund, eachFundIndex, thisFund_callback) {
+
+   for(var i=0; i<thisNum;i++){
+        allSerials.push(eachSerial(hostId, thisEmail, i, needForPeople));
+        if(i==thisNum-1){
+        	callback(allSerials);
+        }
+   } 
+    
+//    callback();
+}
+function eachSerial(hostId, thisEmail, nowNum, needForPeople){
+    
+    var tmpEnN = thisEmail+nowNum;
+//    console.log(tmpEnN);
+    var getThisGuysMd5 = md5(tmpEnN);
+    var thisGuysMd5cutInt =  parseInt(getThisGuysMd5.substr(23),16);
+    
+  // console.log(thisGuysMd5cutInt);
+    thisGuysMd5cutInt = thisGuysMd5cutInt%needForPeople;
+    // console.log(thisEmail+"->"+thisGuysMd5cutInt);
+    for(var i=0; i<needForPeople;i++){
+    	if(hostId=='10000001'){
+    		// console.log('10000001');
+    		if(a_projectObj.ticketBuyArr[(thisGuysMd5cutInt+i)%needForPeople]==false){
+	            a_projectObj.ticketBuyArr[(thisGuysMd5cutInt+i)%needForPeople]=true;
+	            return addNullNum+(thisGuysMd5cutInt+i)%needForPeople;
+	        }
+    	}
+    	else{
+    		if(b_projectObj.ticketBuyArr[(thisGuysMd5cutInt+i)%needForPeople]==false){
+	            b_projectObj.ticketBuyArr[(thisGuysMd5cutInt+i)%needForPeople]=true;
+	            return addNullNum+(thisGuysMd5cutInt+i)%needForPeople;
+	        }
+    	}
+        
+    }
+    console.log("something wrong!");
+}

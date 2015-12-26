@@ -4746,7 +4746,7 @@ a .editorial-list-module {
 }
 .project-card.project-card-tall .project-title,
 .project-card.project-card-tall-big .project-title {
-    font-size: 12px;
+    font-size: 16px;
     font-weight: bold
 }
 .project-card.project-card-tall .project-title a,
@@ -4763,7 +4763,7 @@ a .editorial-list-module {
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
-        font-size: 16px
+        font-size: 24px
     }
 }
 .project-card.project-card-tall .project-byline,
@@ -4873,7 +4873,7 @@ a .editorial-list-module {
 @media (max-width: 640px) {
     body:not(.widget) .project-card.project-card-tall .project-stats-value,
     body:not(.widget) .project-card.project-card-tall-big .project-stats-value {
-        font-size: 16px
+        font-size: 20px
     }
 }
 .project-card.project-card-tall .project-pledged-successful,

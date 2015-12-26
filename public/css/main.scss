@@ -132,6 +132,7 @@ footer {
     margin: 50px auto;
     border: 1px solid #eaeaea;
     border-radius: 10px;
+    text-align: center;
 }
 .propic {
     border-radius: 10px;
@@ -594,7 +595,7 @@ article.post .post-inner iframe {
 }
 .jumbotronDiscover{
     background: url('/img/b2dc32b9c577473db597fc89c74e6f32.jpg') no-repeat;
-    background-size: auto 95%;
+    background-size: auto 120%;
     background-attachment: fixed;
     background-position: 0 -170px;
     
@@ -620,6 +621,7 @@ article.post .post-inner iframe {
 .jumbotron p, .jumbotron h2{
     font-weight: 800;
     color: #062b46;
+    text-shadow: 2px 2px 18px #f5f5f5;
 //    text-shadow: 2px 2px 5px #212121;
 }
 .jumbotron{
@@ -856,3 +858,7 @@ article.post .post-inner iframe {
    pointer-events: none;
    cursor: default;
 }
+p.project-byline, p.project-blurb{
+    font-size: 14px;
+}
+

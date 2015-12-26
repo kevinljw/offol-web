@@ -84,7 +84,20 @@ app.use(logger('dev'));
 app.use(favicon(path.join(__dirname, 'public', 'favicon.png')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(expressValidator());
+app.use(expressValidator({
+   customValidators: {
+      isArray: function(value) {
+          return Array.isArray(value);
+      },
+      gte: function(param, num) {
+          return param >= num;
+      },
+      lt: function(param, num) {
+        return param < num;
+      }
+   }
+})
+);
 app.use(methodOverride());
 app.use(cookieParser());
 app.use(session({
@@ -156,6 +169,8 @@ app.get('/host',  hostController.getHost);
 app.get('/projects/:id', projController.getProject);
 app.get('/fundings/:id', passportConf.isAuthenticated, projController.getFunding);
 app.post('/fundings/:id', passportConf.isAuthenticated, projController.postFunding);
+
+app.get('/payend/:num', passportConf.isAuthenticated, projController.getPayEnd);
 
 
 app.get('/account', passportConf.isAuthenticated, userController.getAccount);

@@ -5,22 +5,36 @@ block content
     .container.img-preview
       img(src='/img/a_banner-01.jpg')
   .container.fundingPage
+    //- h3.col-sm-offset-5 願付金額
+    //- .col-sm-offset-3.col-sm-6
+    //-   hr
     form.form-horizontal(action='/fundings/'+user.id, method='POST')
       input(type='hidden', name='_csrf', value=_csrf)
+      //- .form-group
+      h3.col-sm-offset-5.col-sm-3 支付贊助
+      //- .form-group
+      .col-sm-offset-3.col-sm-6
+        hr
       .form-group
         label.col-sm-offset-1.col-sm-3.control-label(for='money') 金額
         .col-sm-4
           input.form-control(type='text', name='money', id='money', placeholder='請填入一元以上之金額')
-      .form-group
-        label.col-sm-offset-1.col-sm-3.control-label(for='money') 確認
-        .col-sm-4
-          input.form-control(type='checkbox', name='chkm', id='chkm')
-          | 確認付款
+      //- .form-group
+      //-   label.col-sm-offset-1.col-sm-3.control-label(for='chkm') 確認
+      //-   .col-sm-4
+      //-     input.form-control(type='checkbox', name='chkm', id='chkm', value='確認付款')
+      //-     | 確認付款金額
+      //- .form-group
+      p.col-sm-offset-4.col-sm-7 確認贊助金額無誤後，請按「下一步」
+      //- .form-group
+      .col-sm-offset-3.col-sm-6
+        hr
       .form-group
         .col-sm-offset-4.col-sm-7
           button.btn.btn-success(type='submit')
             i.fa.fa-shopping-cart
-            | 付款
-      .form-group
-        .col-sm-offset-3.col-sm-6
-          hr
+            | 下一步：付款
+  //- .container.container-flex.px2
+  //-   .row
+  //-     .col.col-8
+  //-       img(src='/img/pay.jpg',width='100%')

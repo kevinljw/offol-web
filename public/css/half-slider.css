@@ -12,7 +12,7 @@ body {
 /* You can change the height of the carousel by changing the height in the class below. It is set to 50% by default, but can be any height! */
 
 .carousel {
-    height: 50%;
+    height: 70%;
 }
 
 .item,
@@ -35,4 +35,27 @@ body {
 
 footer {
     margin: 50px 0;
+}
+.carousel-caption h1{
+    font-size: 50px;
+    color: #062b46;
+    font-weight: 700;
+    text-shadow: 2px 2px 20px #f5f5f5;
+    float: left;
+    display: block;
+/*    margin-bottom: 240px;*/
+}
+.carousel-caption h3{
+/*    font-size: 50px;*/
+    color: #fcf7f3;
+    font-weight: 700;
+    text-shadow: 2px 2px 20px #062b46;
+    float: left;
+    display: block;
+/*    margin-bottom: 240px;*/
+}
+.loffoHead{
+    width: 300px;
+    margin-bottom: 80px;
+    margin-left: -50px;
 }
