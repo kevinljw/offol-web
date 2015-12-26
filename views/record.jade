@@ -21,12 +21,8 @@ block content
             each eachFund, index in allFund
               tr.clickable(data-toggle='collapse',data-target='#accordion#{index}')
                 td #{index}
-                if index==0
-                  td #{eachFund.hoster}
-                  td #{eachFund.timestamp}
-                else
-                  td ...
-                  td ... 
+                td #{eachFund.hoster}
+                td #{eachFund.timestamp}
               tr
                 td(style='padding:2px;', colspan='3')
                   .collapse(id='accordion#{index}') #{eachFund.serials}

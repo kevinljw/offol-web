@@ -36,15 +36,19 @@ block content
 										.project-percent-pledged(style='width: #{a_project.percent}%')
 									ul.project-stats
 										li
-											.project-stats-value #{a_project.percent}%
-											span.project-stats-label funded
+											.project-stats-value
+												span.money.eur.no-code &#x24; #{a_project.goal}
+											span.project-stats-label 目標募集
 										li
 											.project-stats-value
 												span.money.eur.no-code &#x24; #{a_project.nowMoney}
-											span.project-stats-label pledged
-										li(style='display: none;')
-											.project-stats-value Funded
-											span.project-stats-label
+											span.project-stats-label 已募得
+										li
+											.project-stats-value #{a_project.percent}%
+											span.project-stats-label 完成
+										
+										
+										
 										
 					.mobile-scroll-row-item.col.col-4.project.mb2
 						.js-score-tracking.project-card.project-card-tall-big
@@ -67,15 +71,16 @@ block content
 										.project-percent-pledged(style='width: #{b_project.percent}%')
 									ul.project-stats
 										li
-											.project-stats-value #{b_project.percent}%
-											span.project-stats-label funded
+											.project-stats-value
+												span.money.eur.no-code &#x24; #{b_project.goal}
+											span.project-stats-label 目標募集
 										li
 											.project-stats-value
 												span.money.eur.no-code &#x24; #{b_project.nowMoney}
-											span.project-stats-label pledged
-										li(style='display: none;')
-											.project-stats-value Funded
-											span.project-stats-label
+											span.project-stats-label 已募得
+										li
+											.project-stats-value #{b_project.percent}%
+											span.project-stats-label 完成
 										
 					//- .mobile-scroll-row-item.col.col-4.project.mb2
 					//- 	.js-score-tracking.project-card.project-card-tall-big
