@@ -172,6 +172,8 @@ app.post('/fundings/:id', passportConf.isAuthenticated, projController.postFundi
 
 app.get('/payend/:num', passportConf.isAuthenticated, projController.getPayEnd);
 
+app.get('/record', passportConf.isAuthenticated, userController.getRecord);
+
 
 app.get('/account', passportConf.isAuthenticated, userController.getAccount);
 app.post('/account/profile', passportConf.isAuthenticated, userController.postUpdateProfile);

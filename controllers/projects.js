@@ -108,6 +108,7 @@ exports.getProject = function(req, res) {
   	}
  
 };
+
 exports.getPayEnd = function(req, res) {
   // get all the users
   // console.log("getPeople");
@@ -155,7 +156,7 @@ exports.postFunding = function(req, res) {
 		  hoster: hostId,
 		  investor: req.params.id,
 		  money: req.body.money,
-		  timestamp: Date(),
+		  timestamp: moment().format('lll'),
 		  serials: allSeriels,
 
 	    });

@@ -1,9 +1,6 @@
-extends layoutHidden
+extends layout
 
 block content
-  script.
-    var submitted=false;
-  iframe(name='hidden_iframe', id='hidden_iframe', style='display:none;',onload='if(submitted) {window.location="/";}')
 
   .row.jumbotron
     .container
@@ -12,23 +9,6 @@ block content
       p 
       p 
 
-  .container
-    form.form-horizontal(action='https://docs.google.com/forms/d/1iftxiGmVEhZMNKUd_bJhQLRpXjWsWn1Zyt9RBv7HHKk/formResponse', method='POST',target='hidden_iframe', onsubmit="submitted=true;")
-      input(type='hidden', name='_csrf', value=_csrf)
-      .form-group
-        label.col-sm-offset-1.col-sm-3(class='col-sm-2 control-label', for='name') Name
-        .col-sm-5
-          input.form-control(type='text', name='entry.1574487075', id='entry.1574487075', autofocus=true)
-      .form-group
-        label.col-sm-offset-1.col-sm-3(class='col-sm-2 control-label', for='email') Email
-        .col-sm-5
-          input.form-control(type='text', name='entry.128642184', id='entry.128642184')
-      .form-group
-        label.col-sm-offset-1.col-sm-3(class='col-sm-2 control-label', for='message') Body
-        .col-sm-5
-          textarea.form-control(type='text', name='entry.328904195', id='entry.328904195', rows='7')
-      .form-group
-        .col-sm-offset-4.col-sm-5
-          button.btn.btn-primary(type='submit')
-            i.fa.fa-envelope
-            | Send
+  .container.contactResult
+    h3 您的表單已送出
+    h3 我們會在收到您的建議後，盡快回覆您，謝謝

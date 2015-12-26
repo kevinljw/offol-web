@@ -1,0 +1,37 @@
+extends layoutGray
+
+block content
+  #introHead
+  .container.containerIntro
+    .row
+      h3.col-sm-offset-2.col-sm-8 您擁有共 #{buynum} 組贊助序號
+      h5.col-sm-offset-2.col-sm-8 點選表單，以展開顯示
+    p
+    hr
+    p
+      .col-sm-offset-2.col-sm-8
+        table.table.table-hover.table-bordered.myRecordTable
+          thead
+            tr
+              th.col-xs-1 Order
+              th.col-xs-3 Host
+              th.col-xs-4 Timestamp
+              //- th.col-xs-4 serial
+          tbody#whoBuy
+            each eachFund, index in allFund
+              tr.clickable(data-toggle='collapse',data-target='#accordion#{index}')
+                td #{index}
+                if index==0
+                  td #{eachFund.hoster}
+                  td #{eachFund.timestamp}
+                else
+                  td ...
+                  td ... 
+              tr
+                td(style='padding:2px;', colspan='3')
+                  .collapse(id='accordion#{index}') #{eachFund.serials}
+                  
+                    
+
+
+      

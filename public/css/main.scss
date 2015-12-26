@@ -620,8 +620,8 @@ article.post .post-inner iframe {
 }
 .jumbotron p, .jumbotron h2{
     font-weight: 800;
-    color: #062b46;
-    text-shadow: 2px 2px 18px #f5f5f5;
+    color: #fcf7f3;
+    text-shadow: 2px 2px 18px #b2cee2;
 //    text-shadow: 2px 2px 5px #212121;
 }
 .jumbotron{
@@ -862,3 +862,17 @@ p.project-byline, p.project-blurb{
     font-size: 14px;
 }
 
+.marginBtm{
+    margin-bottom: 200px;
+}
+.contactResult{
+    text-align: center;
+}
+.myRecordTable{
+    word-wrap: break-word;
+    word-break: break-all;
+//    white-space:pre-wrap;
+}
+.myRecordTable #whoBuy{
+    cursor: pointer;
+}

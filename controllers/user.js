@@ -7,6 +7,7 @@ var User = require('../models/User');
 var secrets = require('../config/secrets');
 var adminList = ['evin92@gmail.com'];
 var fs = require('fs');
+var Fund = require('../models/Fund');
 // var whiteListArr;
 // var whiteListArr_email=[];
 
@@ -71,6 +72,37 @@ exports.postEmailToWhitelist = function(req, res, next) {
     return res.redirect('/account');
 
   }
+};
+exports.getRecord = function(req, res) {
+  // get all the users
+  // console.log("getPeople");
+    Fund.find({investor: req.user.id}, function(err, thisUserFund) {
+      if (err) {
+        return res.redirect('/');
+      }
+      if(thisUserFund){
+        console.log(thisUserFund);
+        var thisUserBuyingNum = 0;
+        async.forEachOf(thisUserFund, function (eachFund, eachFundIndex, thisFund_callback) {
+            thisUserBuyingNum+=eachFund.money;
+            thisFund_callback();
+        },function(err){
+          if (err) console.error(err.message);
+          res.render('record', {
+            title: '我的紀錄',
+            buynum: thisUserBuyingNum,
+            allFund: thisUserFund
+          });
+        });
+        
+      }
+      else{
+        res.render('record', {
+          title: '我的紀錄',
+          buynum: 0
+        });
+      }
+    });
 };
 /**
  * GET /login
