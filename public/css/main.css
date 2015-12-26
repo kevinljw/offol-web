@@ -12601,6 +12601,10 @@ p.project-byline, p.project-blurb {
   margin-bottom: 200px;
 }
 
+.marginTop {
+  margin-top: 50px;
+}
+
 .contactResult {
   text-align: center;
 }
