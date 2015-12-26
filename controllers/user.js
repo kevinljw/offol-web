@@ -8,6 +8,7 @@ var secrets = require('../config/secrets');
 var adminList = ['evin92@gmail.com'];
 var fs = require('fs');
 var Fund = require('../models/Fund');
+// var QRCode = require('qrcode');
 // var whiteListArr;
 // var whiteListArr_email=[];
 
@@ -87,12 +88,15 @@ exports.getRecord = function(req, res) {
             thisUserBuyingNum+=eachFund.money;
             thisFund_callback();
         },function(err){
-          if (err) console.error(err.message);
-          res.render('record', {
-            title: '我的紀錄',
-            buynum: thisUserBuyingNum,
-            allFund: thisUserFund
-          });
+          // QRCode.toDataURL('thisUserBuyingNum',function(err,qrUrl){
+            if (err) console.error(err.message);
+            res.render('record', {
+              title: '我的紀錄',
+              buynum: thisUserBuyingNum,
+              allFund: thisUserFund,
+              // qrcodeUrl: qrUrl
+            });
+          // });
         });
         
       }

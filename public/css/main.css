@@ -12373,6 +12373,9 @@ article.post .post-inner iframe {
 }
 
 @media screen and (max-width: 767px) {
+  .jumbotronDiscover {
+    background-size: auto 100%;
+  }
   .jumbotron .container {
     margin-left: 10px;
   }
@@ -12572,7 +12575,7 @@ article.post .post-inner iframe {
 }
 
 .free_jumbo .img-preview {
-  width: 1000px;
+  width: 100%;
   height: 378px;
 }
 
@@ -12581,10 +12584,12 @@ article.post .post-inner iframe {
   -webkit-box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.4);
   -moz-box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.4);
   box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.4);
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
 }
 
 .free_jumbo img, .free_jumbo svg {
-  width: 1000px;
   height: 378px;
 }
 

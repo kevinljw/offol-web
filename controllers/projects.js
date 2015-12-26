@@ -5,6 +5,9 @@ var Fund = require('../models/Fund');
 var async = require('async');
 var md5 = require('md5');
 
+
+
+
 var addNullNum = 10000000;
 
 var a_projectObj = {
@@ -28,7 +31,7 @@ iniFundingData();
 refreshFundingData();
 
 function iniFundingData(){
-	
+
 	for(var i=0; i< a_projectObj.ticketBuyArr.length; i++)a_projectObj.ticketBuyArr[i]=false;
 	for(var j=0; j< b_projectObj.ticketBuyArr.length; j++)b_projectObj.ticketBuyArr[j]=false;
 	
@@ -196,7 +199,7 @@ function serialGenerate(hostId, thisEmail, thisNum, needForPeople, callback){
 }
 function eachSerial(hostId, thisEmail, nowNum, needForPeople){
     
-    var tmpEnN = thisEmail+nowNum;
+    var tmpEnN = thisEmail+nowNum+Date.now();
 //    console.log(tmpEnN);
     var getThisGuysMd5 = md5(tmpEnN);
     var thisGuysMd5cutInt =  parseInt(getThisGuysMd5.substr(23),16);

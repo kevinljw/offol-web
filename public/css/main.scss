@@ -633,6 +633,11 @@ article.post .post-inner iframe {
     margin-bottom: 50px;
 }
 @media screen and (max-width: 767px) {
+  .jumbotronDiscover{
+    background-size: auto 100%;
+    
+  }
+    
   .jumbotron .container{
     margin-left: 10px;
   }
@@ -652,6 +657,7 @@ article.post .post-inner iframe {
   #hero-area{
     background-position: -125px 0px;
   }
+  
 }
 @media screen and (min-width: 1480px) {
     .jumbotronPeopleMentor{
@@ -842,7 +848,7 @@ article.post .post-inner iframe {
     position: relative;
 }
 .free_jumbo .img-preview {
-    width: 1000px;
+    width: 100%;
     height: 378px;
 }
 .free_jumbo img, .free_jumbo svg {
@@ -850,9 +856,13 @@ article.post .post-inner iframe {
     -webkit-box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.4);
     -moz-box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.4);
     box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.4);
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+//    text-align: center;
 }
 .free_jumbo img, .free_jumbo svg {
-    width: 1000px;
+//    width: 100%;
     height: 378px;
     
 }
