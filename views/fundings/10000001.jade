@@ -8,7 +8,7 @@ block content
     //- h3.col-sm-offset-5 願付金額
     //- .col-sm-offset-3.col-sm-6
     //-   hr
-    form.form-horizontal(action='/fundings/'+user.id, method='POST')
+    form.form-horizontal(action='/fundings/'+user.id, method='POST', onsubmit='return confirm("確認支付金額無誤？");')
       input(type='hidden', name='_csrf', value=_csrf)
       //- .form-group
       h3.col-sm-offset-5.col-sm-3 支付贊助

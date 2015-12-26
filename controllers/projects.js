@@ -24,20 +24,25 @@ var b_projectObj = {
 	ticketBuyArr: new Array(1200)
 }
 
+iniFundingData();
 refreshFundingData();
 
+function iniFundingData(){
+	
+	for(var i=0; i< a_projectObj.ticketBuyArr.length; i++)a_projectObj.ticketBuyArr[i]=false;
+	for(var j=0; j< b_projectObj.ticketBuyArr.length; j++)b_projectObj.ticketBuyArr[j]=false;
+	
+}
 function refreshFundingData(){
-	for(var i=0; i< a_projectObj.ticketBuyArr.length; i++){
-		// console.log(a_projectObj.ticketBuyArr[i]);
-		a_projectObj.ticketBuyArr[i]=false;
-	}
+
+	
 	
 	singleUserUpdate('10000001', a_projectObj);
 	singleUserUpdate('10000002', b_projectObj);
 }
 function singleUserUpdate(thisHost, projObj){
 
-	console.log('hoster:'+ thisHost);
+	// console.log('hoster:'+ thisHost);
 
 	projObj.id = thisHost;
 	projObj.nowMoney = 0;
@@ -69,8 +74,8 @@ function singleUserUpdate(thisHost, projObj){
 				
 				projObj.investors=investorArr.length;
 				projObj.percent = Math.round(projObj.nowMoney/projObj.goal*100);
-				console.log("#Money:"+projObj.nowMoney);
-				console.log("#investors:"+projObj.investors);
+				// console.log("#Money:"+projObj.nowMoney);
+				// console.log("#investors:"+projObj.investors);
 			});
 		}
 	});
@@ -150,7 +155,7 @@ exports.postFunding = function(req, res) {
 
 	serialGenerate(hostId, req.params.id, req.body.money, (hostId=='10000001')?a_projectObj.goal:b_projectObj.goal ,function(allSeriels){
   	
-		console.log(allSeriels);
+		// console.log(allSeriels);
 
 		var thisFund = new Fund({
 		  hoster: hostId,
