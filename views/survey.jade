@@ -1,0 +1,102 @@
+extends layoutGray
+
+block content
+  #introHead
+  script.
+    var submitted=false;
+  iframe(name='hidden_iframe', id='hidden_iframe', style='display:none;',onload='if(submitted) {window.location="#{targetUrl}";}')
+  .container.containerIntro
+    .row
+      h3.col-sm-offset-2.col-sm-8 在付款之前，想請問您
+    p
+    hr
+    p
+      form#surveyForm.col-sm-offset-3.col-sm-7.form-horizontal(action='https://docs.google.com/forms/d/1VuXD4cJAzn8EFbYBQH1LASxWjhg4IqT0IE3dilOa1RI/formResponse', method='POST',target='hidden_iframe', onsubmit="submitted=true;")
+        input(type='hidden', name='_csrf', value=_csrf)
+        .form-group
+          label 1.你與募資對象的熟識程度：
+        .form-group 
+          label(for='group_837470344_1')
+            input(type='radio', name='entry.837470344', id='group_837470344_1', aria-label='摯友', value='摯友')
+            |  摯友
+        .form-group 
+          label(for='group_837470344_2')
+            input(type='radio', name='entry.837470344', id='group_837470344_2', aria-label='朋友', value='朋友')
+            |  朋友
+        .form-group 
+          label(for='group_837470344_3')
+            input(type='radio', name='entry.837470344', id='group_837470344_3', aria-label='聽過這個人', value='聽過這個人')
+            |  聽過這個人
+        .form-group 
+          label(for='group_837470344_4')
+            input(type='radio', name='entry.837470344', id='group_837470344_4', aria-label='完全不認識', value='完全不認識')
+            |  完全不認識
+        .form-group 
+          label(for='group_837470344_5')
+            input(type='radio', name='entry.837470344', id='group_837470344_5', value='__other_option__')
+            |   其他:
+          input(type='text', name='entry.837470344.other_option_response', id='entry_837470344_other_option_response', aria-label='其他')
+        .form-group 
+          p 
+          hr
+          p
+        .form-group 
+          label 2.你會贊助的原因「主要」是：
+        .form-group 
+          label(for='group_169123536_1')
+            input(type='radio', name='entry.169123536', id='group_169123536_1', aria-label='受募資故事吸引', value='受募資故事吸引')
+            |  受募資故事吸引
+        .form-group 
+          label(for='group_169123536_2')
+            input(type='radio', name='entry.169123536', id='group_169123536_2', aria-label='想要這位募資對象上一堂課', value='想要這位募資對象上一堂課')
+            |  想要這位募資對象上一堂課
+        .form-group 
+          label(for='group_169123536_3')
+            input(type='radio', name='entry.169123536', id='group_169123536_3', aria-label='想要得到募資對象的實體商品', value='想要得到募資對象的實體商品')
+            |  想要得到募資對象的實體商品
+        .form-group 
+          label(for='group_169123536_4')
+            input(type='radio', name='entry.169123536', id='group_169123536_4', aria-label='單純想贊助這位募資對象', value='單純想贊助這位募資對象')
+            |  單純想贊助這位募資對象
+        .form-group 
+          label(for='group_169123536_5')
+            input(type='radio', name='entry.169123536', id='group_169123536_5', value='__other_option__')
+            |   其他:
+          input(type='text', name='entry.169123536.other_option_response', id='entry.169123536.other_option_response', aria-label='其他')
+        .form-group 
+          p
+          hr
+          p
+        .form-group 
+          label 3.你會贊助的原因「次要」是：
+        .form-group 
+          label(for='group_866808900_1')
+            input(type='radio', name='entry.866808900', id='group_866808900_1', aria-label='受募資故事吸引', value='受募資故事吸引')
+            |  受募資故事吸引
+        .form-group 
+          label(for='group_866808900_2')
+            input(type='radio', name='entry.866808900', id='group_866808900_2', aria-label='想要這位募資對象上一堂課', value='想要這位募資對象上一堂課')
+            |  想要這位募資對象上一堂課
+        .form-group 
+          label(for='group_866808900_3')
+            input(type='radio', name='entry.866808900', id='group_866808900_3', aria-label='想要得到募資對象的實體商品', value='想要得到募資對象的實體商品')
+            |  想要得到募資對象的實體商品
+        .form-group 
+          label(for='group_866808900_4')
+            input(type='radio', name='entry.866808900', id='group_866808900_4', aria-label='單純想贊助這位募資對象', value='單純想贊助這位募資對象')
+            |  單純想贊助這位募資對象
+        .form-group 
+          label(for='group_866808900_5')
+            input(type='radio', name='entry.866808900', id='group_866808900_5', value='__other_option__')
+            |   其他:
+          input(type='text', name='entry.866808900.other_option_response', id='entry.866808900.other_option_response', aria-label='其他')
+        .form-group 
+          p
+          hr
+          p
+        .form-group
+          .col-sm-offset-1.col-sm-5
+            button.btn.btn-primary(type='submit')
+              i.fa.fa-shopping-cart
+              | 下一步：付款
+     

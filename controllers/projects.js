@@ -84,6 +84,20 @@ function singleUserUpdate(thisHost, projObj){
 	});
 
 }
+exports.getSurvey = function(req, res) {
+	// console.log(req.query.id);
+	// console.log(req.query.amount);
+	// res.redirect('/survey');
+	res.render('survey', {
+      title: 'Survey',
+      targetUrl: '/payend/field?amount='+req.query.amount+'&id='+req.query.id+'&host='+req.query.host,
+    });
+
+};
+exports.postSurvey = function(req, res) {
+
+	res.redirect('/payend');
+};
 exports.getDiscover = function(req, res) {
   // get all the users
   // console.log("getPeople");  
@@ -116,15 +130,45 @@ exports.getProject = function(req, res) {
   	}
  
 };
-
+exports.getPayTheEnd = function(req, res) {
+	res.render('payend', {
+    	title: '付款未完',
+    	buynum: req.params.amount
+    	// buynum: req.params.num
+    });
+};
 exports.getPayEnd = function(req, res) {
   // get all the users
   // console.log("getPeople");
+
+   // var hostId = req.headers.referer.substr(req.headers.referer.indexOf("/fundings/")+10);
   	
-  		res.render('payend', {
-	    	title: '付款未完',
-	    	buynum: req.params.num
+  	serialGenerate(req.query.host, req.query.id, req.query.amount, (req.query.host=='10000001')?a_projectObj.goal:b_projectObj.goal ,function(allSeriels){
+  	
+		// console.log(allSeriels);
+
+		var thisFund = new Fund({
+		  hoster: req.query.host,
+		  investor: req.query.id,
+		  money: req.query.amount,
+		  timestamp: moment().utcOffset(8).format('lll'),
+		  serials: allSeriels,
+
 	    });
+	    // console.log(thisArticle);
+	   	thisFund.save(function(err) {
+	        if (err) {
+	          return next(err);
+	        }
+	        refreshFundingData();
+	        req.flash('success', { msg: '已登記:'+req.query.amount+"元" });
+	        
+	        res.redirect('/payend/'+req.query.amount);
+	        
+	    });
+
+   });
+  		
   	
  
 };
@@ -138,7 +182,7 @@ exports.getFunding = function(req, res) {
   
   
 };
-exports.postFunding = function(req, res) {
+exports.postFunding = function(req, res, next) {
 
 	var hostId = req.headers.referer.substr(req.headers.referer.indexOf("/fundings/")+10);
   	
@@ -156,29 +200,36 @@ exports.postFunding = function(req, res) {
 	    return res.redirect(req.headers.referer);
 	  }
 
-	serialGenerate(hostId, req.params.id, req.body.money, (hostId=='10000001')?a_projectObj.goal:b_projectObj.goal ,function(allSeriels){
+	 // next();
+	 res.render('survey', {
+	      title: 'Survey',
+	      targetUrl: '/payend/field?amount='+req.body.money+'&id='+req.params.id+'&host='+hostId,
+	    });
+	 // res.redirect('/survey/field?amount='+req.body.money+'&id='+req.params.id+'&host='+hostId);
+
+	// serialGenerate(hostId, req.params.id, req.body.money, (hostId=='10000001')?a_projectObj.goal:b_projectObj.goal ,function(allSeriels){
   	
-		// console.log(allSeriels);
+	// 	// console.log(allSeriels);
 
-		var thisFund = new Fund({
-		  hoster: hostId,
-		  investor: req.params.id,
-		  money: req.body.money,
-		  timestamp: moment().utcOffset(8).format('lll'),
-		  serials: allSeriels,
+	// 	var thisFund = new Fund({
+	// 	  hoster: hostId,
+	// 	  investor: req.params.id,
+	// 	  money: req.body.money,
+	// 	  timestamp: moment().utcOffset(8).format('lll'),
+	// 	  serials: allSeriels,
 
-	    });
-	    // console.log(thisArticle);
-	   	thisFund.save(function(err) {
-	        if (err) {
-	          return next(err);
-	        }
-	        refreshFundingData();
-	        req.flash('success', { msg: '已登記:'+req.body.money+"元" });
-	        res.redirect('/payend/'+req.body.money);
-	    });
+	//     });
+	//     // console.log(thisArticle);
+	//    	thisFund.save(function(err) {
+	//         if (err) {
+	//           return next(err);
+	//         }
+	//         refreshFundingData();
+	//         // req.flash('success', { msg: '已登記:'+req.body.money+"元" });
+	//         res.redirect('/payend/'+req.body.money);
+	//     });
 
-   });
+ //   });
 		
   
 };

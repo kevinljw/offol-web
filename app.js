@@ -169,8 +169,10 @@ app.get('/host',  hostController.getHost);
 app.get('/projects/:id', projController.getProject);
 app.get('/fundings/:id', passportConf.isAuthenticated, projController.getFunding);
 app.post('/fundings/:id', passportConf.isAuthenticated, projController.postFunding);
-
-app.get('/payend/:num', passportConf.isAuthenticated, projController.getPayEnd);
+app.get('/survey/field', passportConf.isAuthenticated, projController.getSurvey);
+app.post('/survey', passportConf.isAuthenticated, projController.postSurvey);
+app.get('/payend/field', passportConf.isAuthenticated, projController.getPayEnd);
+app.get('/payend/:amount', passportConf.isAuthenticated, projController.getPayTheEnd);
 
 app.get('/record', passportConf.isAuthenticated, userController.getRecord);
 
