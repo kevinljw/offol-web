@@ -190,7 +190,7 @@ exports.postFunding = function(req, res, next) {
   	req.assert('money', '金額錯誤').isInt();
   	req.assert('money', '請填入至少一元以上之金額').gte(1);
   	if(hostId=='10000001') req.assert('money', '填入金額不得多於:'+(a_projectObj.goal-a_projectObj.nowMoney)).lt((a_projectObj.goal-a_projectObj.nowMoney));
-  	else req.assert('money', '填入金額不得多於:'+(b_projectObj.goal-b_projectObj.nowMoney)).lt((b_projectObj.goal-b_projectObj.nowMoney));
+  	else req.assert('money', '填入金額不得多於:'+(b_projectObj.goal-b_projectObj.nowMoney)+1).lt((b_projectObj.goal-b_projectObj.nowMoney+1));
 
   	// console.log(req)
   	var errors = req.validationErrors();
