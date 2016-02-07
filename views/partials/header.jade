@@ -1,4 +1,4 @@
-.navbar.navbar-default.navbar-fixed-top
+.navbar.navbar-default
   .container
     .navbar-header
       button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
@@ -12,31 +12,14 @@
         | LOFFO
     .collapse.navbar-collapse
       ul.nav.navbar-nav.navbar-left
-        //- li(class=title=='Home'?'active':undefined)
-        //-   a(href='/') Home
-        //- li(class=title=='API Examples'?'active':undefined)
-        //-   a(href='/api') API
-        //- li.dropdown(class=title=='People'?'active':undefined)
-        //-   a.dropdown-toggle(href='/people/fellow') People
-        //-   ul.dropdown-menu
-        //-     li
-        //-       a(href='/people/fellow') Fellow
-        //-     li.divider
-        //-     li
-        //-       a(href='/people/ta') Staff
-        //-     li.divider
-        //-     li
-        //-       a(href='/people/mentor') Mentor
-        //-     li.divider
-        //-     li
-        //-       a(href='/people/advisor') Advisor        
-        //-     li.divider
-        //-     li
-        //-       a(href='/people/founder') Founder
+        
         li(class=title=='Discover'?'active':undefined)
           a(href='/discover') 探索
+        li(class=title=='Loffogram'?'active':undefined)
+          a(href='/loffogram', class="active") Loffogram
         li(class=title=='Start a project'?'active':undefined)
           a(href='/host', class="not-active") 發案
+        
         li(class=title=='Contact'?'active':undefined)
           a(href='/contact') 聯絡我們
       ul.nav.navbar-nav.navbar-right

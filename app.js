@@ -30,6 +30,8 @@ var passport = require('passport');
 var expressValidator = require('express-validator');
 var sass = require('node-sass-middleware');
 
+var ghost = require('./ghost-app/ghost-in-the-middle');
+
 /**
  * Controllers (route handlers).
  */
@@ -39,6 +41,7 @@ var apiController = require('./controllers/api');
 var peopleController = require('./controllers/people');
 var contactController = require('./controllers/contact');
 var introController = require('./controllers/intro');
+var loffogramController = require('./controllers/loffogram');
 // var shareController = require('./controllers/sharing');
 var announcementsController = require('./controllers/announcements');
 // var discoverController = require('./controllers/discover');
@@ -110,7 +113,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 app.use(lusca({
-  csrf: true,
+  csrf: false,
   xframe: 'SAMEORIGIN',
   xssProtection: true
 }));
@@ -137,6 +140,9 @@ app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }))
 //     csrf(req, res, next);
 //   }
 // });
+app.use( '/loffogram', ghost({
+  config: path.join(__dirname, 'ghost-app/config.js')
+}) );
 /**
  * Primary app routes.
  */
@@ -175,7 +181,7 @@ app.get('/payend/field', passportConf.isAuthenticated, projController.getPayEnd)
 app.get('/payend/:amount', passportConf.isAuthenticated, projController.getPayTheEnd);
 
 app.get('/record', passportConf.isAuthenticated, userController.getRecord);
-
+// app.get('/loffogram', passportConf.isAuthenticated, loffogramController.getLoffogram);
 
 app.get('/account', passportConf.isAuthenticated, userController.getAccount);
 app.post('/account/profile', passportConf.isAuthenticated, userController.postUpdateProfile);
