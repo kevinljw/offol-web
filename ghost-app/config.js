@@ -11,8 +11,17 @@ config = {
     // When running Ghost in the wild, use the production environment.
     // Configure your URL and mail settings here
     production: {
-        url: 'http://my-ghost-blog.com/loffogram',
-        mail: {},
+        url: 'http://loffo.cf/loffogram',
+        mail: {
+             transport: 'SMTP',
+             options: {
+                 service: 'Mailgun',
+                 auth: {
+                     user: 'postmaster@sandboxc972bba6b5894720b5aac420ae0456e0.mailgun.org', // mailgun username
+                     pass: '26c14c19a11d2cc1f136091f3bba2f3c'  // mailgun password
+                 }
+             }
+         },
         database: {
             client: 'sqlite3',
             connection: {

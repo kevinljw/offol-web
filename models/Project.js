@@ -9,7 +9,7 @@ var projSchema = new mongoose.Schema({
   goalmoney: { type: Number, default: 1 },
   created_time: { type: String, default: '' },
   main_video: { type: String, default: '' },
-  
+   
 });
 
 /**
