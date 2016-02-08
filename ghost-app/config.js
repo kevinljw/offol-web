@@ -34,11 +34,6 @@ config = {
             host: '127.0.0.1',
             port: '3000'
         }
-        // #### Paths
-        // Specify where your content directory lives
-        paths: {
-            contentPath: path.join(__dirname, '/content/')
-        }
     },
 
     // ### Development **(default)**
