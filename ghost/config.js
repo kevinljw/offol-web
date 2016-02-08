@@ -11,8 +11,17 @@ config = {
     // When running Ghost in the wild, use the production environment.
     // Configure your URL and mail settings here
     production: {
-        url: 'http://my-ghost-blog.com',
-        mail: {},
+        url: 'http://52.79.79.108/loffogram',
+        mail: {
+             transport: 'SMTP',
+             options: {
+                 service: 'Mailgun',
+                 auth: {
+                     user: 'postmaster@sandboxc972bba6b5894720b5aac420ae0456e0.mailgun.org', // mailgun username
+                     pass: '26c14c19a11d2cc1f136091f3bba2f3c'  // mailgun password
+                 }
+             }
+         },
         database: {
             client: 'sqlite3',
             connection: {
@@ -23,7 +32,7 @@ config = {
 
         server: {
             host: '127.0.0.1',
-            port: '2368'
+            port: '3000'
         }
     },
 
@@ -31,21 +40,21 @@ config = {
     development: {
         // The url to use when providing links to the site, E.g. in RSS and email.
         // Change this to your Ghost blog's published URL.
-        url: 'http://localhost:2368',
+        url: 'http://localhost:3000/loffogram',
 
         // Example mail config
         // Visit http://support.ghost.org/mail for instructions
         // ```
-        //  mail: {
-        //      transport: 'SMTP',
-        //      options: {
-        //          service: 'Mailgun',
-        //          auth: {
-        //              user: '', // mailgun username
-        //              pass: ''  // mailgun password
-        //          }
-        //      }
-        //  },
+         mail: {
+             transport: 'SMTP',
+             options: {
+                 service: 'Mailgun',
+                 auth: {
+                     user: 'postmaster@sandboxc972bba6b5894720b5aac420ae0456e0.mailgun.org', // mailgun username
+                     pass: '26c14c19a11d2cc1f136091f3bba2f3c'  // mailgun password
+                 }
+             }
+         },
         // ```
 
         // #### Database
@@ -63,7 +72,7 @@ config = {
             // Host to be passed to node's `net.Server#listen()`
             host: '127.0.0.1',
             // Port to be passed to node's `net.Server#listen()`, for iisnode set this to `process.env.PORT`
-            port: '2368'
+            port: '3000'
         },
         // #### Paths
         // Specify where your content directory lives
@@ -78,7 +87,7 @@ config = {
     // Used when developing Ghost to run tests and check the health of Ghost
     // Uses a different port number
     testing: {
-        url: 'http://127.0.0.1:2369',
+        url: 'http://127.0.0.1:2369/loffogram',
         database: {
             client: 'sqlite3',
             connection: {
