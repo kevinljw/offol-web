@@ -12300,15 +12300,15 @@ article.post .post-inner iframe {
 }
 
 .dropdown-menu > li > a {
-  font-size: 12px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 400;
   text-transform: uppercase;
   transition: all 0.2s linear;
 }
 
 .navbar-default .navbar-nav > li > a {
-  font-size: 14px;
-  font-weight: 900;
+  font-size: 17px;
+  font-weight: 400;
 }
 
 .navbar-default .navbar-nav > li > a:hover {

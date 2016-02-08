@@ -39,6 +39,7 @@ var apiController = require('./controllers/api');
 var peopleController = require('./controllers/people');
 var contactController = require('./controllers/contact');
 var introController = require('./controllers/intro');
+var loffogramController = require('./controllers/loffogram');
 // var shareController = require('./controllers/sharing');
 var announcementsController = require('./controllers/announcements');
 // var discoverController = require('./controllers/discover');
@@ -175,7 +176,7 @@ app.get('/payend/field', passportConf.isAuthenticated, projController.getPayEnd)
 app.get('/payend/:amount', passportConf.isAuthenticated, projController.getPayTheEnd);
 
 app.get('/record', passportConf.isAuthenticated, userController.getRecord);
-
+app.get('/loffogram', passportConf.isAuthenticated, loffogramController.getLoffogram);
 
 app.get('/account', passportConf.isAuthenticated, userController.getAccount);
 app.post('/account/profile', passportConf.isAuthenticated, userController.postUpdateProfile);
