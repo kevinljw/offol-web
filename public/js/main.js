@@ -10,9 +10,9 @@ $(document).ready(function() {
     // $('.carousel').carousel({
     //   interval: 1000
     // })
-    $('#myCarousel').carousel({
-      interval: 3000
-    });
+    // $('#myCarousel').carousel({
+    //   interval: 3000
+    // });
 });
 $(document).on('ready', function() {
     

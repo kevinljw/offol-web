@@ -4,12 +4,12 @@ block content
   script.
     var submitted=false;
   iframe(name='hidden_iframe', id='hidden_iframe', style='display:none;',onload='if(submitted) {window.location="contact2";}')
-  .row.jumbotron
-    .container
-      h3 Contact Form
-      p
-      p 
-      p 
+  //- .row.jumbotron
+  //-   .container
+  //-     h3 Contact Form
+  //-     p
+  //-     p 
+  //-     p 
 
   .container
     form.form-horizontal(action='https://docs.google.com/forms/d/1uEWJ_fTQdkgbnusJlkuFpzB_L6pWZpY37VneBAu8euY/formResponse', method='POST',target='hidden_iframe', onsubmit="submitted=true;")

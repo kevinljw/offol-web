@@ -7,8 +7,8 @@
 //@import "themes/default/variables";
 //@import "themes/modern/modern";
 //@import "themes/modern/variables";
-@import "themes/flatly/flatly";
-@import "themes/flatly/variables";
+//@import "themes/flatly/flatly";
+//@import "themes/flatly/variables";
 
 // Scaffolding
 // -------------------------
@@ -23,17 +23,17 @@
 //  margin-bottom: 75px;
 //}
 
-footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 45px;
-  line-height: 45px;
-
-  p, ul {
-    margin-bottom: 0;
-  }
-}
+//footer {
+//  position: absolute;
+//  bottom: 0;
+//  width: 100%;
+//  height: 45px;
+//  line-height: 45px;
+//
+//  p, ul {
+//    margin-bottom: 0;
+//  }
+//}
 
 // Navbar
 // -------------------------
@@ -236,6 +236,7 @@ footer {
 //    padding-left: 20px;
     font-size: 16px;
     font-weight: 300; 
+    list-style-type:none; 
     list-style-type:none; 
     text-decoration:none; 
     color: #000;

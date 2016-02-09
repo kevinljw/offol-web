@@ -1,47 +1,60 @@
 extends layout
 
 block content
-  header#myCarousel.carousel.slide.jumbotronHome
-    //- Indicators
-    ol.carousel-indicators
-      li.active(data-target='#myCarousel', data-slide-to='0')
-      li(data-target='#myCarousel', data-slide-to='1')
-      li(data-target='#myCarousel', data-slide-to='2')
-    //- Wrapper for Slides
-    .carousel-inner
-      .item.active
-        //- Set the first background image using inline CSS below.
-        .fill(style="background-image:url('img/b5a368be53ad4b20bb3441cb26f2fc44.jpg');")
-        .carousel-caption.loffoHead
-          h1 Loffo 集資透
-          h3 Lotto for Fund
-      .item
-        //- Set the second background image using inline CSS below.
-        .fill(style="background-image:url('img/a_banner-01.jpg');")
-        .carousel-caption
-          a.a2a_dd.btn.btn-default(href='projects/10000001')
-            span.fa.fa-eye
-            |  前往
-      .item
-        //- Set the third background image using inline CSS below.
-        .fill(style="background-image:url('img/b_banner.jpg');")
-        .carousel-caption
-          a.a2a_dd.btn.btn-default(href='projects/10000002')
-            span.fa.fa-eye
-            |  前往
-    //- Controls
-    a.left.carousel-control(href='#myCarousel', data-slide='prev')
-      span.icon-prev
-    a.right.carousel-control(href='#myCarousel', data-slide='next')
-      span.icon-next
+  //- header#myCarousel.carousel.slide.jumbotronHome
+  //-   //- Indicators
+  //-   ol.carousel-indicators
+  //-     li.active(data-target='#myCarousel', data-slide-to='0')
+  //-     li(data-target='#myCarousel', data-slide-to='1')
+  //-     li(data-target='#myCarousel', data-slide-to='2')
+  //-   //- Wrapper for Slides
+  //-   .carousel-inner
+  //-     .item.active
+  //-       //- Set the first background image using inline CSS below.
+  //-       .fill(style="background-image:url('img/b5a368be53ad4b20bb3441cb26f2fc44.jpg');")
+  //-       .carousel-caption.loffoHead
+  //-         h1 Loffo 集資透
+  //-         h3 Lotto for Fund
+  //-     .item
+  //-       //- Set the second background image using inline CSS below.
+  //-       .fill(style="background-image:url('img/a_banner-01.jpg');")
+  //-       .carousel-caption
+  //-         a.a2a_dd.btn.btn-default(href='projects/10000001')
+  //-           span.fa.fa-eye
+  //-           |  前往
+  //-     .item
+  //-       //- Set the third background image using inline CSS below.
+  //-       .fill(style="background-image:url('img/b_banner.jpg');")
+  //-       .carousel-caption
+  //-         a.a2a_dd.btn.btn-default(href='projects/10000002')
+  //-           span.fa.fa-eye
+  //-           |  前往
+  //-   //- Controls
+  //-   a.left.carousel-control(href='#myCarousel', data-slide='prev')
+  //-     span.icon-prev
+  //-   a.right.carousel-control(href='#myCarousel', data-slide='next')
+  //-     span.icon-next
   //- .row.jumbotron.jumbotronHome
   //-   .container.backColor
   //-     h1 Loffo
   //-     p.lead Lotto for funding
   //-     p 
   .container.marginTop
-    .col-sm-offset-2.col-sm-8
-        img(src='/img/introGame.jpg',width='100%')
+    .col-sm-offset-1.col-sm-10.col-xs-12
+      img(src='/images/aboutus.jpg',width='100%')
+    .col-sm-offset-1.col-sm-10.col-xs-12
+      img(src='/images/story.jpg',width='100%')
+    .col-sm-offset-1.col-sm-10.col-xs-12
+      img(src='/images/game1.jpg',width='100%')
+    .col-sm-offset-1.col-sm-10.col-xs-12
+      img(src='/images/game2.jpg',width='100%')
+    .col-sm-offset-1.col-sm-10.col-xs-12
+      br
+    .col-sm-offset-1.col-sm-10.col-xs-12
+      img(src='/images/lotto-cover-01.jpg',width='100%')
+    .col-sm-offset-1.col-sm-10.col-xs-12
+      img(src='/images/rule.jpg',width='100%')
+    
     .row.fourHeading
       
     hr

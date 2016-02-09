@@ -1,0 +1,31 @@
+header.logo
+  h1.logo__title
+    a(href='/', class='logo__link') LOFFO
+  h2.logo__desc 才藝家專屬的募資平台
+
+  //- .collapse.navbar-collapse
+  //-   ul.nav.navbar-nav.navbar-right
+  //-     if !user
+  //-       li(class=title=='Login'?'active':undefined)
+  //-         a(href='/login') 登入
+  //-       li(class=title=='Create Account'?'active':undefined)
+  //-         a(href='/signup') 註冊
+  //-     else
+  //-       li.dropdown(class=title=='Account Management'?'active':undefined)
+  //-         a.dropdown-toggle(href='#', data-toggle='dropdown')
+  //-           if user.profile.picture
+  //-             //- .headerProfileGrid(style='background: url(\'#{user.profile.picture}\') no-repeat;background-size: auto 100%; background-position: 50% 0; ')
+  //-             img(src='#{user.profile.picture}')
+  //-           else
+  //-             img(src='#{user.gravatar(60)}')
+  //-           | #{user.profile.name || user.email || user.id}&nbsp;
+  //-           i.caret
+  //-         ul.dropdown-menu
+  //-           li
+  //-             a(href='/account') 我的帳號
+  //-           li.divider
+  //-           li
+  //-             a(href='/record') 我的紀錄
+  //-           li.divider
+  //-           li
+  //-             a(href='/logout') 登出
