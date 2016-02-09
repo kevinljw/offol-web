@@ -3,9 +3,9 @@
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
   js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.5&appId=1751258648430941";
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1751258648430941";
   fjs.parentNode.insertBefore(js, fjs);
-  // console.log("fb-cmts_load")
+  console.log("fb-cmts_load")
 }(document, 'script', 'facebook-jssdk'));</script>
 
 <main role="main">
@@ -13,35 +13,29 @@
         {{#if @blog.navigation}}
         	{{navigation}}
         {{/if}}
-
         {{! Everything inside the #post tags pulls data from the post }}
         <article class="{{post_class}}">
         {{#post}}
             {{#contentFor "metaTags"}} 
                 <meta property="article:author" content="{{author.name}}">
             {{/contentFor}}
-
             <div class="post__wrapper--subpage">    
                 {{#if image}}
                 	<div class="post__media">
                 		<img src="{{image}}" alt="{{{title}}}" />
                 	</div>
                 {{/if}}
-
                 <header class="post__header--subpage">
                     <h2 class="post__title post__title--subpage">
                         <a href="{{url}}" class="post__link post__title_link">{{{title}}}</a>
                     </h2>
-
                     <time datetime="{{date format='YYYY-MM-DD'}}" class="post__date">
                         {{date format="MMM, DD, YYYY"}}
                     </time> 
                 </header>
-
                 <section class="post__content">
                     {{content}}
                 </section>
-
                 <footer class="post__footer">
                     <div class="social social--share">
                         <span class="social__label">Share: </span>
@@ -57,8 +51,7 @@
                            onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                             <span class="social__icon--hidden">Google+</span>
                         </a>
-                    </div>
-                    
+                    </div>                 
                     {{#if tags}}
                     <ul class="post__meta post__meta--subpage">
                       {{#foreach tags}}
@@ -68,33 +61,29 @@
                     {{/if}}
                 </footer>
             </div>
-
             <aside class="author">
                 {{#if author.image}}
                 <a href="{{author.website}}" class="author__avatar">
                     <img src="{{author.image}}" alt="{{author.name}}">
                 </a>
                 {{/if}}
-
                 <h3 class="author__name">{{author}} {{#author}}<a class="author__subscribe" href="{{url}}rss">{{/author}}Subscribe {{author.name}}'s posts RSS</a></h3>
                 <p class="author__bio">
                 	{{author.bio}}
                 </p>
             </aside>
-
             <div class="post__comments">
                 <!-- <div id="disqus_thread"></div> -->
-                <div class="fb-comments" data-href="http://loffo.cf/loffogram{{url}}" data-width="100%" data-numposts="5"></div>   
-            </div>
-            
+                <div class="fb-comments" data-href="http://localhost{{url}}" data-width="100%" data-numposts="5"></div>
+                <!-- <p>"{{url}}"</p> -->
+            </div>           
             {{#prev_post}}
             <div class="post__navigation post__navigation--prev">
             	<a class="post__navigation_link post__navigation_link--prev" href="{{url}}" title="{{title}}">
             		<i class="post__navigation_icon post__navigation_icon--prev">&lsaquo;</i>
             	</a>
             </div>
-            {{/prev_post}}
-            
+            {{/prev_post}}      
             {{#next_post}}
             <div class="post__navigation post__navigation--next">
             	<a class="post__navigation_link post__navigation_link--next" href="{{url}}" title="{{title}}">
@@ -107,7 +96,7 @@
     </div>
 </main>
 
-<script type="text/javascript">
+<!--<script type="text/javascript">
   {{> config}}
 
   {{#post}}
@@ -122,4 +111,5 @@
     (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
   }
-</script>
+</script>-->
+
