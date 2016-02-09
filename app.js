@@ -47,6 +47,8 @@ var announcementsController = require('./controllers/announcements');
 // var discoverController = require('./controllers/discover');
 var hostController = require('./controllers/host');
 var projController = require('./controllers/projects');
+var postProjController = require('./controllers/postProj');
+
 // var adminController = require('./controllers/admin');
 // var ideaController = require('./controllers/idea');
 /**
@@ -183,6 +185,9 @@ app.get('/payend/:amount', passportConf.isAuthenticated, projController.getPayTh
 app.get('/record', passportConf.isAuthenticated, userController.getRecord);
 
 // app.get('/loffogram', passportConf.isAuthenticated, loffogramController.getLoffogram);
+app.get('/postProj', passportConf.isAuthenticated, postProjController.getPostProj);
+app.post('/postProj', passportConf.isAuthenticated, postProjController.postPostProj);
+app.post('/deleteProj/:id', passportConf.isAuthenticated, postProjController.deleteProj);
 
 
 app.get('/account', passportConf.isAuthenticated, userController.getAccount);
@@ -248,7 +253,7 @@ app.get('/auth/instagram/callback', passport.authenticate('instagram', { failure
 });
 app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email', 'user_location'] }));
 app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login' }), function(req, res) {
-  res.redirect('/account#linkAcnt');
+  res.redirect('/');
 });
 app.get('/auth/github', passport.authenticate('github'));
 app.get('/auth/github/callback', passport.authenticate('github', { failureRedirect: '/login' }), function(req, res) {
@@ -260,7 +265,7 @@ app.get('/auth/google/callback', passport.authenticate('google', { failureRedire
 });
 app.get('/auth/twitter', passport.authenticate('twitter'));
 app.get('/auth/twitter/callback', passport.authenticate('twitter', { failureRedirect: '/login' }), function(req, res) {
-  res.redirect('/account#linkAcnt');
+  res.redirect('/');
 });
 app.get('/auth/linkedin', passport.authenticate('linkedin', { state: 'SOME STATE' }));
 app.get('/auth/linkedin/callback', passport.authenticate('linkedin', { failureRedirect: '/login' }), function(req, res) {

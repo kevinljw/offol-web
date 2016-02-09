@@ -8,6 +8,8 @@ var secrets = require('../config/secrets');
 var adminList = ['evin92@gmail.com'];
 var fs = require('fs');
 var Fund = require('../models/Fund');
+
+var adminArr = secrets.admin;
 // var QRCode = require('qrcode');
 // var whiteListArr;
 // var whiteListArr_email=[];
@@ -198,16 +200,28 @@ exports.postSignup = function(req, res, next) {
   
     // console.log('--'+whiteListArr[findWlistIndex].status);
     // console.log(adminList.indexOf(req.body.email));
-    
-      var user = new User({
-        email: req.body.email,
-        profile: {
+  if(adminArr.indexOf(req.body.email)>-1){
+    var user = new User({
+      email: req.body.email,
+      password: req.body.password,
+      profile: {
           name: req.body.uname,
-          lname: req.body.lname,
-          status: 'fellow'
-        },
-        password: req.body.password
-      });
+          status: 'admin'
+      }
+      
+    });
+  }
+  else{
+     var user = new User({
+      email: req.body.email,
+      password: req.body.password,
+      profile: {
+          name: req.body.uname,
+          status: 'guest'
+      }
+      
+    });
+  }
 
     
     User.findOne({ email: req.body.email }, function(err, existingUser) {
@@ -234,31 +248,15 @@ exports.postSignup = function(req, res, next) {
  * Profile page.
  */
 exports.getAccount = function(req, res) {
-  var usersList = [];
 
   User.find({}, function(err, users) {
     if (err) throw err;
-    users.forEach(function(eachUser,index){
-
-      var thisOneData = {
-          'name': eachUser.profile.name,
-          'lname': eachUser.profile.lame,
-          'email':  eachUser.email,
-          'IsAdmin': eachUser.IsAdmin,
-          'status': eachUser.profile.status
-      } 
-
-      usersList.push(thisOneData);
-
-      if(index==users.length-1){
-          res.render('account/profile', {
-            title: 'Account Management',
-            ulist: usersList,
-            // wList: whiteListArr
-          });
-      }
+   
+    res.render('account/profile', {
+      title: 'Account Management',
+      ulist: users,
+      // wList: whiteListArr
     });
-    
     
   });
 };

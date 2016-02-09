@@ -13,11 +13,42 @@ block content
 	//- 					a.post__link.post__readmore(href='#') try…
 	//- 			footer.post__meta
 	//- 				.post__image.el__transition_long.post__image--loaded(style="background-image: url('/img/a_cover.png')")
-
+	
 	section.py6.marginBtm
 		.container.container-flex.px2.mobile-scroll-container
 			.row.mobile-scroll-row
 				.project-card-list
+					each proj in allProjects
+						.mobile-scroll-row-item.col.col-4.project.mb2
+							.js-score-tracking.project-card.project-card-tall-big
+								.project-thumbnail
+									a(href='projects/#{proj.hid}')
+										img.project-thumbnail-img(src='./img/a_cover.png', width='100%')
+								.project-card-content
+									h6.project-title
+										a(href='projects/#{proj.hid}') #{proj.title}
+
+									p.project-byline
+										| #{proj.hoster}
+									p.project-blurb
+										| #{proj.abstract}
+								.project-card-footer
+									.project-location
+									.project-stats-container
+										.project-progress-bar
+											.project-percent-pledged(style='width: #{a_project.percent}%')
+										ul.project-stats
+											li
+												.project-stats-value
+													span.money.eur.no-code &#x24; #{proj.goalmoney}
+												span.project-stats-label 目標募集
+											li
+												.project-stats-value
+													span.money.eur.no-code &#x24; #{a_project.nowMoney}
+												span.project-stats-label 已募得
+											li
+												.project-stats-value #{a_project.percent}%
+												span.project-stats-label 完成
 					.mobile-scroll-row-item.col.col-4.project.mb2
 						.js-score-tracking.project-card.project-card-tall-big
 							.project-thumbnail

@@ -2,11 +2,9 @@ extends ../layout
 
 block content
   .container.containerIntro
-    .row
-      h3.col-sm-offset-2.col-sm-8 登入
-      h5.col-sm-offset-2.col-sm-8 即刻體驗更完整的Loffo
-    p
-    hr
+    .page-header
+      h3 登入
+      h5 即刻體驗更完整的Loffo
     p
     .row
       .col-sm-offset-4.col-sm-4
@@ -32,10 +30,9 @@ block content
             i.fa.fa-user
             | 登入     
         .col-sm-offset-4.col-sm-4
-          a.col-sm-12.forgotPass(href='/forgot') 忘記密碼?        
+          a.col-sm-12.forgotPass(href='/forgot') 忘記密碼?
     p
-    hr
-    p
+    .page-header      
       //-     a.btn.btn-block.btn-twitter.btn-social(href='/auth/twitter')
       //-       i.fa.fa-twitter
       //-       | Sign in with Twitter

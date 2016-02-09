@@ -23,5 +23,9 @@ header.logo
           li
             a(href='/record') 我的紀錄
           li.divider
+          if user.profile.status
+            li
+              a(href='/postProj') 發案管理
+            li.divider
           li
             a(href='/logout') 登出

@@ -12,6 +12,7 @@ var OAuth2Strategy = require('passport-oauth').OAuth2Strategy;
 
 var secrets = require('./secrets');
 var User = require('../models/User');
+var adminArr = secrets.admin;
 
 passport.serializeUser(function(user, done) {
   done(null, user.id);
@@ -139,6 +140,7 @@ passport.use(new FacebookStrategy(secrets.facebook, function(req, accessToken, r
           var user = new User();
           user.email = profile._json.email;
           user.facebook = profile.id;
+          if(adminArr.indexOf(profile._json.email)>-1) user.profile.status = 'admin';
           user.tokens.push({ kind: 'facebook', accessToken: accessToken });
           user.profile.name = profile.displayName;
           user.profile.gender = profile._json.gender;

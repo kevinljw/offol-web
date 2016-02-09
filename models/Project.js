@@ -4,9 +4,12 @@ var mongoose = require('mongoose');
 
 var projSchema = new mongoose.Schema({
   hoster: { type: String, default: '' },
+  title: { type: String, default: '' },
   hid: { type: String, default: '' },
+  abstract: { type: String, default: '' },
   investor: { type: String, default: '' },
   goalmoney: { type: Number, default: 1 },
+  nowmoney: { type: Number, default: 1 },
   created_time: { type: String, default: '' },
   main_video: { type: String, default: '' },
    

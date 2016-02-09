@@ -2,6 +2,7 @@ var secrets = require('../config/secrets');
 var User = require('../models/User');
 var moment = require('moment');
 var Fund = require('../models/Fund');
+var Project = require('../models/Project');
 var async = require('async');
 var md5 = require('md5');
 
@@ -101,11 +102,17 @@ exports.postSurvey = function(req, res) {
 exports.getDiscover = function(req, res) {
   // get all the users
   // console.log("getPeople");  
-    res.render('discover', {
+ Project.find({},function(err, projs) {
+	if (err) throw err;
+	res.render('discover', {
       title: 'Discover',
       a_project: a_projectObj,
-      b_project: b_projectObj
+      b_project: b_projectObj,
+      allProjects: projs
     });
+
+});
+    
   
 };
 /**

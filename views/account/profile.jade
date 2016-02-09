@@ -1,23 +1,17 @@
 extends ../layout
 
 block content
-  //- .row.jumbotron
-  //-   .container
-  //-     h2 User Profile
-  //-     p
-  //-     p 
-  //-     p 
-
-  .container
+  .container.containerIntro
     .page-header
       h3 個人資訊
+    p
     script.
       userPic="#{user.profile.picture}"
       usersList="#{ulist}"
     form.form-horizontal(action='account/uploadPImg/'+user.id, method='POST', enctype='multipart/form-data')
       input(type='hidden', name='_csrf', value=_csrf)
       .form-group
-        label.col-sm-5.control-label(for='gravatar') 個人頭像
+        label.col-sm-4.control-label(for='gravatar') 個人頭像
         .col-sm-4
           if user.profile.picture
             .profileGrid(style='background: url(\'#{user.profile.picture}\') no-repeat;background-size: auto 100%; background-position: 50% 0; border-radius: 5px;')
@@ -25,119 +19,39 @@ block content
           else 
             img(src="img/default_profile.png", class='profile', width='180', height='180')
       //- .form-group
-      //-   label.col-sm-5.control-label(for='userPImg') 上傳照片
+      //-   label.col-sm-4.control-label(for='userPImg') 上傳照片
       //-   .col-sm-4
       //-     input.file(id='input-1', type='file', data-preview-file-type='text',accept='image/*', name='userPImg')
     form.form-horizontal(action='/account/profile', method='POST')
       input(type='hidden', name='_csrf', value=_csrf)
       
       .form-group
-        label.col-sm-5.control-label(for='name') 姓名
+        label.col-sm-4.control-label(for='name') 姓名
         .col-sm-4
-          input.form-control(type='text', name='name', id='name', placeholder='your name', value='#{user.profile.name}')          
+          input.form-control(type='text', name='name', id='name', placeholder='your name', value='#{user.profile.name}')
       .form-group
-        label.col-sm-5.control-label(for='birth') 生日
+        label.col-sm-4.control-label(for='status') 身份
         .col-sm-4
-          input.form-control(type='date', name='birth', id='birth', min='1900-01-01' max='1999-12-31', value='#{user.profile.birth}')
+          input.form-control(type='text', name='status', id='status', value='#{user.profile.status}', disabled)    
       .form-group
-        label.col-sm-5.control-label(for='email') Email
+        label.col-sm-4.control-label(for='birth') 生日
+        .col-sm-4
+          input.form-control(type='date', name='birth', id='birth', min='1900-01-01' max='2015-12-31', value='#{user.profile.birth}')
+      .form-group
+        label.col-sm-4.control-label(for='email') Email
         .col-sm-4
           input.form-control(type='email', name='email', id='email', value='#{user.email}')
-      //- .form-group
-      //-   label.col-sm-5.control-label(for='status') Status
-      //-   .col-sm-4
-      //-     input.form-control(type='status', name='status', id='status', disabled='disabled', value='#{user.profile.status}')  
-      
-
-      //- .form-group
-      //-   label.col-sm-5.control-label(for='gender') Gender
-      //-   .col-sm-5
-      //-     label.radio.col-sm-5
-      //-       input(type='radio', checked=user.profile.gender=='male', name='gender', value='male', data-toggle='radio')
-      //-       span Male
-      //-     label.radio.col-sm-5
-      //-       input(type='radio', checked=user.profile.gender=='female', name='gender', value='female', data-toggle='radio')
-      //-       span Female
-      //- .form-group
-      //-   label.col-sm-5.control-label(for='location') Location
-      //-   .col-sm-4
-      //-     input.form-control(type='text', name='location', id='location', value='#{user.profile.location}')
       .form-group
-        label.col-sm-5.control-label(for='website') 個人連結
+        label.col-sm-4.control-label(for='website') 個人連結
         .col-sm-4
           input.form-control(type='text', name='website', id='website', value='#{user.profile.website}')
-      //- .form-group
-      //-   label.col-sm-5.control-label(for='job') Describe your current role in one word:
-      //-   .col-sm-4
-      //-     input.form-control(type='text', name='job', id='job', value='#{user.profile.job}')
-      //- .form-group
-      //-   label.col-sm-5.control-label(for='selfThreeWords1') How would you describe your self in three words?
-      //-   .col-sm-4
-      //-     .col-sm-4
-      //-       input.form-control(type='text', name='selfThreeWords1', id='selfThreeWords1', placeholder='One', value='#{user.profile.selfThreeWords1}')
-      //-     .col-sm-4
-      //-       input.form-control(type='text', name='selfThreeWords2', id='selfThreeWords2', placeholder='Two', value='#{user.profile.selfThreeWords2}')
-      //-     .col-sm-4
-      //-       input.form-control(type='text', name='selfThreeWords3', id='selfThreeWords3', placeholder='Three', value='#{user.profile.selfThreeWords3}')
-      //- .form-group
-      //-   label.col-sm-5.control-label(for='threeKeySkill1') What are your three key skill sets?
-      //-   .col-sm-4
-      //-     .col-sm-4
-      //-       input.form-control(type='text', name='threeKeySkill1', id='threeKeySkill1', placeholder='One', value='#{user.profile.threeKeySkill1}')
-      //-     .col-sm-4
-      //-       input.form-control(type='text', name='threeKeySkill2', id='threeKeySkill2', placeholder='Two', value='#{user.profile.threeKeySkill2}')
-      //-     .col-sm-4
-      //-       input.form-control(type='text', name='threeKeySkill3', id='threeKeySkill3', placeholder='Three', value='#{user.profile.threeKeySkill3}')
-      //- .form-group
-      //-   label.col-sm-5.control-label(for='threeInterests1') Name three interests outside of school and work
-      //-   .col-sm-4
-      //-     .col-sm-4
-      //-       input.form-control(type='text', name='threeInterests1', id='threeInterests1', placeholder='One', value='#{user.profile.threeInterests1}')
-      //-     .col-sm-4
-      //-       input.form-control(type='text', name='threeInterests2', id='threeInterests2', placeholder='Two', value='#{user.profile.threeInterests2}')
-      //-     .col-sm-4
-      //-       input.form-control(type='text', name='threeInterests3', id='threeInterests3', placeholder='Three', value='#{user.profile.threeInterests3}')
-      //- .form-group
-      //-   label.col-sm-5.control-label(for='sixThings') The Six things I can never do without
-      //-   .col-sm-4
-      //-     .col-sm-6
-      //-       input.form-control(type='text', name='sixThings1', id='sixThings1', placeholder='One', value='#{user.profile.sixThings1}')
-      //-     .col-sm-6
-      //-       input.form-control(type='text', name='sixThings2', id='sixThings2', placeholder='Two', value='#{user.profile.sixThings2}')
-      //-     .col-sm-6
-      //-       input.form-control(type='text', name='sixThings3', id='sixThings3', placeholder='Three', value='#{user.profile.sixThings3}')
-      //-     .col-sm-6
-      //-       input.form-control(type='text', name='sixThings4', id='sixThings4', placeholder='Four', value='#{user.profile.sixThings4}')
-      //-     .col-sm-6
-      //-       input.form-control(type='text', name='sixThings5', id='sixThings5', placeholder='Five', value='#{user.profile.sixThings5}')
-      //-     .col-sm-6
-      //-       input.form-control(type='text', name='sixThings6', id='sixThings6', placeholder='Six', value='#{user.profile.sixThings6}')
-      //- .form-group
-      //-   label.col-sm-5.control-label(for='bestAdvice') Best piece of advice ever received
-      //-   .col-sm-4
-      //-     textarea.form-control(type='text', name='bestAdvice', id='bestAdvice', rows='5') #{user.profile.bestAdvice}
-      //- .form-group
-      //-   label.col-sm-5.control-label(for='oneBook') One book you would recommend to others
-      //-   .col-sm-4
-      //-     textarea.form-control(type='text', name='oneBook', id='oneBook', rows='4') #{user.profile.oneBook}
-      //- .form-group
-      //-   label.col-sm-5.control-label(for='oneUrl') One URL you would recommend to others
-      //-   .col-sm-4
-      //-     textarea.form-control(type='text', name='oneUrl', id='oneUrl', rows='4') #{user.profile.oneUrl}
-      //- .form-group
-      //-   label.col-sm-5.control-label(for='favoritePlace') Where is your favorite place to hang out in Taiwan?
-      //-   .col-sm-4
-      //-     textarea.form-control(type='text', name='favoritePlace', id='favoritePlace', rows='3') #{user.profile.favoritePlace}
-      //- .form-group
-      //-   label.col-sm-5.control-label(for='statement') My self-summary:
-      //-   .col-sm-4
-      //-     textarea.form-control(type='text', name='statement', id='statement', rows='10') #{user.profile.statement}
       .form-group
-        .col-sm-offset-5.col-sm-4
-          button.btn.btn.btn-primary(type='submit')
+        .col-sm-offset-4.col-sm-4
+          button.col-sm-12.btn.btn.btn-primary(type='submit')
             i.fa.fa-pencilr
-            | 更新資訊
-    .page-header#linkAcnt
+            | 更新
+    p
+    .page-header.marginTop100#linkAcnt
       h3 社群連結
       //- p.lead Please enter your personal link to the following social media:
     .form-horizontal
@@ -183,119 +97,60 @@ block content
           //-       a(href='/auth/linkedin')
           //-         span.fa.fa-linkedin-square
           //-         p Link your LinkedIn account
-    .page-header
+    .page-header.marginTop100
       h3 密碼更變
 
     form.form-horizontal(action='/account/password', method='POST')
       input(type='hidden', name='_csrf', value=_csrf)
       .form-group
-        label.col-sm-5.control-label(for='password') 新密碼
+        label.col-sm-4.control-label(for='password') 新密碼
         .col-sm-4
           input.form-control(type='password', name='password', id='password')
       .form-group
-        label.col-sm-5.control-label(for='confirmPassword') 確認密碼
+        label.col-sm-4.control-label(for='confirmPassword') 確認密碼
         .col-sm-4
           input.form-control(type='password', name='confirmPassword', id='confirmPassword')
       .form-group
-        .col-sm-offset-5.col-sm-4
-          button.btn.btn-primary(type='submit')
+        .col-sm-offset-4.col-sm-4
+          button.col-sm-12.btn.btn-primary(type='submit')
             i.fa.fa-lock
             | 變更
-
-    .page-header
-      h3 刪除帳號
-
-    form.form-horizontal(action='/account/delete', method='POST')
-      .form-group
-        p.col-sm-offset-3.col-sm-6 You can delete your account, but keep in mind this action is irreversible.
+    if user.profile.status=='admin'
+      .page-header.marginTop100
+        h3 管理員
+      form.form-horizontal(action='/authority', method='POST')
         input(type='hidden', name='_csrf', value=_csrf)
-        .col-sm-offset-5.col-sm-4
-          button.btn.btn-danger(type='submit')
-            i.fa.fa-trash
-            | Delete my account
-
-    if user.profile.status == "ta" || user.profile.status == "founder" || user.profile.status == "admin"
-      .page-header
-        h3 Administration
-      .panel(class='panel-default')
-        .panel-heading: | White List (Email)
-        
-        form.form-horizontal(action='/account/whitelist', method='POST')
+        each val, index in ulist
+          .form-group
+            label.col-sm-1.control-label(for='#{val.id}') #{index}
+            label.col-sm-3.control-label(for='#{val.id}') #{val.email}
+            label.col-sm-2.control-label(for='#{val.id}') #{val.profile.name}
+            .col-sm-6
+              label.col-sm-6(for='user_#{index}_1')
+                if val.profile.status=='guest'
+                  input(type='radio', name='#{val.id}', id='user_#{index}_1', value='guest', checked)
+                else
+                  input(type='radio', name='#{val.id}', id='user_#{index}_1', value='guest')
+                | guest
+              label.col-sm-6(for='user_#{index}_3')
+                if val.profile.status=='admin'
+                  input(type='radio', name='#{val.id}', id='user_#{index}_3', value='admin', checked)
+                else
+                  input(type='radio', name='#{val.id}', id='user_#{index}_3', value='admin')
+                | admin
+        .form-group.marginTop
+          .col-sm-offset-4.col-sm-4
+            button.col-sm-12.btn.btn-primary(type='submit')
+              i.fa.fa-pencil
+              | Update
+    if user.profile.status=='admin'
+      .page-header.marginTop100
+        h3 刪除帳號
+      form.form-horizontal(action='/account/delete', method='POST')
+        .form-group
+          p.col-sm-offset-3.col-sm-6 You can delete your account, but keep in mind this action is irreversible.
           input(type='hidden', name='_csrf', value=_csrf)
-          .panelContainer
-            table(style='width:100%')
-              thead
-                tr
-                  th Status
-                  th Email
-              tbody
-                each val in wList
-                  tr
-                    td #{val.status}
-                    td #{val.email}
-          .form-group
-            label.col-sm-5.control-label(for='whitelist_status') Status
-            .col-sm-7
-              select(name='whitelist_status', id='whitelist_status')
-                    option(value='fellow') Fellow
-                    option(value='ta') TA
-                    option(value='mentor') Mentor
-                    option(value='advisor') Advisor
-                    option(value='founder') Founder
-                    option(value='admin') Admin
-                    option(value='guest') Guest
-          .form-group
-            label.col-sm-5.control-label(for='whitelist') Add Email
-            .col-sm-4
-              input.form-control(type='text', name='whitelist', id='whitelist')
-          
-          .form-group
-            .col-sm-offset-5.col-sm-4
-              button.btn.btn-primary(type='submit') Post This Email
-        form.form-horizontal(action='/account/delete_whitelist', method='POST')
-          .form-group
-            input(type='hidden', name='_csrf', value=_csrf)
-            .col-sm-offset-5.col-sm-4
-              button.btn.btn-danger(type='submit')
-                i.fa.fa-trash
-                | Delete lastest Item
-          //- form.form-horizontal(action='/account/whitelist', method='POST')
-          //-   input(type='hidden', name='_csrf', value=_csrf)
-          //-   .form-group
-          //-     label.col-sm-4.control-label(for='whitelist') Add Email
-          //-     .col-sm-7
-          //-       input.form-control(type='whitelist', name='whitelist', id='whitelist', value='#{admin.whitelist}')
-          //-   .form-group
-          //-     .col-sm-offset-3.col-sm-4
-          //-       button.btn.btn.btn-primary(type='submit')
-          //-         i.fa.fa-pencilr
-          //-         | Update Profile
-
-      //- .panel(class='panel-default')
-      //-   .panel-heading: | User List
-      //-   select#NameSelect(name='NameSelect',form='adminUsers', onchange='nameSelectFoo()')
-      //-     each val in ulist
-      //-       option(value='#{val.name}') #{val.name}
-      //-   #demo
-      //-   table(class='table-bordered')
-      //-     thead
-      //-       tr
-      //-         th Name
-      //-         th Email
-      //-         th Admin
-      //-         th Status
-      //-     tbody
-      //-       each val in ulist
-      //-         tr
-      //-           td #{val.name}
-      //-           td #{val.email}
-      //-           td 
-      //-             select(name='adminSelect',form='adminUsers', value='#{val.IsAdmin}')
-      //-               option(value='true') true
-      //-               option(value='false') false
-      //-           td
-      //-             select(name='statusSelect',form='adminUsers', value='#{val.status}')
-      //-               option(value='mentor') mentor
-      //-               option(value='student') student
-      //-               option(value='ta') ta
-      //-               option(value='faculty') faculty
+          .col-sm-offset-4.col-sm-4
+            button.col-sm-12.btn.btn-danger(type='submit')
+              i.fa.fa-trash
+              | Delete my account
