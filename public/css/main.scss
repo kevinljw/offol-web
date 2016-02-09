@@ -128,8 +128,8 @@
     padding-bottom: 60px;
     font-family: 'Alegreya Sans', sans-serif;
     background: #fff;
-    padding: 70px 75px;
-    margin: 50px auto;
+    padding: 50px 50px;
+    margin: 10px auto;
     border: 1px solid #eaeaea;
     border-radius: 10px;
     text-align: center;
@@ -160,7 +160,12 @@
     word-wrap:break-word; 
 }
 .containerIntro hr{
-//    padding: 20px 0;
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0; 
 }
 .mainleft {
     padding-right: 30px;
@@ -903,3 +908,4 @@ p.project-byline, p.project-blurb{
     margin-left: 20px;
 //    margin-right: auto;
 }
+

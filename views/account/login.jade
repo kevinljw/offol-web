@@ -1,9 +1,21 @@
 extends ../layout
 
 block content
-  .page-header.container
-    h3 登入
-  .container
+  .container.containerIntro
+    .row
+      h3.col-sm-offset-2.col-sm-8 登入
+      h5.col-sm-offset-2.col-sm-8 即刻體驗更完整的Loffo
+    p
+    hr
+    p
+    .row
+      .col-sm-offset-4.col-sm-4
+        a.btn.btn-block.btn-facebook.btn-social(href='/auth/facebook')
+          i.fa.fa-facebook
+          | 直接以 Facebook 登入
+    p
+      |--- OR ---
+    p
     form.form-horizontal(method='POST')
       input(type='hidden', name='_csrf', value=_csrf)
       .form-group
@@ -16,19 +28,14 @@ block content
           input.form-control(type='password', name='password', id='password', placeholder='Password')
       .form-group
         .col-sm-offset-4.col-sm-4
-          button.col-sm-3.btn.btn-primary(type='submit')
+          button.col-sm-12.btn.btn-primary(type='submit')
             i.fa.fa-user
-            | 登入
+            | 登入     
         .col-sm-offset-4.col-sm-4
-          a.col-sm-4.forgotPass(href='/forgot') 忘記密碼?
-      .form-group
-        .col-sm-offset-3.col-sm-6
-          hr
-      .form-group
-        .col-sm-offset-4.col-sm-4
-          a.btn.btn-block.btn-facebook.btn-social(href='/auth/facebook')
-            i.fa.fa-facebook
-            | 以您的 Facebook 登入
+          a.col-sm-12.forgotPass(href='/forgot') 忘記密碼?        
+    p
+    hr
+    p
       //-     a.btn.btn-block.btn-twitter.btn-social(href='/auth/twitter')
       //-       i.fa.fa-twitter
       //-       | Sign in with Twitter

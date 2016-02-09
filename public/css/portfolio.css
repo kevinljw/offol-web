@@ -140,18 +140,37 @@ main {
 
 }
 .logo__title {
-	font-size: 16px;
-	font-weight: 700;
+	font-size: 18px;
+	font-weight: 900;
 	line-height: 64px;
 	margin: 0;
 	text-transform: uppercase;
 }
 .logo__desc {
 	color: #646464;
-	font-size: 12px;
+	font-size: 14px;
 	font-weight: 500;
 	line-height: 15px;
 	margin-top: -20px;
+}
+.logo__user{
+    display: inline-block;  
+    margin-right: 10px;
+    margin-top: -52px;
+    padding: 10px 5px;
+/*
+    float: right;
+    margin-right: 10px;
+    margin-top: 10px;
+*/
+}
+.logo__user a {
+	color: #777;
+	font-size: 14px;
+	font-weight: 600;
+}
+.logo__user a:hover{
+    color: #5cc1a9;
 }
 .logo__link {
 	color: #000;
