@@ -127,7 +127,7 @@ block content
             label.col-sm-2.control-label(for='#{val.id}') #{val.profile.name}
             .col-sm-6
               label.col-sm-6(for='user_#{index}_1')
-                if val.profile.status=='guest'
+                if val.profile.status=='guest' || val.profile.status=='fellow'
                   input(type='radio', name='#{val.id}', id='user_#{index}_1', value='guest', checked)
                 else
                   input(type='radio', name='#{val.id}', id='user_#{index}_1', value='guest')
