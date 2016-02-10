@@ -15,13 +15,15 @@ var transporter = nodemailer.createTransport({
     pass: secrets.sendgrid.password
   }
 });
+
 var allProjs = function(req, res) {
 
 	Project.find({},function(err, projs) {
     	if (err) console.error(err);
+
     	return projs;
 	});
-  
+  	
 };
 /**
  * GET /contact
@@ -53,11 +55,15 @@ exports.postPostProj = function(req, res, next) {
 	    req.flash('errors', errors);
 	    return res.redirect('/postProj');
 	}
-	Project.find({}, function(err, projs) {
+	Project.find({}, null, {sort:{"hid":-1}}, function(err, projs) {
     	if (err) throw err;
+    	var thisHid = hidStartSerial;
+    	if(projs.length>0){
+    		thisHid = projs[0].hid+1;
+    	}
+    	console.log("thisHid:"+thisHid);
     	allProjs = projs;
-		var thisHid = hidStartSerial+projs.length;
-		console.log(hidStartSerial, projs.length, thisHid);
+		// console.log(hidStartSerial, projs.length, thisHid);
 		var thisProject = new Project({
 	      hoster: req.body.name,
 	      title: req.body.title,
@@ -69,7 +75,7 @@ exports.postPostProj = function(req, res, next) {
 		  bannerPImg: req.body.bannerPImg,
 		  coverPImg: req.body.coverPImg,
 		  bannerColor: req.body.bannerColor,
-		  hid: thisHid.toString()
+		  hid: thisHid
 		  // picture: PictureIsOn?PicPath:''
 	    });
 	    // console.log(thisProject);

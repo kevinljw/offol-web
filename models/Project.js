@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 var projSchema = new mongoose.Schema({
   hoster: { type: String, default: '' },
   title: { type: String, default: '' },
-  hid: { type: String, default: '' },
+  hid: { type: Number, default: '' },
   abstract: { type: String, default: '' },
   investorNum: { type: Number, default: 0 },
   goalmoney: { type: Number, default: 1 },
