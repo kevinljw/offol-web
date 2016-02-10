@@ -64,7 +64,7 @@ exports.postPostProj = function(req, res, next) {
 		  abstract: req.body.abstract,
 		  goalmoney: req.body.money,
 		  created_time: moment().format('MMMM Do YYYY, h:mm:ss a'),
-		  main_video: req.body.video.replace("watch?v=", "v/").replace("youtu.be", "www.youtube.com/v"),
+		  main_video: req.body.video.replace("watch?v=", "embed/").replace("youtu.be", "www.youtube.com/embed/"),
 		  content: req.body.content,
 		  bannerPImg: req.body.bannerPImg,
 		  coverPImg: req.body.coverPImg,
@@ -114,7 +114,7 @@ exports.updateProj = function(req, res, next) {
 		    proj.title= req.body.title;
 			proj.abstract= req.body.abstract;
 			proj.goalmoney= req.body.money;
-			proj.main_video= req.body.video.replace("watch?v=", "v/").replace("youtu.be", "www.youtube.com/v");
+			proj.main_video= req.body.video.replace("watch?v=", "embed/").replace("youtu.be", "www.youtube.com/embed/");
 			proj.content= req.body.content;
 			proj.bannerPImg= req.body.bannerPImg;
 		 	proj.coverPImg= req.body.coverPImg;
