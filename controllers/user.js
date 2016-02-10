@@ -548,8 +548,8 @@ exports.postAuthority = function(req, res, next) {
   User.find({}, function(err, allUsers) {
     // console.log(req.body);
     async.forEachOf(allUsers, function (eachUser, eachUserIndex, user_callback) {
-      eachUser.status=req.body[eachUser.id];
-      // console.log(eachUser.status);
+      eachUser.profile.status=req.body[eachUser.id];
+      // console.log(eachUser.profile.status);
       eachUser.save(function(err) {
         if (err) {
           return next(err);
