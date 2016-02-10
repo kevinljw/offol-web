@@ -1,0 +1,101 @@
+extends layout
+
+block content
+  script.
+    var converter = new showdown.Converter();
+    var text      = !{JSON.stringify(thisProject.content)};
+    var html      = converter.makeHtml(text);
+    //- console.log(html);
+
+
+  .banner.free_jumbo
+    .container.img-preview(style='background: #{thisProject.bannerColor}')
+      img(src='#{thisProject.bannerPImg}')
+  .container.container-flex.px2.marginBtm
+    .row
+      .table
+        .table-cell.col-sm-8.col-8.px-gutter
+          #video-section.project-image
+            #video_pitch.video-player.vertically_center.large
+              iframe(title='#{thisProject.title}', width='99%', src='#{thisProject.main_video}', frameborder='0', allowfullscreen, style='height: 482px; max-height: 768px;')
+             
+        .table-cell.col-sm-4.col-4.px-gutter
+          .mobile-show.mobile-center
+            .py2
+              .NS_projects__header.center
+                h2.normal.mb1
+                  | #{thisProject.title}
+                p.blue-dark.h5.mb0.mobile-show
+                  | by 
+                  b
+                  |  #{thisProject.hoster}
+            p.h5
+              | #{thisProject.abstract}
+            .h5.mb2
+              .grey-dark.mr3.nowrap
+                span.ss-icon.ss-location.margin-right
+                b Taipei, Taiwan
+          .NS_projects__stats
+            #stats.digits_4
+              .row
+                .col.col-12.mb1.stat-item
+                  #backers_count.num.h1.bold #{thisProject.investorNum}
+                  span.bold.h5 人次參與
+                .col.col-12.mb1.stat-item
+                  #pledged.num.h1.bold.nowrap $#{thisProject.nowmoney}
+                    span.money.usd.project_currency_code
+                  span.bold.h5
+                    | 距離目標資金
+                    | 
+                    span.money.usd.no-code $#{thisProject.goalmoney}
+                    span.mobile-hide
+                    |  募集
+                .col.col-12.mb1.stat-item
+                  #backers_percent.num.h1.bold  #{thisProject.percent}%
+                  span.bold.h5 已完成
+                  p
+                  span.bold 一元，即可以行動支持這位素人
+          .NS_projects__back_and_star
+            
+            .inline-block.mobile-hide
+              a#button-back-this-proj.btn.btn--blue.btn--large(href='/fundings/#{thisProject.hid}') 我要贊助
+            .mobile-show
+              a#button-back-this-proj.btn.btn--blue.btn--block(href='/fundings/#{thisProject.hid}') 我要贊助
+            .align-middle.inline-block.pl1.mobile-hide
+            #watching-widget.ajax-container.inline-block.align-middle
+    .row
+      .col.col-8.py4
+        .mobile-hide
+          .h5.mb3
+            .grey-dark.mr3.nowrap
+              span.ss-icon.ss-location.margin-right
+              b Taipei, Taiwan
+           
+          p.h3.mb3
+            | #{thisProject.abstract}
+          
+        //--Curated page projects ----------------
+        .curate.inline-block
+      .col.col-4
+        .border-top.py4
+          .row.clip
+    .row
+      .col.col-8#projContent
+
+  script.
+    var thisProjContent = document.getElementById("projContent");
+    //- console.log(thisProjContent);
+    thisProjContent.innerHTML = html;
+    //- .row
+    //-   .col.col-8
+    //-     img(src='/img/a_target.jpg',width='100%')
+    //-   .col.col-8
+    //-     img(src='/img/a_profile.jpg',width='100%')
+    //-   .col.col-8
+    //-     img(src='/img/a_feedback.jpg',width='100%')
+
+
+          
+
+
+  

@@ -721,6 +721,10 @@ article.post .post-inner iframe {
     float: right;
 //    margin-right: 0;
 }
+.text-alignLeft{
+    text-align: left;
+//    margin-right: 0;
+}
 .alignRight .btn{
     font-size: 10px;
     font-weight: 500;
@@ -848,8 +852,8 @@ article.post .post-inner iframe {
 }
 .banner{
     height: 400px;
-    background: #e4e4e4;
-    margin-top: -10px;
+    background: #fff;
+//    margin-top: -20px;
     margin-bottom: 50px;
 }
 .free_jumbo {
@@ -858,15 +862,18 @@ article.post .post-inner iframe {
 .free_jumbo .img-preview {
 //    width: 100%;
     height: 378px;
+    max-height: 378px;
 }
 .free_jumbo img, .free_jumbo svg {
-    border: 1px solid #ddd;
-    -webkit-box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.4);
-    -moz-box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.4);
-    box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+    max-width: 1024px;
+//    border: 1px solid #ddd;
+//    -webkit-box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.4);
+//    -moz-box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.4);
+//    box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.4);
     margin-left: auto;
     margin-right: auto;
-    display: block;
+    display: inline-block;
 //    text-align: center;
 }
 .free_jumbo img, .free_jumbo svg {

@@ -174,7 +174,7 @@ app.get('/announcements',  announcementsController.getAnnouncements);
 
 app.get('/discover',  projController.getDiscover);
 app.get('/host',  hostController.getHost);
-app.get('/projects/:id', projController.getProject);
+// app.get('/projects/:id', projController.getProject);
 app.get('/fundings/:id', passportConf.isAuthenticated, projController.getFunding);
 app.post('/fundings/:id', passportConf.isAuthenticated, projController.postFunding);
 app.get('/survey/field', passportConf.isAuthenticated, projController.getSurvey);
@@ -188,7 +188,10 @@ app.get('/record', passportConf.isAuthenticated, userController.getRecord);
 app.get('/postProj', passportConf.isAuthenticated, postProjController.getPostProj);
 app.post('/postProj', passportConf.isAuthenticated, postProjController.postPostProj);
 app.post('/deleteProj/:id', passportConf.isAuthenticated, postProjController.deleteProj);
+app.get('/postProj/:id', passportConf.isAuthenticated, postProjController.editProj);
+app.post('/updateProj/:id', passportConf.isAuthenticated, postProjController.updateProj);
 
+app.get('/projects/:id', projController.getProject);
 
 app.get('/account', passportConf.isAuthenticated, userController.getAccount);
 app.post('/account/profile', passportConf.isAuthenticated, userController.postUpdateProfile);

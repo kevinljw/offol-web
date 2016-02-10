@@ -5,6 +5,8 @@ var moment = require('moment');
 // var Idea = require('../models/Idea');
 var User = require('../models/User');
 var Project = require('../models/Project');
+var hidStartSerial = secrets.projects.hidStartSerial;
+
 var nodemailer = require("nodemailer");
 var transporter = nodemailer.createTransport({
   service: 'SendGrid',
@@ -13,26 +15,35 @@ var transporter = nodemailer.createTransport({
     pass: secrets.sendgrid.password
   }
 });
+var allProjs = function(req, res) {
 
+	Project.find({},function(err, projs) {
+    	if (err) console.error(err);
+    	return projs;
+	});
+  
+};
 /**
  * GET /contact
  * Contact form page.
  */
 exports.getPostProj = function(req, res) {
-	Project.find({},function(err, projs) {
+	Project.find({}, null, {sort: {'_id': -1}}, function(err, projs) {
     	if (err) throw err;
 
 		res.render('postProj', {
 			title: 'Project Management',
-			allProjects: projs
+			allProjects: projs,
+			isEditing: false,
 		});
-
+		allProjs = projs;
 	});
   
 };
 exports.postPostProj = function(req, res, next) {
 	req.assert('title', 'Title must be at least 1 characters long').len(1);
 	req.assert('name', 'Name must be at least 1 characters long').len(1);
+	req.assert('abstract', 'Abstract must be at least 1 characters long').len(1);
 	req.assert('content', 'Content must be at least 1 characters long').len(1);
 	req.assert('video', 'video?').len(1);
 	req.assert('money', 'money?').isInt();
@@ -42,23 +53,89 @@ exports.postPostProj = function(req, res, next) {
 	    req.flash('errors', errors);
 	    return res.redirect('/postProj');
 	}
-	var thisProject = new Project({
-      hoster: req.body.name,
-      title: req.body.title,
-	  abstract: req.body.content,
-	  goalmoney: req.body.money,
-	  created_time: moment().format('MMMM Do YYYY, h:mm:ss a'),
-	  main_video: req.body.video,
-	  // picture: PictureIsOn?PicPath:''
-    });
-    console.log(thisProject);
-    thisProject.save(function(err) {
-        if (err) {
-          return next(err);
+	Project.find({}, function(err, projs) {
+    	if (err) throw err;
+    	allProjs = projs;
+		var thisHid = hidStartSerial+projs.length;
+		console.log(hidStartSerial, projs.length, thisHid);
+		var thisProject = new Project({
+	      hoster: req.body.name,
+	      title: req.body.title,
+		  abstract: req.body.abstract,
+		  goalmoney: req.body.money,
+		  created_time: moment().format('MMMM Do YYYY, h:mm:ss a'),
+		  main_video: req.body.video.replace("watch?v=", "v/").replace("youtu.be", "www.youtube.com/v"),
+		  content: req.body.content,
+		  bannerPImg: req.body.bannerPImg,
+		  coverPImg: req.body.coverPImg,
+		  bannerColor: req.body.bannerColor,
+		  hid: thisHid.toString()
+		  // picture: PictureIsOn?PicPath:''
+	    });
+	    // console.log(thisProject);
+	    thisProject.save(function(err) {
+	        if (err) {
+	          return next(err);
+	        }
+	        req.flash('success', { msg: 'Done.' });
+	        res.redirect('/postProj');
+	    });
+	
+	});
+};
+exports.editProj = function(req, res, next) {
+	Project.findOne({"_id": req.params.id}, function(err, proj) {
+		if (!proj) {
+          req.flash('errors', { msg: 'No project with that id exists.' });
+          return res.redirect('/postProj');
         }
-        req.flash('success', { msg: 'Done.' });
-        res.redirect('/postProj');
-    });
+
+        // console.log(proj);
+        // req.flash('success', { msg: 'Done.' });
+
+	    res.render('postProj', {
+			title: 'Project Management',
+			thisProject: proj,
+			isEditing: true,
+			allProjects: allProjs,
+		});
+        
+	});
+
+};
+exports.updateProj = function(req, res, next) {
+	
+		Project.findOne({"_id": req.params.id}, function(err, proj) {
+			if (!proj) {
+	          req.flash('errors', { msg: 'No project with that id exists.' });
+	          return res.redirect('/postProj');
+	        }
+	        proj.hoster= req.body.name;
+		    proj.title= req.body.title;
+			proj.abstract= req.body.abstract;
+			proj.goalmoney= req.body.money;
+			proj.main_video= req.body.video.replace("watch?v=", "v/").replace("youtu.be", "www.youtube.com/v");
+			proj.content= req.body.content;
+			proj.bannerPImg= req.body.bannerPImg;
+		 	proj.coverPImg= req.body.coverPImg;
+		 	proj.bannerColor =  req.body.bannerColor;
+		 	
+
+			proj.save(function(err) {
+		        if (err) {
+		          return next(err);
+		        }
+		        req.flash('success', { msg: 'Done.' });
+		        res.render('postProj', {
+					title: 'Project Management',
+					thisProject: proj,
+					isEditing: false,
+					allProjects: allProjs,
+				});
+		    });
+	        
+		});
+	
 	
 
 };

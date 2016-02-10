@@ -1,113 +1,158 @@
-extends layout
+extends layout_pure
 block content
-  //- script(hsrc='/js/markdown/markdown-it.js')
-  //- script(hsrc='/js/markdown/markdown-it-footnote.js')
-  //- script(hsrc='/js/markdown/highlight.pack.js')
-  //- script(hsrc='/js/markdown/emojify.js')
-  //- script(hsrc='/js/markdown/codemirror/lib/codemirror.js')
-  //- script(hsrc='/js/markdown/codemirror/overlay.js')
-  //- script(hsrc='/js/markdown/codemirror/xml/xml.js')
-  //- script(hsrc='/js/markdown/codemirror/markdown/markdown.js')
-  //- script(hsrc='/js/markdown/codemirror/gfm/gfm.js')
-  //- script(hsrc='/js/markdown/codemirror/javascript/javascript.js')
-  //- script(hsrc='/js/markdown/codemirror/css/css.js')
-  //- script(hsrc='/js/markdown/codemirror/htmlmixed/htmlmixed.js')
-  //- script(hsrc='/js/markdown/codemirror/lib/util/continuelist.js')
-  //- script(hsrc='/js/markdown/rawinflate.js')
-  //- script(hsrc='/js/markdown/rawdeflate.js')
-  //- link(rel='stylesheet', href='/css/base16-light.css')
-  //- link(rel='stylesheet', href='/js/markdown/codemirror/lib/codemirror.css')
-  //- link(rel='stylesheet', href='/css/default.css')
-  //- link(rel='stylesheet', href='/css/markdown-it.css')
   //- #introHead
   .container.containerIntro
     .page-header
       h3 專案管理
     ul.list-group
       .row
-        .col-sm-offset-3.col-sm-6
+        .col-sm-offset-2.col-sm-8
           each val, index in allProjects
-            form.form-horizontal(action='deleteProj/#{val.id}', method='POST')
-              li.list-group-item #{index} | #{val.title} | #{val.goalmoney}
-                span.alignRight
-                  button.btn.btn-default(type='submit')
-                    i.fa.fa-minus-circle
-                    | Delete
-              
-    .page-header
-      h3 發案
-    p
-    form.form-horizontal(action='/postProj', method='POST')
-      input(type='hidden', name='_csrf', value=_csrf)
-      .form-group
-        label.col-sm-4.control-label(for='title') 標題
-        .col-sm-5
-          input.form-control(type='text', name='title', id='title',placeholder='Ex.【Loffo x 江峰】舞蹈、創作、重生')
-      .form-group
-        label.col-sm-4.control-label(for='name') 案主
-        .col-sm-5
-          input.form-control(type='text', name='name', id='name',placeholder='Ex. 江峰')
-      .form-group
-        label.col-sm-4.control-label(for='content') 簡述
-        .col-sm-5
-          textarea.form-control(type='text', name='content', id='content', rows='6', placeholder='Ex. 在生涯規劃上，決心走向藝術這條道路。對我而言，舞蹈是一種自我認識，找出自己與世界不同的方式，希望能接觸更多舞蹈訓練，能更加展現自我，並希望可以讓更多人去接觸、喜愛表演藝術。')
-      .form-group
-        label.col-sm-4.control-label(for='video') 影片連結 (Only Youtube)
-        .col-sm-5
-          input.form-control(type='text', name='video', id='video', placeholder='Ex. https://www.youtube.com/watch?v=dgXDBRpejN8')
-      .form-group
-        label.col-sm-4.control-label(for='money') 募資金額 (only 數字)
-        .col-sm-5
-          input.form-control(type='text', name='money', id='money', placeholder='Ex. 2000')
-      .form-group
-        .col-sm-offset-4.col-sm-5
-          button.col-sm-12.btn.btn-primary(type='submit')
-            i.fa.fa-pencil
-            | 發案
-      //- .form-group
-      //-   #in
-      //-     form
-      //-       textarea#code
-      //-         | # (GitHub-Flavored) Markdown Editor
-      //-         | Basic useful feature list:
-      //-         | * Ctrl+S / Cmd+S to save the file
-      //-         | * Ctrl+Shift+S / Cmd+Shift+S to choose to save as Markdown or HTML
-      //-         | * Drag and drop a file into here to load it
-      //-         | * File contents are saved in the URL so you can share files
-      //-         | I'm no good at writing sample / filler text, so go write something yourself.
-      //-         | Look, a list!
-      //-         | * foo
-      //-         | * bar
-      //-         | * baz
-      //-         | And here's some code! :+1:
-      //-         | ```javascript
-      //-         | $(function(){
-      //-         | $('div').html('I am a div.');
-      //-         | });
-      //-         | ```
-      //-         | This is [on GitHub](https://github.com/jbt/markdown-editor) so let me know if I've b0rked it somewhere.
-      //-         | Props to Mr. Doob and his [code editor](http://mrdoob.com/projects/code-editor/), from which
-      //-         | the inspiration to this, and some handy implementation hints, came.
-      //-         | ### Stuff used to make this:
-      //-         | * [markdown-it](https://github.com/markdown-it/markdown-it) for Markdown parsing
-      //-         | * [CodeMirror](http://codemirror.net/) for the awesome syntax-highlighted editor
-      //-         | * [highlight.js](http://softwaremaniacs.org/soft/highlight/en/) for syntax highlighting in output code blocks
-      //-         | * [js-deflate](https://github.com/dankogai/js-deflate) for gzipping of data to make it fit in URLs
-      //-   #out
-      //-   #menu
-      //-     span Save As
-      //-     #saveas-markdown
-      //-       svg(height='64', width='64', xmlns='http://www.w3.org/2000/svg')
-      //-         g(transform='scale(0.0625)')
-      //-           path(d='M950.154 192H73.846C33.127 192 0 225.12699999999995 0 265.846v492.308C0 798.875 33.127 832 73.846 832h876.308c40.721 0 73.846-33.125 73.846-73.846V265.846C1024 225.12699999999995 990.875 192 950.154 192zM576 703.875L448 704V512l-96 123.077L256 512v192H128V320h128l96 128 96-128 128-0.125V703.875zM767.091 735.875L608 512h96V320h128v192h96L767.091 735.875z')
-      //-       span Markdown
-      //-     #saveas-html
-      //-       svg(height='64', width='64', xmlns='http://www.w3.org/2000/svg')
-      //-         g(transform='scale(0.0625) translate(64,0)')
-      //-           path(d='M608 192l-96 96 224 224L512 736l96 96 288-320L608 192zM288 192L0 512l288 320 96-96L160 512l224-224L288 192z')
-      //-       span HTML
-      //-     a#close-menu ×
-      
+            li.text-alignLeft.col-xs-12.list-group-item ##{index} | #{val.title} | &#36;#{val.goalmoney}
+              span.alignRight
+                .col-sm-6
+                  form.form-horizontal(action='/deleteProj/#{val.id}', method='POST')
+                    button.col-sm-12.btn.btn-default(type='submit')
+                      i.fa.fa-minus-circle
+                      | 移除
+                .col-sm-6
+                  a.col-sm-12.btn.btn-default(href='/postProj/#{val.id}')
+                    i.fa.fa-edit
+                    | 編輯 
+          a.col-sm-12.btn.btn-primary.marginTop(href='/postProj')
+            i.fa.fa-edit
+            | 新專案
+
+    if isEditing
+      .page-header
+        h3 編輯專案
+      p
+      form.form-horizontal(action='/updateProj/#{thisProject.id}', method='POST')
+        input(type='hidden', name='_csrf', value=_csrf)
+        .form-group
+          label.col-sm-4.control-label(for='title') 標題
+          .col-sm-5
+            input.form-control(type='text', name='title', id='title', value='#{thisProject.title}')
+        .form-group
+          label.col-sm-4.control-label(for='name') 案主
+          .col-sm-5
+            input.form-control(type='text', name='name', id='name', value='#{thisProject.hoster}')
+        .form-group
+          label.col-sm-4.control-label(for='abstract') 簡述
+          .col-sm-5
+            textarea.form-control(type='text', name='abstract', id='abstract', rows='6') #{thisProject.abstract}
+        .form-group
+          label.col-sm-4.control-label(for='video') 影片連結 (Only Youtube)
+          .col-sm-5
+            input.form-control(type='text', name='video', id='video', value='#{thisProject.main_video}')
+        .form-group
+          label.col-sm-4.control-label(for='money') 募資金額 (only 數字)
+          .col-sm-5
+            input.form-control(type='text', name='money', id='money', value='#{thisProject.goalmoney}')
+        .form-group
+          label.col-sm-4.control-label(for='bannerPImg') Banner橫幅圖(連結)
+          .col-sm-5
+            input.form-control(type='text', name='bannerPImg', id='bannerPImg', value='#{thisProject.bannerPImg}')
+        .form-group
+          label.col-sm-4.control-label(for='bannerColor') Banner 背景色(色碼)
+          .col-sm-5
+            input.form-control(type='text', name='bannerColor', id='bannerColor', value='#{thisProject.bannerColor}')
+        .form-group
+          label.col-sm-4.control-label(for='coverPImg') 封面圖(連結)
+          .col-sm-5
+            input.form-control(type='text', name='coverPImg', id='coverPImg', value='#{thisProject.coverPImg}')
+        .form-group
+          .col-sm-5
+            | 預覽
+          .col-sm-7
+            | 內文輸入
+          .showdown-body(ng-controller="editorCtrl", squeeze)
+            #editor-wrapper.container-showdown
+              #preview(sd-model-to-html='text')
+              textarea.form-control#editor(type='text', name='content', data-ng-model='text') #{thisProject.content}
+        .form-group
+          .col-sm-offset-3.col-sm-6
+            button.col-sm-12.btn.btn-primary(type='submit')
+              i.fa.fa-pencil
+              | 更新
+    if !isEditing
+      .page-header
+        h3 發案
+      p
+      form.form-horizontal(action='/postProj', method='POST')
+        input(type='hidden', name='_csrf', value=_csrf)
+        .form-group
+          label.col-sm-4.control-label(for='title') 標題
+          .col-sm-5
+            input.form-control(type='text', name='title', id='title',placeholder='Ex.【Loffo x 江峰】舞蹈、創作、重生')
+        .form-group
+          label.col-sm-4.control-label(for='name') 案主
+          .col-sm-5
+            input.form-control(type='text', name='name', id='name',placeholder='Ex. 江峰')
+        .form-group
+          label.col-sm-4.control-label(for='abstract') 簡述
+          .col-sm-5
+            textarea.form-control(type='text', name='abstract', id='abstract', rows='6', placeholder='Ex. 在生涯規劃上，決心走向藝術這條道路。對我而言，舞蹈是一種自我認識，找出自己與世界不同的方式，希望能接觸更多舞蹈訓練，能更加展現自我，並希望可以讓更多人去接觸、喜愛表演藝術。')
+        .form-group
+          label.col-sm-4.control-label(for='video') 影片連結 (Only Youtube)
+          .col-sm-5
+            input.form-control(type='text', name='video', id='video', placeholder='Ex. https://www.youtube.com/watch?v=dgXDBRpejN8')
+        .form-group
+          label.col-sm-4.control-label(for='money') 募資金額 (only 數字)
+          .col-sm-5
+            input.form-control(type='text', name='money', id='money', placeholder='Ex. 2000')
+        .form-group
+          label.col-sm-4.control-label(for='bannerPImg') Banner橫幅圖(連結)
+          .col-sm-5
+            input.form-control(type='text', name='bannerPImg', id='bannerPImg', placeholder='Ex. http://..jpg(寬長比3.0)')
+        .form-group
+          label.col-sm-4.control-label(for='bannerColor') Banner 背景色(色碼)
+          .col-sm-5
+            input.form-control(type='text', name='bannerColor', id='bannerColor', value='#fff')
+        .form-group
+          label.col-sm-4.control-label(for='coverPImg') 封面圖(連結)
+          .col-sm-5
+            input.form-control(type='text', name='coverPImg', id='coverPImg', placeholder='Ex. http://..jpg(寬長比1.35)')
+        .form-group
+          .col-sm-5
+            | 預覽
+          .col-sm-7
+            | 內文輸入
+          .showdown-body(ng-controller="editorCtrl", squeeze)
+            #editor-wrapper.container-showdown
+              #preview(sd-model-to-html='text')
+              textarea.form-control#editor(type='text', name='content', data-ng-model='text')
+            //- .lateral-menu(pageslide='', ps-open='checked', ps-side='left', ps-squeeze='true')
+            //-   .lateral-menu-content
+            //-     .title Options
+            //-     .lateral-menu-content-inner
+            //-       div(ng-repeat='opt in checkOpts')
+            //-         input(id='checkOpt-{{$id}}', ng-click='updateOptions()', type='checkbox', ng-model='opt.value')
+            //-         label.inline(for='checkOpt-{{$id}}') {{opt.name}}
+            //-       hr
+            //-       div(ng-repeat='opt in valOpts')
+            //-         label(for='option-{opt.name}') {{opt.name}}
+            //-         input(id='option-{opt.name}', ng-change='updateOptions()', type='number', ng-model='opt.value')
+            //-       div
+            //-         label(for='showdownVersion') Showdown Version
+            //-         select#showdownVersion(ng-model='version', ng-options='v for v in versions', ng-change='loadVersion()')
+            //- //-modal
+            //- .modal-wrapper.ng-hide(ng-hide='!showModal')
+            //-   .modal-inner(aria-labelledby='modalTitle', aria-hidden='true', role='dialog')
+            //-     .modal-topbar
+            //-       span
+            //-         i   Limited to 1000 characters
+            //-       a.modal-close-btn(aria-label='Close', ng-click='showModal = false')
+            //-         i.fa.fa-lg.fa-close
+            //-     .link-area
+            //-       textarea#dlnk(style='resize: none;') {{hashTxt}}
+
+        .form-group
+          .col-sm-offset-3.col-sm-6
+            button.col-sm-12.btn.btn-primary(type='submit')
+              i.fa.fa-pencil
+              | 送出
+  
 
       //- .form-group
       //-   label.col-sm-4.control-label(for='bannerPImg') Banner橫幅
@@ -124,7 +169,21 @@ block content
       //- .form-group
       //-   label.col-sm-4.control-label(for='feedbackPImg') 回饋品圖
       //-   .col-sm-5
-      //-     input#input-10(type='file', data-preview-file-type='text', accept='image/*', class='file-loading', name='feedbackPImg')                  
+      //-     input#input-10(type='file', data-preview-file-type='text', accept='image/*', class='file-loading', name='feedbackPImg')               
+
+  script(src='/js/showdown/semver.js')
+  script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.js')
+  script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-sanitize.js')
+  script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-animate.js')
+  script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-route.js')
+  script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular-cookies.js')
+  script(src='//cdn.rawgit.com/dpiccone/ng-pageslide/v1.0.4/dist/angular-pageslide-directive.js')
+  if thisProject
+    script(type='text/javascript')
+      | var saved_content=!{JSON.stringify(thisProject.content)};
+  script(src='/js/showdown/editor.js') 
+
+
 //- script(type='text/javascript').
 //-   var URL = window.URL || window.webkitURL || window.mozURL || window.msURL;
 //-   navigator.saveBlob = navigator.saveBlob || navigator.msSaveBlob || navigator.mozSaveBlob || navigator.webkitSaveBlob;

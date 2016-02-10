@@ -102,7 +102,7 @@ exports.postSurvey = function(req, res) {
 exports.getDiscover = function(req, res) {
   // get all the users
   // console.log("getPeople");  
- Project.find({},function(err, projs) {
+ Project.find({},null, {sort:{"_id":-1}}, function(err, projs) {
 	if (err) throw err;
 	res.render('discover', {
       title: 'Discover',
@@ -122,19 +122,34 @@ exports.getDiscover = function(req, res) {
 exports.getProject = function(req, res) {
   // get all the users
   // console.log("getPeople");
-  	if(req.params.id=='10000001'){
-  		res.render('projects/'+req.params.id, {
-	    	title: '【Loffo x 江峰】舞蹈、創作、重生',
-	    	a_project: a_projectObj,
-	    });
-  	}
-  	else{
-  		res.render('projects/'+req.params.id, {
-	    	title: '【Loffo x 謝睿哲】攝影、探索、台灣',
-	    	b_project: b_projectObj,
-	    });
+  	Project.findOne({"hid": req.params.id}, function(err, proj) {
+		if (!proj) {
+          req.flash('errors', { msg: 'No project with that id exists.' });
+          return res.redirect('/postProj');
+        }
 
-  	}
+        // console.log(proj);
+        // req.flash('success', { msg: 'Done.' });
+
+	    res.render('project', {
+			title: proj.title,
+			thisProject: proj
+		});
+        
+	});
+  	// if(req.params.id=='10000001'){
+  	// 	res.render('projects/'+req.params.id, {
+	  //   	title: '【Loffo x 江峰】舞蹈、創作、重生',
+	  //   	a_project: a_projectObj,
+	  //   });
+  	// }
+  	// else{
+  	// 	res.render('projects/'+req.params.id, {
+	  //   	title: '【Loffo x 謝睿哲】攝影、探索、台灣',
+	  //   	b_project: b_projectObj,
+	  //   });
+
+  	// }
  
 };
 exports.getPayTheEnd = function(req, res) {
@@ -182,12 +197,18 @@ exports.getPayEnd = function(req, res) {
 exports.getFunding = function(req, res) {
   // get all the users
   // console.log("getPeople");
-  
-	res.render('fundings/'+req.params.id, {
+  Project.findOne({"hid": req.params.id}, function(err, proj) {
+		if (!proj) {
+          req.flash('errors', { msg: 'No project with that id exists.' });
+          return res.redirect('/discover');
+        }
+	res.render('funding', {
 		title: '我要募集',
+		thisProjHId: req.params.id,
+		thisProjBanner: proj.bannerPImg
 	});
   
-  
+  });
 };
 exports.postFunding = function(req, res, next) {
 

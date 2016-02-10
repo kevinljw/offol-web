@@ -7,12 +7,16 @@ var projSchema = new mongoose.Schema({
   title: { type: String, default: '' },
   hid: { type: String, default: '' },
   abstract: { type: String, default: '' },
-  investor: { type: String, default: '' },
+  investorNum: { type: Number, default: 0 },
   goalmoney: { type: Number, default: 1 },
-  nowmoney: { type: Number, default: 1 },
+  nowmoney: { type: Number, default: 0 },
+  percent: { type: Number, default: 0.0 },
   created_time: { type: String, default: '' },
   main_video: { type: String, default: '' },
-   
+  content: { type: String, default: '' },
+  bannerPImg: { type: String, default: '' },
+  bannerColor: { type: String, default: '#fff' },
+  coverPImg:  { type: String, default: '' },
 });
 
 /**

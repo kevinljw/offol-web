@@ -50,7 +50,9 @@ module.exports = {
   },
 
   admin: ['evin92@gmail.com'],
-
+  projects:{
+    hidStartSerial : 1000000,
+  },
   facebook: {
     // clientID: process.env.FACEBOOK_ID || '754220301289665',
     // clientSecret: process.env.FACEBOOK_SECRET || '41860e58c256a3d7ad8267d3c1939a4a',

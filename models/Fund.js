@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 
 var fundSchema = new mongoose.Schema({
 
-  hoster: { type: String, default: '' },
+  hid: { type: String, default: '' },
   investor: { type: String, default: '' },
   money: { type: Number, default: 1 },
   timestamp: { type: String, default: '' },
