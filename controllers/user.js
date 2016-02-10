@@ -544,7 +544,28 @@ exports.postForgot = function(req, res, next) {
     res.redirect('/forgot');
   });
 };
-
+exports.postAuthority = function(req, res, next) {
+  User.find({}, function(err, allUsers) {
+    // console.log(req.body);
+    async.forEachOf(allUsers, function (eachUser, eachUserIndex, user_callback) {
+      eachUser.status=req.body[eachUser.id];
+      // console.log(eachUser.status);
+      eachUser.save(function(err) {
+        if (err) {
+          return next(err);
+        }
+        user_callback();
+      });
+    }, function(err){
+        if (err) console.error(err.message);
+        req.flash('success', { msg: 'Authority updated.' });
+        res.redirect('/account');
+    });
+    
+    
+    
+  });
+};
 exports.postPImg = function(req, res) {
   // console.log('req.body'); //form fields
   // console.log(req.body); //form fields

@@ -203,6 +203,8 @@ app.get('/account/unlink/:provider', passportConf.isAuthenticated, userControlle
 app.post('/account/whitelist', passportConf.isAuthenticated, userController.postEmailToWhitelist);
 app.post('/account/delete_whitelist', passportConf.isAuthenticated, userController.postDeleteLastWhitelist);
 
+app.post('/authority', passportConf.isAuthenticated, userController.postAuthority);
+
 // app.get('/article', passportConf.isAuthenticated, announcementsController.getArticle);
 // app.post('/article/new/:id', passportConf.isAuthenticated, uploadAnnPImg.single('AnnPImg'), announcementsController.postNewArticle);
 
