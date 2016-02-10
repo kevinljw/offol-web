@@ -17,6 +17,9 @@ block content
     form.form-horizontal(method='POST')
       input(type='hidden', name='_csrf', value=_csrf)
       .form-group
+        .col-sm-offset-4.col-sm-4
+          a.forgotPass(href='/signup') 還沒註冊?
+      .form-group
         label.col-sm-offset-1.col-sm-3.control-label(for='email') Email
         .col-sm-4
           input.form-control(type='email', name='email', id='email', placeholder='Email', autofocus=true)
@@ -28,10 +31,11 @@ block content
         .col-sm-offset-4.col-sm-4
           button.col-sm-12.btn.btn-primary(type='submit')
             i.fa.fa-user
-            | 登入     
+            | 登入   
+      .form-group  
         .col-sm-offset-4.col-sm-4
           a.forgotPass(href='/forgot') 忘記密碼?
-          a.forgotPass(href='/signup') 還沒註冊?
+          
     p
     .page-header      
       //-     a.btn.btn-block.btn-twitter.btn-social(href='/auth/twitter')
