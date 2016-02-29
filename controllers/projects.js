@@ -288,16 +288,19 @@ function serialGenerate(hostId, thisEmail, thisNum, needForPeople, callback){
 	    thisProj.investorNum = thisProj.investorNum+1;
 	    thisProj.nowmoney = thisProj.nowmoney+thisNum;
 	    thisProj.percent = (thisProj.nowmoney/thisProj.goalmoney);
-	    
+	    thisProj.save(function(err) {
+	      // console.log('saved');
+	      
+	  	});
 	  	async.forEachOf(allSerialArr, function (thisSerial, thisSerialIndex, thisSerial_callback) {
 	    	eachSerial(hostId, thisEmail, thisSerialIndex, needForPeople, function(serialNum){
 	    		thisProj.ticketBuyArr[serialNum] = true;
-	    		thisProj.save(function(err) {
-			      console.log('saved');
-			      thisSerial_callback();
-			  	});
+	    	// 	thisProj.save(function(err) {
+			   //    console.log('saved');
+			   //    thisSerial_callback();
+			  	// });
 	    		allSerials.push(serialNum);
-	    		
+	    		thisSerial_callback();
 	    	});
 	    	
 	    },function(err){
