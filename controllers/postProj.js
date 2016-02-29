@@ -76,11 +76,11 @@ exports.postPostProj = function(req, res, next) {
 		  coverPImg: req.body.coverPImg,
 		  bannerColor: req.body.bannerColor,
 		  hid: thisHid,
-		  ticketBuyArr: new Array(parseInt(req.body.money))
+		  ticketBuyArr: new Array(parseInt(req.body.money)+1).join('0')
 		  // picture: PictureIsOn?PicPath:''
 	    });
 
-		for(var i=0; i<thisProject.goalmoney; i++)thisProject.ticketBuyArr[i]=false;
+		// for(var i=0; i<thisProject.goalmoney; i++)thisProject.ticketBuyArr[i]=false;
 	    
 	    // console.log(thisProject);
 	    thisProject.save(function(err) {

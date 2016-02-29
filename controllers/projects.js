@@ -290,11 +290,13 @@ function serialGenerate(hostId, thisEmail, thisNum, needForPeople, callback){
 	    thisProj.percent = (thisProj.nowmoney/thisProj.goalmoney);
 	    thisProj.save(function(err) {
 	      // console.log('saved');
-	      
+	      if (err) {
+		        return console.log(err);
+		      }
 	  	});
 	  	async.forEachOf(allSerialArr, function (thisSerial, thisSerialIndex, thisSerial_callback) {
 	    	eachSerial(hostId, thisEmail, thisSerialIndex, needForPeople, function(serialNum){
-	    		thisProj.ticketBuyArr[serialNum] = true;
+	    		// console.log(thisProj.ticketBuyArr);
 	    	// 	thisProj.save(function(err) {
 			   //    console.log('saved');
 			   //    thisSerial_callback();
@@ -307,11 +309,13 @@ function serialGenerate(hostId, thisEmail, thisNum, needForPeople, callback){
 			if (err) console.error(err.message);
 			// console.log('saving thisProj');
 			// console.log(thisProj.ticketBuyArr.join(','))
-			// thisProj.save(function(err) {
-		      
+			thisProj.save(function(err) {
+		      if (err) {
+		        return console.log(err);
+		      }
 		      console.log('saved');
 		      return callback(allSerials);
-		  	// });
+		  	});
 			
 		});
 
@@ -331,10 +335,11 @@ function serialGenerate(hostId, thisEmail, thisNum, needForPeople, callback){
 				    // });
 				    for(var i=0; i<needForPeople;i++){
 				    	
-						if(thisProj.ticketBuyArr[(thisGuysMd5cutInt+i)%needForPeople]==false){
+						if(thisProj.ticketBuyArr.charAt((thisGuysMd5cutInt+i)%needForPeople)=='0'){
 							// console.log((thisGuysMd5cutInt+i)%needForPeople);
 				            // thisProj.ticketBuyArr[(thisGuysMd5cutInt+i)%needForPeople]=true;
-				            
+				            thisProj.ticketBuyArr = thisProj.ticketBuyArr.replaceAt((thisGuysMd5cutInt+i)%needForPeople,'1');
+	    		
 				            return each_callback(addNullNum+(thisGuysMd5cutInt+i)%needForPeople);
 				            
 				            break;
@@ -353,4 +358,7 @@ function serialGenerate(hostId, thisEmail, thisNum, needForPeople, callback){
    
     
 //    callback();
+}
+String.prototype.replaceAt=function(index, character) {
+    return this.substr(0, index) + character + this.substr(index+character.length);
 }

@@ -51,7 +51,7 @@ module.exports = {
 
   admin: ['evin92@gmail.com'],
   projects:{
-    hidStartSerial : 1000000,
+    hidStartSerial : 1000001,
   },
   facebook: {
     // clientID: process.env.FACEBOOK_ID || '754220301289665',
