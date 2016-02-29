@@ -26,6 +26,8 @@ block content
     if isEditing
       .page-header
         h3 編輯專案
+          br
+          small 編號(hid):#{thisProject.hid}
       p
       form.form-horizontal(action='/updateProj/#{thisProject.id}', method='POST')
         input(type='hidden', name='_csrf', value=_csrf)
@@ -61,6 +63,10 @@ block content
           label.col-sm-4.control-label(for='coverPImg') 封面圖(連結)
           .col-sm-5
             input.form-control(type='text', name='coverPImg', id='coverPImg', value='#{thisProject.coverPImg}')
+        .form-group
+          label.col-sm-4.control-label(for='payid') 歐付寶QuickPayId
+          .col-sm-5
+            input.form-control(type='text', name='payid', id='payid', value='#{thisProject.quickPayId}')
         .form-group
           .col-sm-5
             | 預覽

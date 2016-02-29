@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 var projSchema = new mongoose.Schema({
   hoster: { type: String, default: '' },
   title: { type: String, default: '' },
-  hid: { type: Number, default: '' },
+  hid: { type: String, default: '' },
   abstract: { type: String, default: '' },
   investorNum: { type: Number, default: 0 },
   goalmoney: { type: Number, default: 1 },
@@ -17,6 +17,8 @@ var projSchema = new mongoose.Schema({
   bannerPImg: { type: String, default: '' },
   bannerColor: { type: String, default: '#fff' },
   coverPImg:  { type: String, default: '' },
+  quickPayId: { type: String, default: '' },
+  ticketBuyArr : { type: Array },
 });
 
 /**

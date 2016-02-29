@@ -6,6 +6,7 @@ var fundSchema = new mongoose.Schema({
 
   hid: { type: String, default: '' },
   investor: { type: String, default: '' },
+  investorName: { type: String, default: '' },
   money: { type: Number, default: 1 },
   timestamp: { type: String, default: '' },
   serials: { type: Array, default: [] },

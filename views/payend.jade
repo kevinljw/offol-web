@@ -1,10 +1,10 @@
-extends layoutGray
+extends layout
 
 block content
   #introHead
   .container.containerIntro
     .row
-      h3.col-sm-offset-2.col-sm-8 已為您自動產生#{buynum}組贊助序號
+      h3.col-sm-offset-2.col-sm-8 預付完成，已為您自動產生#{buynum}組贊助序號
     p
     hr
     p
@@ -16,16 +16,6 @@ block content
           |  前往查看
       p.marginBtm
       p
-      h3.col-sm-offset-2.col-sm-8
-        p 付款手續只差最後一步
-        p 安心付款，請跟我這樣做
-        hr
-      .col.col-8
-        img(src='/img/pay.jpg',width='100%')
-      .col-sm-3
-        
-        //- photo end                  
-           
     p
     hr
     p       
@@ -33,5 +23,5 @@ block content
       .col-md-12.introBackBtn
         a.a2a_dd.btn.btn-default(href='/discover')
           span.fa.fa-check
-          |  我知道了 
+          | 繼續探索 
       

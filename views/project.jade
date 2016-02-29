@@ -56,13 +56,13 @@ block content
                   p
                   span.bold 一元，即可以行動支持這位素人
           .NS_projects__back_and_star
-            
-            .inline-block.mobile-hide
-              a#button-back-this-proj.btn.btn--blue.btn--large(href='/fundings/#{thisProject.hid}') 我要贊助
-            .mobile-show
-              a#button-back-this-proj.btn.btn--blue.btn--block(href='/fundings/#{thisProject.hid}') 我要贊助
-            .align-middle.inline-block.pl1.mobile-hide
-            #watching-widget.ajax-container.inline-block.align-middle
+            if thisProject.quickPayId!=''
+              .inline-block.mobile-hide
+                a#button-back-this-proj.btn.btn--blue.btn--large(href='/fundings/#{thisProject.hid}') 我要贊助
+              .mobile-show
+                a#button-back-this-proj.btn.btn--blue.btn--block(href='/fundings/#{thisProject.hid}') 我要贊助
+              .align-middle.inline-block.pl1.mobile-hide
+              #watching-widget.ajax-container.inline-block.align-middle
     .row
       .col.col-8.py4
         .mobile-hide

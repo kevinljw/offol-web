@@ -59,7 +59,7 @@ exports.postPostProj = function(req, res, next) {
     	if (err) throw err;
     	var thisHid = hidStartSerial;
     	if(projs.length>0){
-    		thisHid = projs[0].hid+1;
+    		thisHid = parseInt(projs[0].hid)+1;
     	}
     	console.log("thisHid:"+thisHid);
     	allProjs = projs;
@@ -68,16 +68,20 @@ exports.postPostProj = function(req, res, next) {
 	      hoster: req.body.name,
 	      title: req.body.title,
 		  abstract: req.body.abstract,
-		  goalmoney: req.body.money,
+		  goalmoney: parseInt(req.body.money),
 		  created_time: moment().format('MMMM Do YYYY, h:mm:ss a'),
 		  main_video: req.body.video.replace("watch?v=", "embed/").replace("youtu.be", "www.youtube.com/embed/"),
 		  content: req.body.content,
 		  bannerPImg: req.body.bannerPImg,
 		  coverPImg: req.body.coverPImg,
 		  bannerColor: req.body.bannerColor,
-		  hid: thisHid
+		  hid: thisHid,
+		  ticketBuyArr: new Array(parseInt(req.body.money))
 		  // picture: PictureIsOn?PicPath:''
 	    });
+
+		for(var i=0; i<thisProject.goalmoney; i++)thisProject.ticketBuyArr[i]=false;
+	    
 	    // console.log(thisProject);
 	    thisProject.save(function(err) {
 	        if (err) {
@@ -125,7 +129,7 @@ exports.updateProj = function(req, res, next) {
 			proj.bannerPImg= req.body.bannerPImg;
 		 	proj.coverPImg= req.body.coverPImg;
 		 	proj.bannerColor =  req.body.bannerColor;
-		 	
+		 	proj.quickPayId = req.body.payid;
 
 			proj.save(function(err) {
 		        if (err) {

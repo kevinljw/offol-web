@@ -23,12 +23,13 @@ block content
             each eachFund, index in allFund
               tr.clickable(data-toggle='collapse',data-target='#accordion#{index}')
                 td #{index}
-                td #{eachFund.hoster}
+                td #{eachFund.hid}
                 td #{eachFund.timestamp}
                 td #{eachFund.money}
               tr
                 td(style='padding:2px;', colspan='4')
                   .collapse(id='accordion#{index}') #{eachFund.serials}
+              
                   
                     
 

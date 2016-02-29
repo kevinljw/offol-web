@@ -14,6 +14,9 @@ var userSchema = new mongoose.Schema({
   linkedin: String,
   tokens: Array,
 
+  prePay: { type: Number, default: 0 },
+  preHid: { type: String, default: '' },
+  payyet: { type: Boolean, default: false },
   profile: {
     name: { type: String, default: '' },
     birth: { type: String, default: '' },
