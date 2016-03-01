@@ -236,6 +236,7 @@ exports.getFunding = function(req, res) {
 		title: '我要募集',
 		thisProjHid: req.params.id,
 		thisProjBanner: proj.bannerPImg,
+		thisProjBackground: proj.bannerColor,
 		remainMoney: proj.goalmoney-proj.nowmoney,
 		quickpayid: proj.quickPayId
 	});

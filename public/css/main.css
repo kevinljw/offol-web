@@ -12518,7 +12518,6 @@ article.post .post-inner iframe {
 
 .banner {
   height: 400px;
-  background: #fff;
   margin-bottom: 50px;
 }
 
@@ -12553,7 +12552,7 @@ p.project-byline, p.project-blurb {
 }
 
 .marginBtm {
-  margin-bottom: 100px;
+  margin-bottom: 200px;
 }
 
 .marginTop {

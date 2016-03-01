@@ -11,7 +11,7 @@ block content
             li.text-alignLeft.col-xs-12.list-group-item ##{index} | #{val.title} | &#36;#{val.goalmoney}
               span.alignRight
                 .col-sm-6
-                  form.form-horizontal(action='/deleteProj/#{val.id}', method='POST')
+                  form.form-horizontal(action='/deleteProj/#{val.id}', onsubmit='return confirm("這是「移除」專案喔！你真的確定要移除嗎？");', method='POST')
                     button.col-sm-12.btn.btn-default(type='submit')
                       i.fa.fa-minus-circle
                       | 移除
