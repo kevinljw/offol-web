@@ -68,6 +68,11 @@ block content
           .col-sm-5
             input.form-control(type='text', name='payid', id='payid', value='#{thisProject.quickPayId}')
         .form-group
+          label.col-sm-4.control-label(for='payInfo') 付款頁面說明
+          .col-sm-5
+            textarea.form-control(type='text', name='payInfo', id='payInfo', rows='6') !{thisProject.payInfo}
+              
+        .form-group
           .col-sm-5
             | 預覽
           .col-sm-7

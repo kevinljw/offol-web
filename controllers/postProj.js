@@ -130,7 +130,8 @@ exports.updateProj = function(req, res, next) {
 		 	proj.coverPImg= req.body.coverPImg;
 		 	proj.bannerColor =  req.body.bannerColor;
 		 	proj.quickPayId = req.body.payid;
-
+			proj.payInfo = req.body.payInfo;
+			
 			proj.save(function(err) {
 		        if (err) {
 		          return next(err);

@@ -238,7 +238,8 @@ exports.getFunding = function(req, res) {
 		thisProjBanner: proj.bannerPImg,
 		thisProjBackground: proj.bannerColor,
 		remainMoney: proj.goalmoney-proj.nowmoney,
-		quickpayid: proj.quickPayId
+		quickpayid: proj.quickPayId,
+		payInfo: proj.payInfo
 	});
   
   });

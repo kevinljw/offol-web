@@ -16,6 +16,7 @@ var projSchema = new mongoose.Schema({
   content: { type: String, default: '' },
   bannerPImg: { type: String, default: '' },
   bannerColor: { type: String, default: '#fff' },
+  payInfo: { type: String, default: '' },
   coverPImg:  { type: String, default: '' },
   quickPayId: { type: String, default: '' },
   ticketBuyArr : { type: String, default: '' },
