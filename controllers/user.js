@@ -138,6 +138,7 @@ exports.postLogin = function(req, res, next) {
     return res.redirect('/login');
   }
 
+  console.log(req);
   passport.authenticate('local', function(err, user, info) {
     if (err) {
       return next(err);
@@ -151,7 +152,7 @@ exports.postLogin = function(req, res, next) {
         return next(err);
       }
       req.flash('success', { msg: 'Success! You are logged in.' });
-      res.redirect(req.session.returnTo || '/');
+      res.redirect(req.session.returnTo || '/discover');
     });
   })(req, res, next);
 };
@@ -237,7 +238,7 @@ exports.postSignup = function(req, res, next) {
                 if (err) {
                   return next(err);
                 }
-                return res.redirect('/');
+                return res.redirect(req.session.returnTo || '/discover');
               });
             });
     });
