@@ -347,7 +347,7 @@ function serialGenerate(hostId, thisEmail, thisNum, needForPeople, callback){
 				            break;
 				        }
 				    	
-				        if(i=needForPeople-1) console.log("something wrong!");
+				        if(i==needForPeople-1) console.log("something wrong!");
 				    }
 
 			
