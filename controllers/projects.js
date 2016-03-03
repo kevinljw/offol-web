@@ -289,7 +289,7 @@ function serialGenerate(hostId, thisEmail, thisNum, needForPeople, callback){
 	    }
 	    thisProj.investorNum = thisProj.investorNum+1;
 	    thisProj.nowmoney = thisProj.nowmoney+thisNum;
-	    thisProj.percent = (thisProj.nowmoney/thisProj.goalmoney)*100;
+	    thisProj.percent = Math.round((thisProj.nowmoney/thisProj.goalmoney)*10000)/100;
 	    thisProj.save(function(err) {
 	      // console.log('saved');
 	      if (err) {
