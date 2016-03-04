@@ -1,0 +1,62 @@
+extends layout
+
+block content
+  #introHead
+  script.
+    var submitted=false;
+  iframe(name='hidden_iframe', id='hidden_iframe', style='display:none;',onload='if(submitted) {window.location="#{targetUrl}";}')
+  .container.containerIntro
+    .row
+      h3.col-sm-offset-2.col-sm-8
+        small 您選擇了「台大面交」
+      h3.col-sm-offset-2.col-sm-8 請填寫聯絡資訊，我們會盡快聯絡您
+    p
+    hr
+    p
+      //- https://docs.google.com/forms/d/1YwjbNUsfY7yhzeX65mNQLS0PJCbziLANQbD6XXi-B_A/viewform
+      form#surveyForm.col-sm-offset-3.col-sm-7.form-horizontal(action='https://docs.google.com/forms/d/1YwjbNUsfY7yhzeX65mNQLS0PJCbziLANQbD6XXi-B_A/formResponse', method='POST',target='hidden_iframe', onsubmit="submitted=true;")
+        input(type='hidden', name='_csrf', value=_csrf)
+        .form-group
+          label.col-sm-offset-7.col-sm-6.text-center
+            h4 - 基本資料 -
+        .form-group 
+          label.col-md-offset-4.col-md-4.control-label(for='entry_1999103904') 姓名:
+          .col-md-4 
+            input.col-md-12.form-control(type='text', name='entry.1999103904', id='entry_1999103904', aria-label='姓名', placeholder='Your Name')
+        .form-group 
+          label.col-md-offset-4.col-md-4.control-label(for='entry.1156670951') 聯絡電話:
+          .col-md-4 
+            input.col-md-12.form-control(type='text', name='entry.1156670951', id='entry.1156670951', aria-label='電話', placeholder='Your Phone Number')
+        .form-group 
+          label.col-md-offset-4.col-md-4.control-label(for='entry.1778371938') Email:
+          .col-md-4 
+            input.col-md-12.form-control(type='text', name='entry.1778371938', id='entry.1778371938', aria-label='信箱', placeholder='Your Email Address')
+        br
+        .form-group
+          label.col-sm-offset-7.col-sm-6.text-center
+            h4 - 商品資料 -
+        .form-group 
+          label.col-md-offset-4.col-md-4.control-label(for='entry.1958939522') 金額:
+          .col-md-4 
+            input.col-md-12.form-control(type='text', name='entry.1958939522', id='entry.1958939522', aria-label='金額', value='#{TradeAMT}', readonly="readonly")
+        .form-group 
+          label.col-md-offset-4.col-md-4.control-label(for='entry_1288833198') 數量(件):
+          .col-md-4 
+            input.col-md-12.form-control(type='text', name='entry_1288833198', id='entry_1288833198', aria-label='件數', value='#{Math.floor(TradeAMT/350)}')
+        .form-group 
+          label.col-md-offset-4.col-md-4.control-label(for='entry.1393680220') 尺寸:
+          .col-md-4 
+            input.col-md-12.form-control(type='text', name='entry.1393680220', id='entry.1393680220', aria-label='尺寸', placeholder='Your Size')
+
+        .form-group 
+          label.col-md-offset-4.col-md-4.control-label(for='entry.1766982530') 備註:
+          .col-md-4 
+            input.col-md-12.form-control(type='text', name='entry.1766982530', id='entry.1766982530', aria-label='備註', placeholder='Other')
+        br
+        br
+        .form-group
+          .col-md-offset-8.col-md-4.text-center
+            button.col-md-12.btn.btn-primary(type='submit')
+              i.fa.fa-shopping-cart
+              | 下一步：填寫完畢
+     

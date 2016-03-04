@@ -177,6 +177,8 @@ app.get('/host',  hostController.getHost);
 // app.get('/projects/:id', projController.getProject);
 app.get('/fundings/:id', passportConf.isAuthenticated, projController.getFunding);
 app.post('/fundings/:id', passportConf.isAuthenticated, projController.postFunding);
+app.post('/inPerson/:id', passportConf.isAuthenticated, projController.postInPerson);
+
 app.get('/survey/field', passportConf.isAuthenticated, projController.getSurvey);
 app.post('/survey', passportConf.isAuthenticated, projController.postSurvey);
 // app.get('/payend/field', passportConf.isAuthenticated, projController.getPayEnd);
@@ -213,6 +215,7 @@ app.post('/deleteShare/:id', passportConf.isAuthenticated, announcementsControll
 app.post('/deleteIdea/:id', passportConf.isAuthenticated, announcementsController.postDeleteIdea);
 
 app.get('/f98e58c2c27e7131b38f8684695ee891', passportConf.isAuthenticated, projController.getPayEnd);
+app.get('/0a0e0389f9f272205d43d978c2f7f03c', passportConf.isAuthenticated, projController.getPayEnd);
 
 // app.get('/idea',  ideaController.getIdea);
 // app.post('/idea/new/:id',  ideaController.postIdea);

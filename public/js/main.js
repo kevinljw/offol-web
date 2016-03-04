@@ -15,53 +15,82 @@ $(document).ready(function() {
     // });
 });
 $(document).on('ready', function() {
-    $('#paymentbtn').submit(function (e) {
-    // alert("123");
-    // var thisRemainMoneyStr = '!{remainMoney}';
-    // console.log(thisRemainMoneyStr);
-    e.preventDefault();
-    var thisRemainMoney = parseInt(thisRemainMoneyStr);
-    var form = $(this);
-    var inputAmount = form.find('input[type="text"]');
-    var inputNumber = parseInt(inputAmount.val());
-    if(inputNumber>thisRemainMoney){
-        alert('您輸入的金額不得大於'+thisRemainMoney+'元');
-        return false; 
-    }
-    else if(inputNumber<=thisRemainMoney && inputNumber>0){
+    $('#inPersonbtn').submit(function(e){
+        e.preventDefault();
+
+        var thisRemainMoney = parseInt(thisRemainMoneyStr);
+        var inputAmount = $('#paymentbtn').find('input[type="text"]');
+        var inputNumber = parseInt(inputAmount.val());
         // console.log(inputNumber);
-        // document.forms['paymentbtn'].action='/fundings/'+uid;
-        // document.forms['paymentbtn'].submit();
-        $('#paymentbtn').ajaxSubmit({
-            url: '/fundings/'+uid, 
-            type: 'post',
-            // beforeSend: function(){
-            //     alert('before')
-            // },
-            success: function(data){  
-                // alert( "success"); 
-                // document.forms['paymentbtn'].submit();
-                if(confirm("確認支付金額無誤？")){
-                    document.forms['paymentbtn'].submit();
-                    return true;
-                }
-                else{
-                    return false;
-                }
-                
-                // return confirm("確認支付金額無誤？");   
-            },
-            error: function(XmlHttpRequest, textStatus, errorThrown){  
-                alert( "error");  
-            } 
-        });
-        
-        // return 
-    }
-    else{
-        alert('您輸入的金額有誤，請重新輸入。');
-        return false; 
-    }
+        if(inputNumber>thisRemainMoney){
+            alert('您輸入的金額不得大於'+thisRemainMoney+'元');
+            return false; 
+        }
+        else if(inputNumber<=thisRemainMoney && inputNumber>0){
+            
+            if(confirm("確認支付金額無誤？")){
+                document.forms['paymentbtn'].action="/inPerson/"+projHid;
+                // console.log();
+                document.forms['paymentbtn'].submit();
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        else{
+            alert('您輸入的金額有誤，請重新輸入。');
+            return false; 
+        }
+    });
+    $('#paymentbtn').submit(function (e) {
+        // alert("123");
+        // var thisRemainMoneyStr = '!{remainMoney}';
+        // console.log(thisRemainMoneyStr);
+        e.preventDefault();
+        // console.log($(this).attr('id'));
+        var thisRemainMoney = parseInt(thisRemainMoneyStr);
+        var form = $(this);
+        var inputAmount = form.find('input[type="text"]');
+        var inputNumber = parseInt(inputAmount.val());
+        if(inputNumber>thisRemainMoney){
+            alert('您輸入的金額不得大於'+thisRemainMoney+'元');
+            return false; 
+        }
+        else if(inputNumber<=thisRemainMoney && inputNumber>0){
+            // console.log(inputNumber);
+            // document.forms['paymentbtn'].action='/fundings/'+uid;
+            // document.forms['paymentbtn'].submit();
+            $('#paymentbtn').ajaxSubmit({
+                url: '/fundings/'+uid, 
+                type: 'post',
+                // beforeSend: function(){
+                //     alert('before')
+                // },
+                success: function(data){  
+                    // alert( "success"); 
+                    // document.forms['paymentbtn'].submit();
+                    if(confirm("確認支付金額無誤？")){
+                        document.forms['paymentbtn'].submit();
+                        return true;
+                    }
+                    else{
+                        return false;
+                    }
+                    
+                    // return confirm("確認支付金額無誤？");   
+                },
+                error: function(XmlHttpRequest, textStatus, errorThrown){  
+                    alert( "error");  
+                } 
+            });
+            
+            // return 
+        }
+        else{
+            alert('您輸入的金額有誤，請重新輸入。');
+            return false; 
+        }
     
     // var form = $(this),
     //     input = form.find('input[type="text"]');

@@ -84,7 +84,7 @@ exports.getRecord = function(req, res) {
         return res.redirect('/');
       }
       if(thisUserFund){
-        console.log(thisUserFund);
+        // console.log(thisUserFund);
         var thisUserBuyingNum = 0;
         async.forEachOf(thisUserFund, function (eachFund, eachFundIndex, thisFund_callback) {
             thisUserBuyingNum+=eachFund.money;

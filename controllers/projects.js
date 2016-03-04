@@ -244,6 +244,33 @@ exports.getFunding = function(req, res) {
   
   });
 };
+exports.postInPerson = function(req, res, next) {
+
+	// var hostId = req.headers.referer.substr(req.headers.referer.indexOf("/fundings/")+10);
+  	User.findById(req.user.id, function(err, user) {
+	    if (err) {
+	      return next(err);
+	    }
+	    if(user){
+	    	user.prePay = req.body.TradeAMT;
+	    	user.preHid = req.body.ProductName;
+	    	user.payyet = false;
+	    	// console.log(user);
+		    user.save(function(err) {
+		      if (err) {
+		        return next(err);
+		      }
+		  	});
+	  	}
+	  	res.render('inPerson', {
+			title: '面交聯絡資訊',
+			TradeAMT: req.body.TradeAMT,
+			targetUrl: '/0a0e0389f9f272205d43d978c2f7f03c',
+		});
+      
+    });
+  	// console.log(req.body)
+} 
 exports.postFunding = function(req, res, next) {
 
 	// var hostId = req.headers.referer.substr(req.headers.referer.indexOf("/fundings/")+10);
