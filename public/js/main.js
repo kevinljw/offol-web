@@ -28,10 +28,13 @@ $(document).on('ready', function() {
         }
         else if(inputNumber<=thisRemainMoney && inputNumber>0){
             
+            document.forms['inPersonbtn']= document.forms['paymentbtn'];
+            document.forms['inPersonbtn'].action="/inPerson/"+projHid;
+            
             if(confirm("確認支付金額無誤？")){
-                document.forms['paymentbtn'].action="/inPerson/"+projHid;
+                
                 // console.log();
-                document.forms['paymentbtn'].submit();
+                document.forms['inPersonbtn'].submit();
                 return true;
             }
             else{
