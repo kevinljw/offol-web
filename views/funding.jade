@@ -43,17 +43,16 @@ block content
           br
         .form-group
           .col-sm-offset-5.col-sm-2.text-center
-            button#nextStep.btn.btn-success(type='submit')
+            button#nextStep.btn.btn-success(type='submit', onclick="return submitForm();")
               i.fa.fa-shopping-cart
                 |   下一步: 線上支付
         .form-group
           .col-sm-offset-5.col-sm-2.text-center
             h5
               small -------- OR --------
-      form#inPersonbtn.form-horizontal(action='/inPerson/#{thisProjHid}', method='POST')
         .form-group
           .col-sm-offset-5.col-sm-2.text-center
-            button#inPerson.btn.btn-primary(type='submit')
+            button#inPerson.btn.btn-primary(type='submit',formaction='/inPerson/#{thisProjHid}', onclick="return submitForm_inperson();")
               i.fa.fa-money
                 |   台大面交
             //- input(type='button', name='Submit', value='Submit' onclick='javascript: return SubmitForm();')

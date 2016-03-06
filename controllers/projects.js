@@ -246,6 +246,8 @@ exports.getFunding = function(req, res) {
 };
 exports.postInPerson = function(req, res, next) {
 
+
+	console.log("InPerson", req.body);
 	// var hostId = req.headers.referer.substr(req.headers.referer.indexOf("/fundings/")+10);
   	User.findById(req.user.id, function(err, user) {
 	    if (err) {
@@ -275,7 +277,7 @@ exports.postFunding = function(req, res, next) {
 
 	// var hostId = req.headers.referer.substr(req.headers.referer.indexOf("/fundings/")+10);
   	
-  	// console.log(req.body)
+  	console.log(req.body)
   	
 	res.end("File is uploaded");
 

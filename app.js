@@ -12,7 +12,6 @@ var bodyParser = require('body-parser');
 var logger = require('morgan');
 var errorHandler = require('errorhandler');
 
-
 // var img = require('easyimage');
 // var imgs = ['png', 'jpg', 'jpeg', 'gif', 'bmp']; // only make thumbnail for these
 
