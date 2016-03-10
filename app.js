@@ -186,7 +186,7 @@ app.get('/payend/:amount', passportConf.isAuthenticated, projController.getPayTh
 app.get('/record', passportConf.isAuthenticated, userController.getRecord);
 
 // app.get('/loffogram', passportConf.isAuthenticated, loffogramController.getLoffogram);
-app.get('/postProj', passportConf.isAuthenticated, postProjController.getPostProj);
+app.get('/postProj', passportConf.isAdminAuthenticated, postProjController.getPostProj);
 app.post('/postProj', passportConf.isAuthenticated, postProjController.postPostProj);
 app.post('/deleteProj/:id', passportConf.isAuthenticated, postProjController.deleteProj);
 app.get('/postProj/:id', passportConf.isAuthenticated, postProjController.editProj);

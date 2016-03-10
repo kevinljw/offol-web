@@ -424,7 +424,12 @@ exports.isAuthenticated = function(req, res, next) {
   }
   res.redirect('/login');
 };
-
+exports.isAdminAuthenticated = function(req, res, next) {
+  if (req.isAuthenticated() && req.user.profile.status=='admin') {
+    return next();
+  }
+  res.redirect('/login');
+};
 /**
  * Authorization Required middleware.
  */
