@@ -6,7 +6,8 @@ var moment = require('moment');
 var User = require('../models/User');
 var Project = require('../models/Project');
 var hidStartSerial = secrets.projects.hidStartSerial;
-
+var async = require('async');
+var md5 = require('md5');
 var nodemailer = require("nodemailer");
 var transporter = nodemailer.createTransport({
   service: 'SendGrid',
@@ -15,6 +16,7 @@ var transporter = nodemailer.createTransport({
     pass: secrets.sendgrid.password
   }
 });
+var addNullNum = 10000000;
 
 var allProjs = function(req, res) {
 
@@ -42,6 +44,29 @@ exports.getPostProj = function(req, res) {
 	});
   
 };
+exports.postGenerator = function(req, res, next) {
+
+	Project.findById(req.params.id, function(err, proj) {
+		if (!proj) {
+          req.flash('errors', { msg: 'No project with that id exists.' });
+          return res.redirect('/postProj');
+        }
+		generateWinnerSerial(req.body.feedBackObjNum, proj.hid, proj.goalmoney, function(winSerials){
+	    		proj.winnerSerials = winSerials;
+	    	
+		        proj.feedBackObjNum = req.body.feedBackObjNum;
+				
+				proj.save(function(err) {
+			        if (err) {
+			          return next(err);
+			        }
+			        req.flash('success', { msg: 'Done.' });
+			        res.redirect('/postProj/'+req.params.id);
+			    });
+		        
+		});
+	});
+}
 exports.postPostProj = function(req, res, next) {
 	req.assert('title', 'Title must be at least 1 characters long').len(1);
 	req.assert('name', 'Name must be at least 1 characters long').len(1);
@@ -76,25 +101,29 @@ exports.postPostProj = function(req, res, next) {
 		  coverPImg: req.body.coverPImg,
 		  bannerColor: req.body.bannerColor,
 		  hid: thisHid,
-		  ticketBuyArr: new Array(parseInt(req.body.money)+1).join('0')
+		  ticketBuyArr: new Array(parseInt(req.body.money)+1).join('0'),
+		  feedBackObjNum: req.body.feedBackObjNum
 		  // picture: PictureIsOn?PicPath:''
 	    });
 
 		// for(var i=0; i<thisProject.goalmoney; i++)thisProject.ticketBuyArr[i]=false;
-	    
-	    // console.log(thisProject);
-	    thisProject.save(function(err) {
-	        if (err) {
-	          return next(err);
-	        }
-	        req.flash('success', { msg: 'Done.' });
-	        res.redirect('/postProj');
+	    generateWinnerSerial(req.body.feedBackObjNum, thisHid, parseInt(req.body.money), function(winSerials){
+	    	thisProject.winnerSerials = winSerials;
+	    	thisProject.save(function(err) {
+		        if (err) {
+		          return next(err);
+		        }
+		        req.flash('success', { msg: 'Done.' });
+		        res.redirect('/postProj');
+		    });
 	    });
+	    // console.log(thisProject);
+	    
 	
 	});
 };
 exports.editProj = function(req, res, next) {
-	Project.findOne({"_id": req.params.id}, function(err, proj) {
+	Project.findById(req.params.id, function(err, proj) {
 		if (!proj) {
           req.flash('errors', { msg: 'No project with that id exists.' });
           return res.redirect('/postProj');
@@ -271,5 +300,49 @@ exports.postNewArticle = function(req, res, next) {
 	    });
 	    
     });
+	
+};
+function generateWinnerSerial(amount, thisEmail, needForPeople, callback){
+	// console.log(hostId, thisEmail, nowNum, needForPeople);
+		// var nowNum = 0;
+
+		var winArr= new Array(parseInt(amount));
+		console.log(winArr);
+
+		async.forEachOf(winArr, function (eachSerial, eachIndex, eachSerial_callback) {
+			var tmpEnN = thisEmail+eachIndex+Date.now();
+		    var getThisGuysMd5 = md5(tmpEnN);
+		    var thisGuysMd5cutInt =  parseInt(getThisGuysMd5.substr(23),16);
+		    thisGuysMd5cutInt = thisGuysMd5cutInt%needForPeople;
+
+		    for(var i=0; i<needForPeople;i++){
+		    	
+				if(winArr.indexOf((addNullNum+(thisGuysMd5cutInt+i)%needForPeople).toString())<0){
+					winArr[eachIndex] = (addNullNum+(thisGuysMd5cutInt+i)%needForPeople).toString();
+					eachSerial_callback();
+		            
+		            break;
+				}
+		    	
+		        if(i==needForPeople-1) console.log("something wrong!");
+		    }
+			
+		}, function (err) {
+			  if (err) console.error(err.message);  
+			  console.log(winArr);
+			  callback(winArr);
+		});    
+
+	    
+	  // console.log(thisGuysMd5cutInt);
+	    
+	    // console.log(thisEmail+"->"+thisGuysMd5cutInt);
+	    
+		    // thisProj.ticketBuyArr.forEach(function(eachEle,index){
+		    // 	if(eachEle) console.log(index, '-true');
+		    // });
+		    
+
+	
 	
 };

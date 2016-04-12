@@ -182,6 +182,12 @@ app.get('/survey/field', passportConf.isAuthenticated, projController.getSurvey)
 app.post('/survey', passportConf.isAuthenticated, projController.postSurvey);
 // app.get('/payend/field', passportConf.isAuthenticated, projController.getPayEnd);
 app.get('/payend/:amount', passportConf.isAuthenticated, projController.getPayTheEnd);
+// app.get('/payend/:amount', projController.getPayTheEnd);
+
+app.get('/payend', passportConf.isAuthenticated, projController.getPayTheEnd);
+
+app.get('/recordSlot/:id', passportConf.isAuthenticated, projController.getPayTheEndR);
+
 
 app.get('/record', passportConf.isAuthenticated, userController.getRecord);
 
@@ -216,6 +222,10 @@ app.post('/deleteIdea/:id', passportConf.isAuthenticated, announcementsControlle
 app.get('/f98e58c2c27e7131b38f8684695ee891', passportConf.isAuthenticated, projController.getPayEnd);
 app.get('/0a0e0389f9f272205d43d978c2f7f03c', passportConf.isAuthenticated, projController.getPayEnd);
 
+
+app.post('/winnersGenerator/:id', passportConf.isAuthenticated, postProjController.postGenerator);
+// app.post('/slot', passportConf.isAuthenticated, projController.postSlot);
+app.post('/slot', passportConf.isAuthenticated, projController.postSlot);
 // app.get('/idea',  ideaController.getIdea);
 // app.post('/idea/new/:id',  ideaController.postIdea);
 /**

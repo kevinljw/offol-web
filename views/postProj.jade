@@ -6,9 +6,9 @@ block content
       h3 專案管理
     ul.list-group
       .row
-        .col-sm-offset-2.col-sm-8
+        .col-sm-offset-1.col-sm-10
           each val, index in allProjects
-            li.text-alignLeft.col-xs-12.list-group-item ##{index} | #{val.title} | &#36;#{val.goalmoney}
+            li.text-alignLeft.col-xs-12.list-group-item #{index} | #{val.title} | &#36;#{val.goalmoney} | Win: #{val.winnerList.length}
               span.alignRight
                 .col-sm-6
                   form.form-horizontal(action='/deleteProj/#{val.id}', onsubmit='return confirm("這是「移除」專案喔！你真的確定要移除嗎？");', method='POST')
@@ -29,6 +29,46 @@ block content
           br
           small 編號(hid):#{thisProject.hid}
       p
+      h6 抽獎管理
+
+      form.form-horizontal(action='/winnersGenerator/#{thisProject.id}', method='POST')
+        input(type='hidden', name='_csrf', value=_csrf)
+        .form-group
+          label.col-sm-4.control-label(for='feedBackObjNum') 回饋品數量
+          .col-sm-5
+            input.form-control(type='number', name='feedBackObjNum', id='feedBackObjNum', value='#{thisProject.feedBackObjNum}')
+        .form-group
+          label.col-sm-4.control-label(for='winnerSerials') 中獎序號
+          .col-sm-5
+            textarea.form-control(type='text', name='winnerSerials', id='winnerSerials', rows='4', disabled) #{thisProject.winnerSerials}
+        .form-group
+          .col-sm-offset-2.col-sm-8
+            table.table.table-hover.table-bordered.myRecordTable
+                thead
+                  tr
+                    th.col-xs-3 id
+                    th.col-xs-3 name
+                    th.col-xs-3 serial
+                    //- th.col-xs-4 serial
+                tbody#whoWin
+                  each winner in thisProject.winnerList
+                    tr
+                      td #{winner.wId}
+                      td #{winner.wName}
+                      td #{winner.serial}
+        //- .form-group
+        //-   label.col-sm-4.control-label(for='winnerSerials') 中獎人
+        //-   .col-sm-5
+        //-     textarea.form-control(type='text', name='whoWins', id='whoWins', rows='3', disabled) #{JSON.stringify(thisProject.winnerList)}  
+        //- .form-group
+        //-   .col-sm-offset-4.col-sm-4
+        //-     button.col-sm-12.btn.btn-primary(type='submit')
+        //-       i.fa.fa-pencil
+        //-       | 重新產生抽獎序號
+
+      hr
+      br 
+      h6 文案管理
       form.form-horizontal(action='/updateProj/#{thisProject.id}', method='POST')
         input(type='hidden', name='_csrf', value=_csrf)
         .form-group
@@ -63,6 +103,14 @@ block content
           label.col-sm-4.control-label(for='coverPImg') 封面圖(連結)
           .col-sm-5
             input.form-control(type='text', name='coverPImg', id='coverPImg', value='#{thisProject.coverPImg}')
+        //- .form-group
+        //-   label.col-sm-4.control-label(for='feedBackObjNum') 回饋品數量
+        //-   .col-sm-5
+        //-     input.form-control(type='number', name='feedBackObjNum', id='feedBackObjNum', value='#{thisProject.feedBackObjNum}', readonly=true) 
+        //- .form-group
+        //-   label.col-sm-4.control-label(for='winnerSerials') 中獎序號
+        //-   .col-sm-5
+        //-     textarea.form-control(type='text', name='winnerSerials', id='winnerSerials', value='#{thisProject.winnerSerials.join(",")}', rows='6', disabled=true)
         .form-group
           label.col-sm-4.control-label(for='payid') 歐付寶QuickPayId
           .col-sm-5
@@ -71,7 +119,7 @@ block content
           label.col-sm-4.control-label(for='payInfo') 付款頁面說明
           .col-sm-5
             textarea.form-control(type='text', name='payInfo', id='payInfo', rows='6') !{thisProject.payInfo}
-              
+             
         .form-group
           .col-sm-5
             | 預覽
@@ -124,6 +172,11 @@ block content
           label.col-sm-4.control-label(for='coverPImg') 封面圖(連結)
           .col-sm-5
             input.form-control(type='text', name='coverPImg', id='coverPImg', placeholder='Ex. http://..jpg(寬長比1.35)')
+        .form-group
+          label.col-sm-4.control-label(for='feedBackObjNum') 回饋品數量
+          .col-sm-5
+            input.form-control(type='number', name='feedBackObjNum', id='feedBackObjNum', value=1)
+        
         .form-group
           .col-sm-5
             | 預覽

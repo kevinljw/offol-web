@@ -1,0 +1,142 @@
+.playground{
+    /*width:100%;*/
+    height:470px;
+    background: #f2f4f4;
+    display: inline-block;
+    margin-bottom: 20px;
+
+}
+.playgroundInfo{
+    /*width:100%;*/
+    height:470px;
+    background: #f2f4f4;
+    display: inline-block;
+    /*margin-bottom: 20px;*/
+
+}
+#gameHintText{
+    margin-top:5px;
+    font-size: 25px;
+    /*z-index: -1;*/
+}
+#slotForm input{
+    margin-bottom: 30px;
+}
+.octagon{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 60px;
+    display: block;
+    
+    width:242px;
+    height:242px;
+    background:#f0b27a;
+    -webkit-clip-path:polygon(29.34% 0%, 70.66% 0%,100% 29.34%,100% 70.66%,70.66% 100%,29.34% 100%,0% 70.66%,0% 29.34%);
+}
+#slotHandler{
+    cursor: pointer;  
+}
+#btmTarget, #rTarget{
+    position: absolute;
+    top: 100px;
+    left: 0;
+}
+.whiteBall{
+    content: 'o';
+    color: firebrick;
+    display: inline-block;
+}
+
+@media (min-width: 768px) {
+  .infoText{
+    line-height: 20px;
+  }
+}
+
+@media (min-width: 992px) {
+  
+}
+
+@media (min-width: 1200px) {
+  .infoText{
+    line-height: 30px;
+  }
+}
+/*#slotForm{
+    position: absolute;
+    top: 40px;
+    left: 60%;
+}*/
+/*#btmTarget{
+    animation: spin1 2.5s infinite linear;
+    -webkit-animation: spin1 2.5s infinite linear;
+}*/
+#rTarget{
+    z-index: 10;
+    /*animation: spin1 2.5s infinite ease-in;*/
+    /*-webkit-animation: spin1 2.5s infinite ease-in;*/
+}
+.resultArea{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    color: #000;
+    font-size: 30px;
+    /*padding-top: 70px;*/
+    z-index: 20;
+    /*margin-top: 70%;*/
+}
+
+/*@keyframes spin1 {
+  0% {
+  -moz-transform:rotate(90deg);
+  -webkit-transform:rotate(90deg);
+  -o-transform:rotate(90deg);
+  -ms-transform:rotate(90deg);
+  }
+  25% {
+  -moz-transform:rotate(80deg);
+  -webkit-transform:rotate(80deg);
+  -o-transform:rotate(80deg);
+  -ms-transform:rotate(80deg); 
+  }
+  75% {
+  -moz-transform:rotate(100deg);
+  -webkit-transform:rotate(100deg);
+  -o-transform:rotate(100deg);
+  -ms-transform:rotate(100deg); 
+  }
+  100% {
+  -moz-transform:rotate(90deg);
+  -webkit-transform:rotate(90deg);
+  -o-transform:rotate(90deg);
+  -ms-transform:rotate(90deg);
+  }
+}
+@-webkit-keyframes spin1 {
+  0% {
+  -moz-transform:rotate(90deg);
+  -webkit-transform:rotate(90deg);
+  -o-transform:rotate(90deg);
+  -ms-transform:rotate(90deg);
+  }
+  33% {
+  -moz-transform:rotate(85deg);
+  -webkit-transform:rotate(85deg);
+  -o-transform:rotate(80deg);
+  -ms-transform:rotate(80deg); 
+  }
+  
+  75% {
+  -moz-transform:rotate(100deg);
+  -webkit-transform:rotate(100deg);
+  -o-transform:rotate(100deg);
+  -ms-transform:rotate(100deg); 
+  }
+  100% {
+  -moz-transform:rotate(90deg);
+  -webkit-transform:rotate(90deg);
+  -o-transform:rotate(90deg);
+  -ms-transform:rotate(90deg);
+  }
+}*/

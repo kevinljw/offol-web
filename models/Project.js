@@ -20,6 +20,9 @@ var projSchema = new mongoose.Schema({
   coverPImg:  { type: String, default: '' },
   quickPayId: { type: String, default: '' },
   ticketBuyArr : { type: String, default: '' },
+  winnerSerials: { type: Array, default: [] },
+  feedBackObjNum: { type: Number, default: 1 },
+  winnerList: { type: Array, default: [] },
 });
 
 /**

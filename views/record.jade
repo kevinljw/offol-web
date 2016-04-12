@@ -14,22 +14,36 @@ block content
         table.table.table-hover.table-bordered.myRecordTable
           thead
             tr
-              th.col-xs-1 Order
-              th.col-xs-2 Host
-              th.col-xs-3 Timestamp
-              th.col-xs-2 Amount
+              th.col-xs-1 順序
+              th.col-xs-3 贊助專案
+              th.col-xs-3 時間
+              th.col-xs-2 數量
+              th.col-xs-1 已抽獎
+              th.col-xs-2 搖獎
               //- th.col-xs-4 serial
           tbody#whoBuy
             each eachFund, index in allFund
               tr.clickable(data-toggle='collapse',data-target='#accordion#{index}')
                 td #{index}
-                td #{eachFund.hid}
+                td
+                  a.a2a_dd.btn.btn-default(href='/projects/#{eachFund.hid}', target='_blank', disable=parseInt(eachFund.money)-parseInt(eachFund.slotNum)>0)
+                    | 專案: #{eachFund.hid}
                 td #{eachFund.timestamp}
                 td #{eachFund.money}
+                td #{eachFund.slotNum}
+                td
+                  if parseInt(eachFund.money)-parseInt(eachFund.slotNum)>0
+                    a.btn.btn-success(href='/recordSlot/#{eachFund.id}', target='_blank')
+                      | 前往: 剩餘#{parseInt(eachFund.money)-parseInt(eachFund.slotNum)}次機會
+                
+                  
               tr
-                td(style='padding:2px;', colspan='4')
+                td(style='padding:2px;', colspan='1')
+                td(style='padding:2px;', colspan='5')
                   .collapse(id='accordion#{index}') #{eachFund.serials}
-              
+                
+
+                  //- a(href='#', target='_blank') 前往搖獎
                   
                     
 

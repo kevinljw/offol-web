@@ -4,7 +4,7 @@ block content
   #introHead
   .container.containerIntro
     .row
-      h3.col-sm-offset-2.col-sm-8 預付完成，已為您自動產生#{buynum}組贊助序號  
+      h3.col-sm-offset-2.col-sm-8 您，就是那位幸運兒嗎
     p
     hr
     .col-sm-12
@@ -37,11 +37,7 @@ block content
                 a#confirmAmount.col-xs-12.col-md-12.btn.btn-primary
                   | 確認
               input.col-xs-12.col-md-12.form-control(type='hidden', name='fid', id='fid', value='#{fundId}')
-          .col-sm-12
-            #dataDebug
-            .whiteBall
       .playground.col-xs-12.col-sm-7
-        
         svg#rTarget.animated.infinite.tada2.col-xs-offset-1.col-xs-10.col-md-offset-2.col-md-8(version='1.1', xmlns='http://www.w3.org/2000/svg', xmlns:xlink='http://www.w3.org/1999/xlink', x='0px', y='0px', viewbox='0 0 283.5 283.5', enable-background='new 0 0 283.5 283.5', xml:space='preserve')
           g#rotateItems
             rect#ph(fill='none', width='283.5', height='283.5')
@@ -64,28 +60,8 @@ block content
         #gameHintText  
       //- .col-sm-12
       //-   .resultArea    
-    p
-    //- a.col-sm-12.btn.btn-info.btn-xs(data-toggle="modal" data-target="#slotResultModel") 查看
-    .col-md-12.marginTop
-      p
-        h3 之後再抽獎嗎？
-        h4
-          small 您可以之後至「導覽列」右上方點選「人名」
-        h4
-          small 下拉選單->查看「我的贊助」
-      .col-md-12.introBackBtn
-        h4
-          small 或者按下方按鈕直接前往
-        a.a2a_dd.btn.btn-default(href='/record', target='_blank')
-          span.fa.fa-eye
-          |  前往查看
-      p.marginBtm
-    .col-md-12.introBackBtn
-      hr
-      a.a2a_dd.btn.btn-default(href='/discover')
-        span.fa.fa-flag
-        | 繼續探索 
-  include slotResultModel
+    p 
+  include slotResultModel 
   script.
     var uid = '#{user.id}'
     //- var slotEnd = '#{slotResult}'

@@ -10,6 +10,7 @@ var fundSchema = new mongoose.Schema({
   money: { type: Number, default: 1 },
   timestamp: { type: String, default: '' },
   serials: { type: Array, default: [] },
+  slotNum: { type: Number, default: 0 },
 });
 
 /**

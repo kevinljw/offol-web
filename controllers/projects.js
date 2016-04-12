@@ -150,11 +150,32 @@ exports.getProject = function(req, res) {
  
 };
 exports.getPayTheEnd = function(req, res) {
-	res.render('payend', {
-    	title: '贊助完成',
-    	buynum: req.params.amount
-    	// buynum: req.params.num
-    });
+	Fund.find({investor: req.user.id},{},{sort: {_id:-1}, limit:1}, function(err, newestFund) {
+	    if (err) {
+	      return next(err);
+	    }
+		res.render('payend', {
+	    	title: '贊助完成',
+	    	buynum: newestFund[0].money,
+	    	slotNum: newestFund[0].money-newestFund[0].slotNum,
+	    	fundId: newestFund[0].id
+	    	// buynum: req.params.num
+	    });
+	});
+};
+exports.getPayTheEndR = function(req, res) {
+	Fund.findById(req.params.id, function(err, newestFund) {
+	    if (err) {
+	      return next(err);
+	    }
+		res.render('payend2', {
+	    	title: '贊助紀錄',
+	    	buynum: newestFund.money,
+	    	slotNum: newestFund.money-newestFund.slotNum,
+	    	fundId: newestFund.id
+	    	// buynum: req.params.num
+	    });
+	});
 };
 exports.getPayEnd = function(req, res) {
   // get all the users
@@ -273,6 +294,69 @@ exports.postInPerson = function(req, res, next) {
     });
   	// console.log(req.body)
 } 
+exports.postSlot = function(req, res, next) {
+	
+
+	// console.log(req.body);
+	Fund.findById(req.body.fid, function(err, thisFund) {
+	    if (err) {
+	      return next(err);
+	    }
+	    if(thisFund && thisFund.money-thisFund.slotNum>=parseInt(req.body.amount)){
+	    	// var startIndex = thisFund.money-thisFund.slotNum;
+	    	
+	    	Project.findOne({"hid": thisFund.hid}, function(err, proj) {
+				if (!proj) {
+		          req.flash('errors', { msg: 'No project with that id exists.' });
+		          return res.redirect('/payend');
+		        }
+		        else{
+		        	// proj.winnerSerials=['10007'];
+		        	var thisSlotSerials = thisFund.serials.slice(thisFund.slotNum, thisFund.slotNum+parseInt(req.body.amount));
+		        	console.log(thisFund.slotNum, thisFund.slotNum+parseInt(req.body.amount), thisSlotSerials);
+		        	
+		        	var resultSlot = Array.intersect(proj.winnerSerials,thisSlotSerials);
+		        	thisFund.slotNum+=parseInt(req.body.amount);
+		        	if(resultSlot.length>0){
+		        		res.end('恭喜您獲得回饋品 '+resultSlot.length+' 件，您的中獎序號為:'+resultSlot.join(' '));
+		        		resultSlot.forEach(function(eachSerial){
+		        			proj.winnerList.push({'wId': thisFund.investor, 'wName': thisFund.investorName, 'serial': eachSerial});
+		        			proj.save(function(err) {
+						      if (err) {
+						        return next(err);
+						      }
+
+						  	});
+		        		});
+		        	}
+		        	else{
+		        		res.end('銘謝惠顧，歡迎再次贊助');
+
+		        	}
+		        	thisFund.save(function(err) {
+				      if (err) {
+				        return next(err);
+				      }
+
+				  	});
+
+		        }
+
+		    });
+
+	    	
+	    }
+	    else{
+	    	res.end('錯誤：您輸入的金額有誤');
+	    }
+	});
+	
+	// res.render('payend', {
+ //    	title: '贊助完成',
+ //    	slotResult: '鳴謝會酷'
+ //    	// buynum: req.params.num
+ //    });
+};
 exports.postFunding = function(req, res, next) {
 
 	// var hostId = req.headers.referer.substr(req.headers.referer.indexOf("/fundings/")+10);
@@ -393,3 +477,119 @@ function serialGenerate(hostId, thisEmail, thisNum, needForPeople, callback){
 String.prototype.replaceAt=function(index, character) {
     return this.substr(0, index) + character + this.substr(index+character.length);
 }
+/** 
+* each是一個集合迭代函數，它接受一個函數作為參數和一組可選的參數 
+* 這個迭代函數依次將集合的每一個元素和可選參數用函數進行計算，並將計算得的結果集返回 
+{%example 
+<script> 
+var a = [1,2,3,4].each(function(x){return x > 2 ? x : null}); 
+var b = [1,2,3,4].each(function(x){return x < 0 ? x : null}); 
+alert(a); 
+alert(b); 
+</script> 
+%} 
+* @param {Function} fn 進行迭代判定的函數 
+* @param more ... 零個或多個可選的用戶自定義參數 
+* @returns {Array} 結果集，如果沒有結果，返回空集 
+*/ 
+Array.prototype.each = function(fn){ 
+fn = fn || Function.K; 
+var a = []; 
+var args = Array.prototype.slice.call(arguments, 1); 
+for(var i = 0; i < this.length; i++){ 
+var res = fn.apply(this,[this[i],i].concat(args)); 
+if(res != null) a.push(res); 
+} 
+return a; 
+}; 
+//数组是否包含指定元素
+Array.prototype.contains = function(suArr){
+    for(var i = 0; i < this.length; i ++){  
+        if(this[i] == suArr){
+            return true;
+        } 
+     } 
+     return false;
+}
+/** 
+* 得到一個數組不重複的元素集合<br/> 
+* 唯一化一個數組 
+* @returns {Array} 由不重複元素構成的數組 
+*/ 
+Array.prototype.uniquelize = function(){ 
+var ra = new Array(); 
+for(var i = 0; i < this.length; i ++){ 
+if(!ra.contains(this[i])){ 
+ra.push(this[i]); 
+} 
+} 
+return ra; 
+}; 
+
+/** 
+* 求兩個集合的補集 
+{%example 
+<script> 
+var a = [1,2,3,4]; 
+var b = [3,4,5,6]; 
+alert(Array.complement(a,b)); 
+</script> 
+%} 
+* @param {Array} a 集合A 
+* @param {Array} b 集合B 
+* @returns {Array} 兩個集合的補集 
+*/ 
+Array.complement = function(a, b){ 
+return Array.minus(Array.union(a, b),Array.intersect(a, b)); 
+}; 
+
+/** 
+* 求兩個集合的交集 
+{%example 
+<script> 
+var a = [1,2,3,4]; 
+var b = [3,4,5,6]; 
+alert(Array.intersect(a,b)); 
+</script> 
+%} 
+* @param {Array} a 集合A 
+* @param {Array} b 集合B 
+* @returns {Array} 兩個集合的交集 
+*/ 
+Array.intersect = function(a, b){ 
+return a.uniquelize().each(function(o){return b.contains(o) ? o : null}); 
+}; 
+
+/** 
+* 求兩個集合的差集 
+{%example 
+<script> 
+var a = [1,2,3,4]; 
+var b = [3,4,5,6]; 
+alert(Array.minus(a,b)); 
+</script> 
+%} 
+* @param {Array} a 集合A 
+* @param {Array} b 集合B 
+* @returns {Array} 兩個集合的差集 
+*/ 
+Array.minus = function(a, b){ 
+return a.uniquelize().each(function(o){return b.contains(o) ? null : o}); 
+}; 
+
+/** 
+* 求兩個集合的並集 
+{%example 
+<script> 
+var a = [1,2,3,4]; 
+var b = [3,4,5,6]; 
+alert(Array.union(a,b)); 
+</script> 
+%} 
+* @param {Array} a 集合A 
+* @param {Array} b 集合B 
+* @returns {Array} 兩個集合的並集 
+*/ 
+Array.union = function(a, b){ 
+return a.concat(b).uniquelize(); 
+};  

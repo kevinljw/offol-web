@@ -8,10 +8,13 @@ html
     meta(http-equiv='Content-Type' content='text/html; charset=utf-8')
     title #{title} - Loffo
     //- link(rel='stylesheet', href='/css/fileinput.min.css')
-    //- link(rel='stylesheet', href='/css/jquery.bxslider.css')
+    //- link(rel='stylesheet', href='/css/jquery.ui.rotatable.css')
     link(rel='stylesheet', href='/css/half-slider.css')
     link(rel='stylesheet', href='/css/ks.css')
     link(rel='stylesheet', href='/css/main.css')
+    if title=='贊助完成' || title=='贊助紀錄'
+      link(rel='stylesheet', href='/css/slot.css')
+    link(rel='stylesheet', href='/css/animate.css')
     link(rel='stylesheet', href='/css/portfolio.css')
     link(rel='stylesheet', href='/css/normalize.css')
     //- link(rel='stylesheet', href='/css/style.css')
@@ -30,6 +33,9 @@ html
     include partials/footer
 
     script(src='/js/lib/jquery.min.js')
+    script(src='/js/lib/jquery-ui.min.js')
+    script(src='/js/jquery.ui.rotatable.min.js')
+      
     script(src='/js/lib/jquery.form.min.js')
     script(src='/js/jquery.fitvids.js')
     
@@ -43,6 +49,8 @@ html
     //- script(src='/js/lib/fileinput.min.js')
 
     script(src='/js/main.js')
+    if title=='贊助完成' || title=='贊助紀錄'
+      script(src='/js/slot.js')
     //- script(src='/js/index.js')
 
     //- Google Analytics: change UA-XXXXX-X to be your site's ID

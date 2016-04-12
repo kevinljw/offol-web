@@ -93,7 +93,7 @@ exports.getRecord = function(req, res) {
           // QRCode.toDataURL('thisUserBuyingNum',function(err,qrUrl){
             if (err) console.error(err.message);
             res.render('record', {
-              title: '我的紀錄',
+              title: '我的贊助',
               buynum: thisUserBuyingNum,
               allFund: thisUserFund,
               // qrcodeUrl: qrUrl
@@ -104,7 +104,7 @@ exports.getRecord = function(req, res) {
       }
       else{
         res.render('record', {
-          title: '我的紀錄',
+          title: '我的贊助',
           buynum: 0
         });
       }
