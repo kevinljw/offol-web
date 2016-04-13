@@ -136,6 +136,7 @@ main {
 	height: 140px;
 	text-align: center;
 }
+
 .logo__image {
 
 }
@@ -145,6 +146,9 @@ main {
 	line-height: 64px;
 	margin: 0;
 	text-transform: uppercase;
+}
+.logo__title img#logoPic{
+    height: 98px;
 }
 .logo__desc {
 	color: #646464;
@@ -672,7 +676,6 @@ blockquote {
 	border-left: 4px solid #59c0ab;
 	background: #fdfbec;
 	font-size: 12px;
-px;
 	font-weight: 600;
 	line-height: 2;
 	margin: 30px 0;
@@ -729,6 +732,12 @@ ul {
 	.post__wrapper--subpage {
 		max-width: 95%;
 	}
+    .logo__title img#logoPic{
+        height: 70px;
+    }
+    .logo {
+        height: 120px;
+    }
 }
 
 @media (max-width: 700px) {
@@ -814,6 +823,10 @@ ul {
 	.pagination__item--newer:after {
 		left: -12px;
 	}
+    .logo {
+        height: 140px;
+    }
+    
 }
 
 @media (max-width: 480px) { 
@@ -827,5 +840,11 @@ ul {
 	.post__wrapper[data-cols="3"],
 	.post__wrapper[data-cols="4"] {
 		width: 100%;
-	}	
+	}
+    .logo__title img#logoPic{
+        height: 60px;
+    }
+    .logo {
+        height: 140px;
+    }
 }
