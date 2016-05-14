@@ -7,7 +7,7 @@
 exports.index = function(req, res) {
 	
 			res.render('home', {
-			    title: '集資透',
+			    title: '大亂募',
 			    
 			});
 		
