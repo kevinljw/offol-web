@@ -147,7 +147,9 @@ app.use( '/loffogram', ghost({
 /**
  * Primary app routes.
  */
-app.get('/', homeController.index);
+// app.get('/', homeController.index);
+app.get('/', projController.getDiscover);
+
 // app.get('/home', homeController.indexHidden);
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);
